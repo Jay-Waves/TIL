@@ -82,7 +82,7 @@ while not (timeout or abort_signal):
 print(Tx)
 ```
 
-![](Pasted%20image%2020230727234845.png)
+![](../attach/Pasted%20image%2020230727234845.png)
 
 ### Key Questions
 

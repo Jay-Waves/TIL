@@ -1,4 +1,4 @@
-![](../../-%20attach/Pasted%20image%2020240111112148.png)
+![](../../attach/Pasted%20image%2020240111112148.png)
 
 `source apollo/cyber/setup.bash`
 

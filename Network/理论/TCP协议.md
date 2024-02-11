@@ -81,9 +81,9 @@
 ## 流量控制
 
 ## 拥塞控制
-![|350](Pasted%20image%2020230604170719.png)
+![|350](../../attach/Pasted%20image%2020230604170719.png)
 
-![|500](Pasted%20image%2020230604173012.png)
+![|500](../../attach/Pasted%20image%2020230604173012.png)
 
 **慢启动算法**:
 
@@ -95,7 +95,7 @@ For (each segment ACKed):
 Until (loss event OR cwnd > ssthresh):
 ```
 
-![|500](Pasted%20image%2020230604172957.png)
+![|500](../../attach/Pasted%20image%2020230604172957.png)
 
 算法流程:
 ```
@@ -130,9 +130,9 @@ Loop:
 
 TCP 三次握手建立连接, 四次挥手释放连接
 
-![|400](Pasted%20image%2020230604174627.png)
+![|400](../../attach/Pasted%20image%2020230604174627.png)
 
-![|400](Pasted%20image%2020230604174640.png)
+![|400](../../attach/Pasted%20image%2020230604174640.png)
 
 #### 使用TCP的协议
 

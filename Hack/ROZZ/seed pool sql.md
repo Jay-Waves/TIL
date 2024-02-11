@@ -117,7 +117,7 @@ CREATE TABLE mutated_msgs (
 );
 ```
 
-![|350](Pasted%20image%2020230830215031.png)
+![|350](../../attach/Pasted%20image%2020230830215031.png)
 
 ```sql
 INSERT INTO sensors (message_type, description)
@@ -237,7 +237,7 @@ ORDER BY layer ASC, prior DESC;
 
 ```
 
-![|350](Pasted%20image%2020230901123747.png)
+![|350](../../attach/Pasted%20image%2020230901123747.png)
 
 收集了一些 msg_type:
 

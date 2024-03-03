@@ -42,6 +42,8 @@ export ASAN_OPTIONS="new_delete_type_mismatch=0 detect_leaks=0 halt_on_erro=0"
 ros2 launch nav2_bringup tb3_simulation_launch.py headless:=True use_composition:=False # log_level:=log
 ```
 
+ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
+
 相关日志:
 ```bash
 export ROS_LOG_DIR=./runtime_log/

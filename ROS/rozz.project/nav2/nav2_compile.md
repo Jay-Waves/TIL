@@ -238,7 +238,7 @@ using-clang:
 
 > https://github.com/google/sanitizers/issues/89
 
-==已解决==, 见 [nav2_bringup](nav2/nav2_bringup.md)
+==已解决==, 见 [nav2_bringup](nav2_bringup.md)
 
 ### 使用 clang 编译
 

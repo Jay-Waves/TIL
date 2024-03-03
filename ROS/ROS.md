@@ -97,3 +97,30 @@ service 是某**个** node 作为 server 提供的, 其他节点作为 client �
 `ros2 bag play output_file.bag`
 
 拿 bag 当时钟源: rosbag play --clock
+
+### topic_tools
+
+见 [topic_tools.git](https://github.com/ros-tooling/topic_tools)
+
+```shell
+# 订阅转发 relay 
+ros2 run topic_tools relay /rtabmap/map /map
+
+# 订阅 input topic, 并根据其内容 (用 m 代指) 转发到另一个 topic
+ros2 run topic_tools relay_field <input topic> <output topic> <output type> [<expression on m>]
+
+# 订阅 input topic, 并将其内容(字段) 按格式填入 output topic
+ros2 run topic_tools transform <input topic> <output topic> <output type> [<expressoin on m>] [--import <modules>] [--field <topic_field>]
+
+# 延迟
+ros2 run topic_tools delay <topic_in> <delay/sec> [topic_out]
+
+# 删除 X/Y 个消息, 并转发
+ros2 run topic_tools drop <topic_in> <X> <Y> [topic_out]
+
+# 减少消息转发速率
+ros2 run topic_tools throttle messages <topic_in> <msgs_per_sec> [topic_out]
+
+# 在多个输入topic中选择一个流
+ros2 run topic_tools mux <topic_out> <topic_in1> [topic_in2 ...]
+```

@@ -1,0 +1,1 @@
+[ChilloutMix - Chilloutmix-Ni-pruned-fp32-fix  Stable Diffusion Checkpoint  Civitai](https://civitai.com/models/6424/chilloutmix)

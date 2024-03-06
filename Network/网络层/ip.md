@@ -1,13 +1,14 @@
-> 参考 [《深入理解计算机网络》之网络层总结 - 知乎](https://zhuanlan.zhihu.com/p/470493698)
+## IPv4
 
 ### IP地址分类
-开头为哈夫曼编码, 对进行唯一区分
 
-- A类地址, `Net ID`占8bits, `Host ID`占24bits, 开头固定为 `0`
+开头为哈夫曼编码, 对IP进行唯一区分
 
-- B类地址, `Net ID`占16bits, `Host ID`占16bits, 开头固定为 `10`
+- A类地址, 默认`Net ID`占8bits, `Host ID`占24bits, 开头固定为 `0`
 
-- C类地址, `Net ID`占24bits, `Host ID`占8bits, 开头固定为 `110`
+- B类地址, 默认`Net ID`占16bits, `Host ID`占16bits, 开头固定为 `10`
+
+- C类地址, 默认`Net ID`占24bits, `Host ID`占8bits, 开头固定为 `110`
 
 - D类地址, 开头固定为 `1110`, 用于多播地址
 
@@ -27,6 +28,7 @@
 - C类: `Net ID`为192.168.0 - 192.168.255
 
 ### IP数据报
+
 首部前20字节固定长, 其后长度可变.
 
 ```
@@ -48,29 +50,29 @@
  |                             Data                              |
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ```
-- Version: version of the IP datagram, typically 4 (IPv4) or 6 (IPv6).
-- IHL (Internet Header Length):  the length of the IP header in 32-bit words (4 bytes).
+- Version: 版本号 (IPv4: 4, IPv6: 6)
+- IHL (Internet Header Length):  IP头长度, 单位 4 bytes.
 - Type of Service: usually unused
-- Total Length: The total length of the header and data, in bytes.
+- Total Length: 数据+头部总长度, 单位 bytes.
 - Identification: 用于分片, 标识同一数据的分片
-- Flags: reserved|DF|MF, DF: don't fragment, MF: more fragment
-- Fragment Offset: 分片原偏移, in 8 bytes
-- Time to Live: 每通过一路由器, 减一
-- Protocol: 指出数据是哪个协议负责处理的, 比如ICMP/OSPF/TCP/UDP等.
-- Options: Optional field used to extend the functionality of the IP header.
+- Flags: reserved|DF|MF, DF: don't fragment 不分片, MF: more fragment 后续还有改报文的分片.
+- Fragment Offset: 分片原偏移, 单位 8 bytes
+- Time to Live: 每转发一次, 减一.
+- Protocol: 数据是哪个上层协议负责处理的, 比如 ICMP/OSPF/TCP/UDP 等.
+- Options: 可扩展功能段
 
-## 1 ARP协议
+## IPv6
 
-ARP: address resolution protocol, 地址解析协议.   
-用于从IP地址寻得其映射的硬件地址, 寻找方式是向网络中发送ARP请求.
+ipv6 和 ipv4 是不兼容的, 这导致了从 ipv4 向 ipv6 过渡困难.
 
-每台主机缓存ARP表, 记录`<IP, MAC, TTL>`映射关系, TTL为有效期.
+## 应用
 
-## 组网
+### 开启 IPv4 转发
 
-路由器: 连接广域网, 仅学习IP路由表. 有路由选择功能, 选择最佳转发数据包路径.
+临时开启: `sudo sysctl -w net.ipv4.ip_forward=1`
 
-三层交换机: 位于网络层. 同时学习MAC地址表与IP路由表, 兼顾交换与路由功能, 连接内部不同子网.
+永久开启: 
 
-二层交换机: 也称以太网交换机, 位于数据链路层. 维护MAC地址表, 转发局域网数据帧, 不过网关.
+- 修改 `/etc/sysctl.conf`, 添加 `net.ipv4.ip_forward = 1`
+- 重启服务 `sudo sysctl -p`
 

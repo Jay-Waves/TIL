@@ -71,7 +71,7 @@ rsync user@host:target_folder target_folder
 
 ### `ssh`
 
-详见: [ssh](../../Network/ssh.md)
+详见: [ssh](../../Network/应用层/ssh.md)
 
 ssh (SSH client) is a program for logging into and executing commands on a remote machine.  
 

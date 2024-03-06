@@ -39,7 +39,7 @@ docker 默认网桥模式: 虚拟一个网桥(docker0), 为每一个容器分配
 | none      | --network none                 | 容器有独立的 Network namespace，但并没有对其进行任何网络设置，如分配 veth pair 和网桥连接，配置 IP 等 |
 | bridge    | --network                      | bridge 默认模式, 网络隔离, 但分配一个内部IP. 构建时也使用该网络模式.                                                                                       |
 
-直接将宿主机设置为proxy即可, 如用[clash](../Network/防火墙/proxy.md), 设置 `all_proxy=http://host_ip:7890`
+直接将宿主机设置为proxy即可, 如用[clash](../Network/防火墙/代理.md), 设置 `all_proxy=http://host_ip:7890`
 
 ps: git 不走系统代理, 构建时也要设置 proxy.
 

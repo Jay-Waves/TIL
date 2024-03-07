@@ -78,7 +78,7 @@ AddressSanitizer (Aka. ASan) detects bugs for C++ like:
 - Initialization order bugs
 - Memory leaks
 
-### use
+### how to use
 
 use `clang` to compile and link 
 - `-fsanitize=address` enable ASan
@@ -87,7 +87,7 @@ use `clang` to compile and link
 
 ### principle
 
-The run-time library replaces the `malloc` and `free` functions. The memory around malloc-ed regions (red zones) is poisoned. The `free`\-ed memory is placed in quarantine and also poisoned. Every memory access in the program is transformed by the compiler in the following way:
+ASan 运行时库替换了 `malloc()` and `free()` 函数. 被 malloc 的常规内存区域两侧的内存被毒化 (red zones is poisoned), 用于检测数组越界, 这部分区域也被称为 Shadow; 被 free 的内存实际上并没有被释放而是全部被毒化, ASan 会在每次内存访问时检查是否有对被毒化区域访问的行为.
 
 Before:
 
@@ -104,5 +104,50 @@ if (IsPoisoned(address)) {
 *address = ...;  // or: ... = *address;
 ```
 
+实现原理详见 [Address Sanitizer](Address%20Sanitizer.md), 核心技巧就是如何高效实现 `IsPoisoned()`. [官方wiki](https://github.com/google/sanitizers/wiki/AddressSanitizerAlgorithm)
+
+#### Mapping
+
+ASan 将常规内存 8 字节映射为阴影区域 1 字节.
+
+> 如果偏移量足够大, 超过被毒化的范围, 是不是就检查不出越界了? 确实..
+
+#### Stack
+
+为检测 BufferOverflow, Asan 会修改栈结构为:
+
+```cpp
+// original code
+void foo() {
+  char a[8];
+  ...
+  return;
+}
+```
+
+```cpp
+// code after asan
+void foo() {
+  char redzone1[32];  // 32-byte aligned
+  char a[8];          // 32-byte aligned
+  char redzone2[24];
+  char redzone3[32];  // 32-byte aligned
+  int  *shadow_base = MemToShadow(redzone1);
+  shadow_base[0] = 0xffffffff;  // poison redzone1
+  shadow_base[1] = 0xffffff00;  // poison redzone2, unpoison 'a'
+  shadow_base[2] = 0xffffffff;  // poison redzone3
+  ...
+  shadow_base[0] = shadow_base[1] = shadow_base[2] = 0; // unpoison all
+  return;
+}
+```
+
 ## LSan
+
+## Sanitizer Coverage
+
+Sanitizer 自带的覆盖率统计工具, 见:
+- [Sanitizer Coverage](Sanitizer%20Coverage.md)
+- [AFL](AFL.md)
+- [Coverage](../Coverage.md)
 

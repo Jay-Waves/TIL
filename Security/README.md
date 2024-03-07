@@ -1,0 +1,1 @@
+[密码学相关见](obsidian://open?vault=Math&file=%E5%AF%86%E7%A0%81%E5%AD%A6%2FREADME)

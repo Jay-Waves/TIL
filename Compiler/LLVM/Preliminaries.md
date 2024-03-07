@@ -2,6 +2,8 @@
 > [LLVM IR 入门](https://evian-zhang.github.io/llvm-ir-tutorial/01-LLVM%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B.html)  
 > [LLVM Language Reference](https://llvm.org/docs/LangRef.html)
 
+![](../../attach/Pasted%20image%2020240307150000.png)
+
 **编译过程:**  
 `Source Code` --> Clang (frontend)  
 --> `IR` --> LLVM IR Linker, LLVM Optimizer  

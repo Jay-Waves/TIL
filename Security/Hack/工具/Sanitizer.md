@@ -87,7 +87,7 @@ use `clang` to compile and link
 
 ### principle
 
-ASan 运行时库替换了 `malloc()` and `free()` 函数. 被 malloc 的常规内存区域两侧的内存被毒化 (red zones is poisoned), 用于检测数组越界, 这部分区域也被称为 Shadow; 被 free 的内存实际上并没有被释放而是全部被毒化, ASan 会在每次内存访问时检查是否有对被毒化区域访问的行为.
+ASan 运行时库替换了 `malloc()` and `free()` 函数. 被 malloc 的常规内存区域两侧的内存被毒化 (red zones is poisoned), 用于检测数组越界; 被 free 的内存实际上并没有被释放而是全部被毒化, 每次内存访问时检查是否访问了被毒化区域.
 
 Before:
 
@@ -104,13 +104,57 @@ if (IsPoisoned(address)) {
 *address = ...;  // or: ... = *address;
 ```
 
+**毒化 (Poison) 实际上意味着该内存区域对应的 Shadow 内存区域被写上特殊值, 意味着此内存区域不再可访问 (不安全).**
+
+ASan 维护了一个 Shadow Table 的内存区域, 将**内存访问状态**映射到其上 `shadow=(addr>>3)+offset`. Asan 还维护了 Shadow Gap 区域, 用于隔离 Shadow 部分内存, 防止恶意软件或无意访问 Shadow 内存 (类似防御 BufferOverflow 的 Canary).
+
+```cpp
+byte* MemToShadow(address){
+	return (address>>3) + offset
+}
+
+shadow_address = MemToShadow(address);
+if (ShadowIsPoisoned(shadow_address)) {
+  ReportError(address, kAccessSize, kIsWrite);
+}
+```
+
 实现原理详见 [Address Sanitizer](Address%20Sanitizer.md), 核心技巧就是如何高效实现 `IsPoisoned()`. [官方wiki](https://github.com/google/sanitizers/wiki/AddressSanitizerAlgorithm)
 
 #### Mapping
 
-ASan 将常规内存 8 字节映射为阴影区域 1 字节.
+为了节省空间, ASan 将常规内存 8bytes (one qword) 映射为 Shadow 区域 1byte, 来监控对内存的访问. qword 有如下几种值:
+- `0`: 表示该 8bytes 未被污染, 可访问. 这是最常见的, 意味着内存安全.
+- 负数: 表示 8bytes 被完全污染, 即皆不可访问.
+- 前 k bytes 未被污染, 8-k bytes 被污染. 即 malloc 的字节数并不是 8bytes 对齐时, ASan 会将未对齐的剩余部分污染. (编译器也会做这种对齐优化, 这部分通常不会被使用).
 
+```cpp
+byte *shadow_address = MemToShadow(address);
+byte shadow_value = *shadow_address;
+if (shadow_value) {
+  if (SlowPathCheck(shadow_value, address, kAccessSize)) {
+    ReportError(address, kAccessSize, kIsWrite);
+  }
+}
+
+// Check the cases where we access first k bytes of the qword
+// and these k bytes are unpoisoned.
+bool SlowPathCheck(shadow_value, address, kAccessSize) {
+  last_accessed_byte = (address & 7) + kAccessSize - 1;
+  return (last_accessed_byte >= shadow_value);
+}
+```
 > 如果偏移量足够大, 超过被毒化的范围, 是不是就检查不出越界了? 确实..
+
+#### Report Error
+
+ASan 抛出异常时, 需要尽量做到紧凑, 确保程序崩溃时也能尽量获取到准确报告. (不过 ASan 也支持不强制终止程序的报告方式.)
+
+1. 将错误地址拷贝到 `%rax` 寄存器
+2. 执行 `ud2`, Undefined Instruction, 会导致程序抛出 `SIGILL`, 强制触发一个可捕获的异常, 触发错误处理流程.
+3. 在接下来的指令中, 用 1byte 大小数据来告知*检测到的错误类型和内存体积*
+
+整个 `ReportError()` 调用仅有 3 条指令, 5-6bytes 数据.
 
 #### Stack
 

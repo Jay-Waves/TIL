@@ -1,7 +1,4 @@
-### 系统互通
-wsl的环境变量是和windows共享的, 具体而言, wsl能直接使用windows的环境变量, 但是执行具体程序必须具名`.exe`后缀; 而windows执行wsl的环境, 需要设置环境变量WSLENV
-比如wsl中和win互通剪贴板: 使用cmd的clip.exe程序; 调用剪贴板则需要powershell get-clipboard, 当然wsl-ubuntu中我把这一长串命令alias为`pst`了, 可以在./bashrc后找.
-又比如python, wsl内置的用`python`, 用windows的用`python.exe`
+
 
 wsl比较坑的是主文件都在C盘, 挪不好挪.
 
@@ -38,12 +35,25 @@ git config --list
 
 ## 兼容性
 
-vim:
-- **_vimrc全局设置文件**在用户文件夹下
 
-windows下使用linux命令的简单方法: windows平台有个GitBash虚拟终端很强大, 将它的目录下程序文件夹添加到windows的环境变量中即可. `...\Git\usr\bin`
 
-#### 删除 wsl
+### 环境变量
+
+windows 和 wsl 的环境变量是共享的. 意味着, wsl 环境可以直接使用 windows 上的程序, 但需要加 `.exe` 后缀. 如 `code.exe`.
+
+windows 执行 wsl 环境, 需要设置 `PATH:WSLENV` 
+
+windows 磁盘都挂在在 `/mnt` 下.
+
+### 剪贴板
+
+windows 剪贴板管理工具是 clip.exe, wsl 中某些情况下可能无法通过 UI 直接复制内容到 windows 剪贴板, 可以直接访问 clip.exe.
+
+如, vim 中使用 `:'<'>w !iconv -f utf-8 -t utf-16LE | clip.exe`, 需注意 windows 平台使用的编码是 `utf-16le`.
+
+```
+
+### 删除 wsl
 
 ```bash
 wsl --list

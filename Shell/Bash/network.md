@@ -1,9 +1,4 @@
-## Network Operations
-
-| ping | dig | whois | scp  | rsync |
-| ---- | --- | ----- | ---- | ----- |
-| ssh  | w   | wget  | curl | ip    |
-| netstat     |     |       |      |       |
+## Network Info
 
 ### `ip`
 
@@ -12,14 +7,6 @@
 ### `nslookup` 
 
 根据域名查看 ip.
-
-### `ping`
-
-Pings host and outputs results.  
-
-```bash
-ping host
-```
 
 ### `dig`
 
@@ -36,6 +23,29 @@ Gets whois information for domain.
 ```bash
 whois domain
 ```
+
+## Network Debug
+
+### `ping`
+
+Pings host and outputs results.  
+
+```bash
+ping host
+```
+
+### `netstat`
+
+检查哪些进程在监听端口:
+```bash
+netstat -lntp
+```
+
+### `wireshark`, `tshark`
+
+[`wireshark`](https://wireshark.org/)，[`tshark`](https://www.wireshark.org/docs/wsug_html_chunked/AppToolstshark.html) 和 [`ngrep`](http://ngrep.sourceforge.net/) 可用于复杂的网络调试
+
+## Network Connection Tool
 
 ### `scp`
 
@@ -71,46 +81,13 @@ rsync user@host:target_folder target_folder
 
 ### `ssh`
 
-详见: [ssh](../../Network/应用层/ssh.md)
+请查看: [Network/应用层/ssh](../../Network/应用层/ssh.md)
 
-ssh (SSH client) is a program for logging into and executing commands on a remote machine.  
+### `curl`, `wget`
 
-```bash
-ssh user@host
-```
+查看 [Networl/Tool/curl](../../Network/Tool/curl.md), 或者试试更潮的 [httpie](https://github.com/jkbrzt/httpie)
 
-This command also accepts an option `-p` that can be used to connect to specific port.  
+<pre>
+$ wget file_url
+</pre>
 
-```bash
-ssh -p port user@host
-```
-
-### `w`
-
-Displays who is online.
-
-### `wget`
-
-Downloads file.  
-
-```bash
-wget file
-```
-
-### `curl`
-
-Curl is a command-line tool for requesting or sending data using URL syntax. Usefull on systems where you only have terminal available for making various requests.
-
-```bash
-curl url
-```
-
-Use  `-X` or `--request` to specify which method you would like invoke (GET, POST, DELETE, ...).
-Use `-d <data>` or `--data <data>` to POST data on given URL.
-
-### `netstat`
-
-检查哪些进程在监听端口:
-```bash
-netstat -lntp
-```

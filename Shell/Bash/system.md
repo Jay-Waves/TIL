@@ -1,182 +1,105 @@
-# System Info
+## System Info
 
-| cal    | date   |       |        |     |
-| ------ | ------ | ----- | ------ | --- |
-| df     | du     | quota |        |     |
-| bg     | fg     | jobs  | ps     | (h)top |
-| kill | killall| & | nohup | lsof |
-| finger | whoami | last  | passwd |     |
-| man    | uname       |       |        |     |
+### `/proc` Info
 
-## 1 date
+`/proc` 是一种虚拟文件系统, 用于内核态和用户态的通信. 用户可以通过这些文件读取大量系统信息, 并通过修改参数改变系统行为.
 
-### `cal`
+- `/proc/cpuinfo` CPU 详细信息
+- `/proc/meminfo` 内存使用情况
+- `/proc/sys/` 内核各种参数和状态, 用于修改内核行为 (如 IP转发)
+- `/proc/partitions` 系统所有分区
+- `/proc/mouts` 当前挂载的文件系统
+- `/proc/[pid]/cmdline` 启动进程时使用的命令行参数
+- `/proc/[pid]/status` 进程状态信息
+- `/proc/[pid]/cwd` 进程工作目录
+- `/proc/[pid]/exe` 指向该进程所用可执行文件的符号链接
+- `/proc/[pid]/fd/` 指向该进程打开的所有文件的符号链接
 
-Shows the month's calendar.
+### `uptime`, `w`
 
-### `date`
-
-Shows the current date and time.
-
-## 2 disk
-
-### `df`
-
-Shows disk usage.
-
-### `du`
-
-Shows the disk usage of files or directories. For more information on this command check this [link](http://www.linfo.org/du.html)
-
-```bash
-du [option] [filename|directory]
-```
-
-Options:
-
-- `-h` (human readable) Displays output it in kilobytes (K), megabytes (M) and gigabytes (G).
-- `-s` (supress or summarize) Outputs total disk space of a directory and supresses reports for subdirectories. 
-
-Example:
-
-```bash
-du -sh pictures
-1.4M pictures
-```
-
-### `quota`
-
-Shows what your disk quota is.  
-
-```bash
-quota -v
-```
-
-## 3 process
-
-### `bg`
-
-Lists stopped or background jobs; resume a stopped job in the background.
-
-### `fg`
-
-Brings the most recent job in the foreground.
-
-### `top`
-
-Displays your currently active processes.
-
-### `jobs`
-
-Lists the jobs running in the background, giving the job number.
-
-### `ps`
-
-Lists your processes.  
-
-```bash
-ps -u yourusername
-
-pstree -p
-```
-
-Use the flags ef. e for every process and f for full listing. 
-
-```bash
-ps -ef
-```
-
-###  `kill`
-
-Kills (ends) the processes with the ID you gave.  
-
-```bash
-kill PID
-```
-
-### `killall`
-
-Kill all processes with the name.  
-
-```bash
-killall processname
-```
-
-### `lsof`
-
-list open files.
-
-### &
-
-The `&` symbol instructs the command to run as a background process in a subshell.
-
-```bash
-command &
-```
-
-### `nohup`
-
-nohup stands for "No Hang Up". This allows to run command/process or shell script that can continue running in the background after you log out from a shell.
-
-```bash
-nohup command
-```
-
-Combine it with `&` to create background processes 
-
-```bash
-nohup command &
-```
-
-## 4 usr info
-
-### `finger`
-
-Displays information about user.  
-
-```bash
-finger username
-```
-
-### `whoami`
-
-Return current logged in username.
-
-### `last`
-
-Lists your last logins of specified user.  
-
-```bash
-last yourUsername
-```
-
-### `passwd`
-
-Allows the current logged user to change their password.
-
-## other
-
-### `uptime`
-
-Shows current uptime. (已开机时间)
+展示已开机时间, 用 `w` 也可, `w` 还可以查看当前登录用户.
 
 ### `uname`
 
 Shows kernel information.  
 
 ```bash
-uname -a
+uname -a # Unix/Kernel 
+# or
+lsb_release -a # Linux Release 
 ```
 
-### 检查系统状态
+### `sysstat`, `dstat`
 
-`df` dick free, 检查磁盘空间
+`sysstat` 包是收集系统性能和使用情况的工具集, 包括 `mpstat`, `iostat`, `vmstat`, `sar`
+
+`mpstat`, multiprocessor statistics, 报告 CPU 在用户态/内核态/iowait(等待I/O时间)/IDLE(空闲) 状态下所花费时间的百分比.
+
+`iostat`, I/O statistics, 报告 各个设备传输速率, 每次 I/O 操作平均大小, 每秒进行的 I/O 操作数.
+
+`vmstat`, virtual memory statistics, 报告关于虚拟内存/进程/CPU活动等信息.
+
+```shell
+$ vmstat 5 # 5s 刷新一次
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0   0  14900552  58160 397884   0    0     7     2    2   10  0  0 100  0  0
+ 0  0   0  14900552  58160 397884   0    0     0     0    3   36  0  0 100  0  0
+```
+
+| r                        | b                        | swpd            | free                 | buff       | cache          |
+| ------------------------ | ------------------------ | --------------- | -------------------- | ---------- | -------------- |
+| 运行队列                 | 等待 I/O 的进程数        | 虚拟内存量      | 空闲内存量           | 缓冲内存量 | 缓存内存量     |
+| si                       | so                       | bi              | bo                   | in         | cs             |
+| 从磁盘交换到内存数据量/s | 从内存交换到磁盘数据量/s | 读入块数        | 写出块数             | 中断数/s   | 上下文切换数/s |
+| us                       | sy                       | id              | wa                   | st         |                |
+| 用户态CPU时间占比        | 系统态CPU时间占比        | 空闲CPU时间占比 | 等待I/O的CPU时间占比 |   被偷取的CPU时间(如虚拟机使用的CPU时间)        |                |
+
+### `dstat`, `glances`
+
+`dstat` 可以视作 `sysstat` 的简易现代替代品. 
+
+更深度系统信息则可以使用 [glances](https://github.com/nicolargo/glances), 会展示更多系统级数据.
+
+### `free`
 
 `free` 检查主存空间
 
-`vmstat $time_sec`, 如`vmstat 5` 列出一系列空间
+## Debug
 
-### 关机
+### network debug
+
+see [Bash/network](network.md)
+
+### `ldd`
+
+列出程序所依赖的共享库文件 (.so)
+
+<pre>
+$ ldd /usr/bin/clang
+ linux-vdso.so.1 (0x00007fffc04c3000)
+ libclang-cpp.so.14 => /lib/x86_64-linux-gnu/libclang-cpp.so.14 (0x00007f8e58795000)
+ libLLVM-14.so.1 => /lib/x86_64-linux-gnu/libLLVM-14.so.1 (0x00007f8e51ec3000)
+ libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f8e51c97000)
+ libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f8e51bb0000)
+ #  [库名] => [地址] (加载到的内存地址)
+ </pre>
+
+ldd 存在[严重安全漏洞](https://catonmat.net/ldd-arbitrary-code-execution), 确保目标程序是受信任文件.
+
+### `time`
+
+```
+$ time ./lab2
+./lab2  0.59s user 0.01s system 19% cpu 3.008 total
+```
+
+### `dmesg`
+
+引导及系统错误信息
+
+
+## Shutdown
 
 关机命令差别不大:
 

@@ -1,4 +1,4 @@
-[AnyLoRA - Checkpoint](https://civitai.com/models/23900?modelVersionId=95489) 动漫风格绘图, 易搭配各种LoRA风格
+[AnyLoRA - Checkpoint](https://civitai.com/models/23900?modelVersionId=95489) 纯二次元动漫风格绘图, 易搭配各种LoRA风格. 本地跑效果很好.
 
 file: AnyLoRA_bakedVae_fp16_blessedVae
 

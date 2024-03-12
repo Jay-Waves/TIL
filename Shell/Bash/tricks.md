@@ -4,9 +4,6 @@
 
 常用于`\[Enter]`,让[Enter]不再是执行当前行命令, 而是单纯**换行**
 
-### 历史命令查询
-`^R` 可以开始查询, 只需正常输出命令, 它就会根据你的输入(从调命令以后的输入)匹配历史命令
-
 ### 查询文件
 
 `find` 找到含有字符串'score'的文件名, 并列出其路径: `find /path/to/dir -type f | grep score`
@@ -22,6 +19,32 @@ Run `nano ~/.bash_profile` and add the following line:
 ```bash
 alias dockerlogin='ssh www-data@adnan.local -p2222'  # add your alias in .bash_profile
 ```
+
+
+`$ alias new_expr=old_instru_expr`
+
+```bash
+e.g.
+$ alias lm='ls -al | more'
+```
+
+`alias`: 列出当前所有 alias
+
+`unalias old_instru_alias`: 取消某 alias
+
+### 命令历史
+
+`history [n]` 显示 (过去 n 个) 编号历史
+
+`history -c` 清除历史
+
+`echo ${HISTSIZE}$`
+
+`!!` 上一条命令
+
+`!n` 执行第 n 条历史命令 (用 `^R` 更方便)
+
+`!$$` 上一条参数
 
 ### 快速定位
 

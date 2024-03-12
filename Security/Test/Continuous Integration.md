@@ -1,0 +1,1 @@
+Continous Integration (CI, 持续集成) 是一种自动化软件测试系统

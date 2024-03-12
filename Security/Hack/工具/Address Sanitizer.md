@@ -261,15 +261,17 @@ void *FakeStack = __asan_option_detect_stack_use_after_return
 	? __asan_stack_malloc_N(LocalStackSize) : nullptr;
 void *LocalStackBase = (FakeStack) ? FakeStack : alloca(LocalStackSize);
 
-从ShadowTable中分配一块栈内存, 用于异常检测的. __asan_stack_malloc_N() 在Compiler-RT 中实现
+从ShadowTable中分配一块栈内存, 用于异常检测的. 
+__asan_stack_malloc_N() 在Compiler-RT 中实现
 */
 
-  Value *LocalStackBaseAllocaPtr =
-      isa<PtrToIntInst>(LocalStackBaseAlloca)
+// 获取 ShadowTable 中的栈起始地址
+  Value *LocalStackBaseAllocaPtr = isa<PtrToIntInst>(LocalStackBaseAlloca)
           ? cast<PtrToIntInst>(LocalStackBaseAlloca)->getPointerOperand()
-          : LocalStackBaseAlloca;  // 获取ShadowTable中的栈起始地址
+          : LocalStackBaseAlloca;  
 
-  for (const auto &Desc : SVD) {  // 根据AllocaInst的申请栈分配内存大小和位置,在ShadowTable中重新调整到对应的位置
+// 根据 AllocaInst 的申请栈分配内存大小和位置,在 ShadowTable 中重新调整位置
+  for (const auto &Desc : SVD) {  
     AllocaInst *AI = Desc.AI;
     Value *NewAllocaPtr = IRB.CreateIntToPtr(
         IRB.CreateAdd(LocalStackBase, ConstantInt::get(IntptrTy, Desc.Offset)),
@@ -277,15 +279,14 @@ void *LocalStackBase = (FakeStack) ? FakeStack : alloca(LocalStackSize);
     AI->replaceAllUsesWith(NewAllocaPtr);
   }
 
-  // 这些插桩代码都不太重要,意义就是在ShadowTable中创建的栈内存记录当前函数的信息
+// 不重要,在 ShadowTable 中记录当前函数的信息
   Value *BasePlus0 = IRB.CreateIntToPtr(LocalStackBase, IntptrPtrTy);
   IRB.CreateStore(ConstantInt::get(IntptrTy, kCurrentStackFrameMagic),
                   BasePlus0);
   // Write the frame description constant to redzone[1].
   Value *BasePlus1 = IRB.CreateIntToPtr(
       IRB.CreateAdd(LocalStackBase,
-                    ConstantInt::get(IntptrTy, ASan.LongSize / 8)),
-      IntptrPtrTy);
+                ConstantInt::get(IntptrTy, ASan.LongSize / 8)), IntptrPtrTy);
   GlobalVariable *StackDescriptionGlobal =
       createPrivateGlobalForString(*F.getParent(), DescriptionString,
                                    /*AllowMerging*/ true, kAsanGenPrefix);
@@ -293,17 +294,20 @@ void *LocalStackBase = (FakeStack) ? FakeStack : alloca(LocalStackSize);
   IRB.CreateStore(Description, BasePlus1);
   // Write the PC to redzone[2].
   Value *BasePlus2 = IRB.CreateIntToPtr(
-      IRB.CreateAdd(LocalStackBase,
-                    ConstantInt::get(IntptrTy, 2 * ASan.LongSize / 8)),
-      IntptrPtrTy);
+	    IRB.CreateAdd(LocalStackBase,
+                ConstantInt::get(IntptrTy, 2 * ASan.LongSize / 8)), IntptrPtrTy);
   IRB.CreateStore(IRB.CreatePointerCast(&F, IntptrTy), BasePlus2);
 
-  const auto &ShadowAfterScope = GetShadowBytesAfterScope(SVD, L);  // 根据SVD中记录栈中各个变量对应的内存位置初始化ShadowTable的栈内存
+// 根据 SVD 中记录栈中各个变量对应的内存位置初始化 ShadowTable 的栈内存
+  const auto &ShadowAfterScope = GetShadowBytesAfterScope(SVD, L);  
 
-  Value *ShadowBase = ASan.memToShadow(LocalStackBase, IRB);  // ASan.memToShadow()用于计算进程内存在ShadowTable的偏移位置
-  copyToShadow(ShadowAfterScope, ShadowAfterScope, IRB, ShadowBase);  // 21给函数栈内存投毒
+// ASan.memToShadow() 用于计算进程内存在 ShadowTable 的偏移位置
+  Value *ShadowBase = ASan.memToShadow(LocalStackBase, IRB);  
+// 1. 给函数栈内存投毒
+  copyToShadow(ShadowAfterScope, ShadowAfterScope, IRB, ShadowBase);
 
-  if (!StaticAllocaPoisonCallVec.empty()) {  // 2.对栈中分配的变量在ShadowTable中消毒
+// 2.对栈中分配的变量在 ShadowTable 中消毒
+  if (!StaticAllocaPoisonCallVec.empty()) {  
     const auto &ShadowInScope = GetShadowBytes(SVD, L);
 
     for (const auto &APC : StaticAllocaPoisonCallVec) {
@@ -318,11 +322,12 @@ void *LocalStackBase = (FakeStack) ? FakeStack : alloca(LocalStackSize);
                    IRB, ShadowBase);
     }
   }
+  
   /*
-  投毒再消毒后,ShadowTable的内存数据布局如下:
-  1.ShadowTable分配栈后对内存投毒 =>  F3F3F8F8F1F1F1F1
-  2.对栈中需要用到的变量位置消毒  =>  F3F30000F1F1F1F1
-  此时访问栈变量,获取到的数据就是0x00,为正常数据访问;如果是不允许访问的话,那就必定不为0
+  投毒再消毒后, ShadowTable 的内存数据布局如下:
+  1. ShadowTable 分配栈后对内存投毒 =>  F3F3F8F8F1F1F1F1
+  2. 对栈中需要用到的变量位置消毒     =>  F3F30000F1F1F1F1
+  此时访问栈变量,获取到的数据就是 0x00, 为正常数据访问
   */
     
   SmallVector<uint8_t, 64> ShadowClean(ShadowAfterScope.size(), 0);
@@ -333,18 +338,19 @@ void *LocalStackBase = (FakeStack) ? FakeStack : alloca(LocalStackSize);
     // Mark the current frame as retired.
     IRBRet.CreateStore(ConstantInt::get(IntptrTy, kRetiredStackFrameMagic),
                        BasePlus0);
-      
-// 简单总结就是在函数返回时清空ShadowTable中的栈数据为0xF5
-// if FakeStack != 0  // LocalStackBase == FakeStack
-//     // In use-after-return mode, poison the whole stack frame.
-//     if StackMallocIdx <= 4
-//         // For small sizes inline the whole thing:
-//         memset(ShadowBase, kAsanStackAfterReturnMagic, ShadowSize);
-//         **SavedFlagPtr(FakeStack) = 0
-//     else
-//         __asan_stack_free_N(FakeStack, LocalStackSize)
-// else
-//     <This is not a fake stack; unpoison the redzones>
+ 
+//简单总结就是在函数返回时清空 ShadowTable 中的栈数据为 0xF5
+	// if FakeStack != 0  // LocalStackBase == FakeStack
+	//     // In use-after-return mode, poison the whole stack frame.
+	//     if StackMallocIdx <= 4
+	//         // For small sizes inline the whole thing:
+	//         memset(ShadowBase, kAsanStackAfterReturnMagic, ShadowSize);
+	//         **SavedFlagPtr(FakeStack) = 0
+	//     else
+	//         __asan_stack_free_N(FakeStack, LocalStackSize)
+	// else
+	//     <This is not a fake stack; unpoison the redzones>
+
     Value *Cmp =
         IRBRet.CreateICmpNE(FakeStack, Constant::getNullValue(IntptrTy));
     Instruction *ThenTerm, *ElseTerm;

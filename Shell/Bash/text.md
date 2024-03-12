@@ -1,10 +1,32 @@
-## Text Operations
+## Special Formatter
 
-| awk  | cut | echo | egrep | fgrep | fmt  | |
-| ---- | --- | ---- | ----- | ----- | ---- |--|
-| grep | nl  | sed  | sort  | tr    | uniq | wc|
+### HTML, YAML, JSON, CSV
 
-### a. `awk`
+- 将 HTML 转为文本：`lynx -dump -stdin`。
+
+- Markdown，HTML，以及所有文档格式之间的转换，试试 [`pandoc`](http://pandoc.org/)。
+
+- 当你要处理棘手的 XML 时候，`xmlstarlet` 算是上古时代流传下来的神器。
+
+- 使用 [`jq`](http://stedolan.github.io/jq/) 处理 JSON。
+
+- 使用 [`shyaml`](https://github.com/0k/shyaml) 处理 YAML。
+
+- 要处理 Excel 或 CSV 文件的话，[csvkit](https://github.com/onyxfish/csvkit) 提供了 `in2csv`，`csvcut`，`csvjoin`，`csvgrep` 等方便易用的工具。
+
+### Binary
+
+- 对于二进制文件，使用 `hd`，`hexdump` 或者 `xxd` 使其以十六进制显示，使用 `bvi`，`hexedit` 或者 `biew` 来进行二进制编辑。
+
+- 同样对于二进制文件，`strings`（包括 `grep` 等工具）可以帮助在二进制文件中查找特定比特。
+
+- 制作二进制差分文件（Delta 压缩），使用 `xdelta3`。
+
+- 拆分文件可以使用 `split`（按大小拆分）和 `csplit`（按模式拆分）。
+
+## Text Filter
+
+### `awk`
 
 awk is the most useful command for handling text files. It operates on an entire file line by line. By default it uses whitespace to separate the fields. The most common syntax for awk command is
 
@@ -40,7 +62,72 @@ sync
 
 For more detail on how to use `awk`, check following [link](https://www.cyberciti.biz/faq/bash-scripting-using-awk).
 
-### b. `cut`
+### `sed`
+
+Stream editor for filtering and transforming text
+
+*example.txt*
+
+```bash
+Hello This is a Test 1 2 3 4
+```
+
+*replace all spaces with hyphens*
+
+```bash
+sed 's/ /-/g' example.txt
+```
+
+```bash
+Hello-This-is-a-Test-1-2-3-4
+```
+
+*replace all digits with "d"*
+
+```bash
+sed 's/[0-9]/d/g' example.txt
+```
+
+```bash
+Hello This is a Test d d d d
+```
+ 
+ > [详见](https://www.cnblogs.com/liwei0526vip/p/5644163.html)
+
+### `grep`
+
+Looks for text inside files. You can use grep to search for lines of text that match one or many regular expressions, and outputs only the matching lines.  
+
+```bash
+grep pattern filename
+```
+
+Example:
+
+```bash
+$ grep admin /etc/passwd
+_kadmin_admin:*:218:-2:Kerberos Admin Service:/var/empty:/usr/bin/false
+_kadmin_changepw:*:219:-2:Kerberos Change Password Service:/var/empty:/usr/bin/false
+_krb_kadmin:*:231:-2:Open Directory Kerberos Admin Service:/var/empty:/usr/bin/false
+```
+
+You can also force grep to ignore word case by using `-i` option. `-r` can be used to search all files under the specified directory, for example:
+
+```bash
+$ grep -r admin /etc/
+```
+
+And `-w` to search for words only. For more detail on `grep`, check following [link](https://www.cyberciti.biz/faq/grep-in-bash).
+
+`grep -F`
+
+`grep -E`
+
+***
+
+## Formatter
+
+### `cut`, `paste`, `join`
 
 Remove sections from each line of files
 
@@ -60,118 +147,15 @@ cut -d " " -f2,7,9 example.txt
 riding park play
 ```
 
-### c. `echo`
+### `echo`
 
-Display a line of text
-
-*display "Hello World"*
-
-```bash
-echo Hello World
-```
-
-```bash
-Hello World
-```
-
-*display "Hello World" with newlines between words*
-
-```bash
-echo -ne "Hello\nWorld\n"
-```
-
-```bash
+```sh
+$ echo -ne "Hello\nWorld\n"
 Hello
 World
 ```
 
-### d. `egrep`
-
-Print lines matching a pattern - Extended Expression (alias for: 'grep -E')
-
-*example.txt*
-
-```bash
-Lorem ipsum
-dolor sit amet, 
-consetetur
-sadipscing elitr,
-sed diam nonumy
-eirmod tempor
-invidunt ut labore
-et dolore magna
-aliquyam erat, sed
-diam voluptua. At
-vero eos et
-accusam et justo
-duo dolores et ea
-rebum. Stet clita
-kasd gubergren,
-no sea takimata
-sanctus est Lorem
-ipsum dolor sit
-amet.
-```
-
-*display lines that have either "Lorem" or "dolor" in them.*
-
-```bash
-egrep '(Lorem|dolor)' example.txt
-or
-grep -E '(Lorem|dolor)' example.txt
-```
-
-```bash
-Lorem ipsum
-dolor sit amet,
-et dolore magna
-duo dolores et ea
-sanctus est Lorem
-ipsum dolor sit
-```
-
-### e. `fgrep`
-
-Print lines matching a pattern - FIXED pattern matching  (alias for: 'grep -F')
-
-*example.txt*
-
-```bash
-Lorem ipsum
-dolor sit amet,
-consetetur
-sadipscing elitr,
-sed diam nonumy
-eirmod tempor
-foo (Lorem|dolor) 
-invidunt ut labore
-et dolore magna
-aliquyam erat, sed
-diam voluptua. At
-vero eos et
-accusam et justo
-duo dolores et ea
-rebum. Stet clita
-kasd gubergren,
-no sea takimata
-sanctus est Lorem
-ipsum dolor sit
-amet.
-```
-
-*Find the exact string '(Lorem|dolor)' in example.txt*
-
-```bash
-fgrep '(Lorem|dolor)' example.txt
-or
-grep -F '(Lorem|dolor)' example.txt
-```
-
-```bash
-foo (Lorem|dolor) 
-```
-
-### f. `fmt`
+### `fmt`
 
 Simple optimal text formatter
 
@@ -209,202 +193,7 @@ ipsum dolor sit
 amet.
 ```
 
-### g. `grep`
-
-Looks for text inside files. You can use grep to search for lines of text that match one or many regular expressions, and outputs only the matching lines.  
-
-```bash
-grep pattern filename
-```
-
-Example:
-
-```bash
-$ grep admin /etc/passwd
-_kadmin_admin:*:218:-2:Kerberos Admin Service:/var/empty:/usr/bin/false
-_kadmin_changepw:*:219:-2:Kerberos Change Password Service:/var/empty:/usr/bin/false
-_krb_kadmin:*:231:-2:Open Directory Kerberos Admin Service:/var/empty:/usr/bin/false
-```
-
-You can also force grep to ignore word case by using `-i` option. `-r` can be used to search all files under the specified directory, for example:
-
-```bash
-$ grep -r admin /etc/
-```
-
-And `-w` to search for words only. For more detail on `grep`, check following [link](https://www.cyberciti.biz/faq/grep-in-bash).
-
-### h. `nl`
-
-Number lines of files
-
-*example.txt*
-
-```bash
-Lorem ipsum
-dolor sit amet,
-consetetur
-sadipscing elitr,
-sed diam nonumy
-eirmod tempor
-invidunt ut labore
-et dolore magna
-aliquyam erat, sed
-diam voluptua. At
-vero eos et
-accusam et justo
-duo dolores et ea
-rebum. Stet clita
-kasd gubergren,
-no sea takimata
-sanctus est Lorem
-ipsum dolor sit
-amet.
-```
-
-*show example.txt with line numbers*
-
-```bash
-nl -s". " example.txt 
-```
-
-```bash
-     1. Lorem ipsum
-     2. dolor sit amet,
-     3. consetetur
-     4. sadipscing elitr,
-     5. sed diam nonumy
-     6. eirmod tempor
-     7. invidunt ut labore
-     8. et dolore magna
-     9. aliquyam erat, sed
-    10. diam voluptua. At
-    11. vero eos et
-    12. accusam et justo
-    13. duo dolores et ea
-    14. rebum. Stet clita
-    15. kasd gubergren,
-    16. no sea takimata
-    17. sanctus est Lorem
-    18. ipsum dolor sit
-    19. amet.
-```
-
-### i. `sed`
-
-Stream editor for filtering and transforming text
-
-*example.txt*
-
-```bash
-Hello This is a Test 1 2 3 4
-```
-
-*replace all spaces with hyphens*
-
-```bash
-sed 's/ /-/g' example.txt
-```
-
-```bash
-Hello-This-is-a-Test-1-2-3-4
-```
-
-*replace all digits with "d"*
-
-```bash
-sed 's/[0-9]/d/g' example.txt
-```
-
-```bash
-Hello This is a Test d d d d
-```
- 
- > [详见](https://www.cnblogs.com/liwei0526vip/p/5644163.html)
-
-### j. `sort`
-
-Sort lines of text files
-
-*example.txt*
-
-```bash
-f
-b
-c
-g
-a
-e
-d
-```
-
-*sort example.txt*
-
-```bash
-sort example.txt
-```
-
-```bash
-a
-b
-c
-d
-e
-f
-g
-```
-
-*randomize a sorted example.txt*
-
-```bash
-sort example.txt | sort -R
-```
-
-```bash
-b
-f
-a
-c
-d
-g
-e
-```
-
-### k. `tr`
-
-Translate or delete characters
-
-*example.txt*
-
-```bash
-Hello World Foo Bar Baz!
-```
-
-*take all lower case letters and make them upper case*
-
-```bash
-cat example.txt | tr 'a-z' 'A-Z' 
-```
-
-```bash
-HELLO WORLD FOO BAR BAZ!
-```
-
-*take all spaces and make them into newlines*
-
-```bash
-cat example.txt | tr ' ' '\n'
-```
-
-```bash
-Hello
-World
-Foo
-Bar
-Baz!
-```
-
-### l. `uniq`
+### `uniq`, `sort`
 
 Report or omit repeated lines
 
@@ -447,19 +236,13 @@ sort example.txt | uniq -c
     1 d
 ```
 
-### m. `wc`
+## Encode
 
-Tells you how many lines, words and characters there are in a file.  
+### `iconv`, `uconv`
 
-```bash
-wc filename
+`iconv` 更改文本编码, `uconv` 则支持一些高级 Unicode 功能.
+
+```sh
+# 转换为 Windows 默认的 UTF-16LE 编码 (傻逼巨硬)
+iconv -f utf-8 -t utf-16le data.txt
 ```
-
-Example:
-
-```bash
-$ wc demo.txt
-7459   15915  398400 demo.txt
-```
-
-Where `7459` is lines, `15915` is words and `398400` is characters.

@@ -3,6 +3,7 @@
 /.stash/**
 .obsidian.vimrc
 desktop.ini
+NSFW/
 
 # 大文件
 /Hack/Tutorials/**

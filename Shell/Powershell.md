@@ -26,6 +26,7 @@ powershell 为 bash 和 cmd 用户准备了对应命令的别名.
 | `chmod`                  | `set-acl`                  |                             |
 | `export VarName="value"` | `$env:VarName="value"`     |                             |
 | `clear`                  | `cls`                      |                             |
+| `cd .. && pwd`           | `cd; pwd`                           |                             |
 
 ## Variable
 

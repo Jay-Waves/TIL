@@ -1,4 +1,22 @@
-## 批处理循环 `for`
+`.bat` 和直接执行 cmd 命令并不完全相同, 很多语法不兼容. (和 bash 不同).
+
+```bat
+@echo off
+cd $Dir
+File.exe arg
+pause
+```
+- 注意中文要使用ANSI编码, 否则是乱码. 用notepad打开并另存为即可.
+
+### %
+1. `%var%` 变量引用， 如`path=%path%;c\hello`
+2. `%[0-9]` 对形式参数的引用
+
+### ^
+转移字符, 常用来换行`end of line^ new line`
+
+# 循环 `for`
+
 ### format
 `FOR [parameter] %%variable IN (files or doc set)  DO command [command-parameters]`
 

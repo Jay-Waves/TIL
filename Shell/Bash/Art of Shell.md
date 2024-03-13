@@ -9,10 +9,6 @@
       cat hosts | xargs -I{} ssh root@{} hostname
 ```
 
-- 使用 `netstat -lntp` 或 `ss -plat` 检查哪些进程在监听端口（默认是检查 TCP 端口; 添加参数 `-u` 则检查 UDP 端口）或者 `lsof -iTCP -sTCP:LISTEN -P -n` (这也可以在 OS X 上运行)。
-
-
-
 - 当变量和文件名中包含空格的时候要格外小心。Bash 变量要用引号括起来，比如 `"$FOO"`。尽量使用 `-0` 或 `-print0` 选项以便用 NULL 来分隔文件名，例如 `locate -0 pattern | xargs -0 ls -al` 或 `find / -print0 -type d | xargs -0 ls -al`。如果 for 循环中循环访问的文件名含有空字符（空格、tab 等字符），只需用 `IFS=$'\n'` 把内部字段分隔符设为换行符。
 
 - 在 Bash 脚本中，使用 `set -x` 去调试输出（或者使用它的变体 `set -v`，它会记录原始输入，包括多余的参数和注释）。尽可能地使用严格模式：使用 `set -e` 令脚本在发生错误时退出而不是继续运行；使用 `set -u` 来检查是否使用了未赋值的变量；试试 `set -o pipefail`，它可以监测管道中的错误。当牵扯到很多脚本时，使用 `trap` 来检测 ERR 和 EXIT。一个好的习惯是在脚本文件开头这样写，这会使它能够检测一些错误，并在错误发生时中断程序并输出信息：
@@ -119,9 +115,6 @@ mkdir empty && rsync -r --delete empty/ some-dir && rmdir some-dir
 
 ## 系统调试
 
-- 使用 `netstat` 和 `ss` 查看网络连接的细节。
-
-- 使用 [`mtr`](http://www.bitwizard.nl/mtr/) 去跟踪路由，用于确定网络问题。
 
 - 查找正在使用带宽的套接字连接或进程，使用 [`iftop`](http://www.ex-parrot.com/~pdw/iftop/) 或 [`nethogs`](https://github.com/raboof/nethogs)。
 
@@ -155,10 +148,6 @@ mkdir empty && rsync -r --delete empty/ some-dir && rmdir some-dir
 - `seq`：打印数字
 
 - `toe`：terminfo 入口列表
-
-- `nc`：网络调试及数据传输
-
-- `socat`：套接字代理，与 `netcat` 类似
 
 - [`slurm`](https://github.com/mattthias/slurm)：网络流量可视化
 
@@ -215,8 +204,6 @@ mkdir empty && rsync -r --delete empty/ some-dir && rmdir some-dir
 - [`sar`](http://sebastien.godard.pagesperso-orange.fr/)：系统历史数据
 
 - [`iftop`](http://www.ex-parrot.com/~pdw/iftop/) 或 [`nethogs`](https://github.com/raboof/nethogs)：套接字及进程的网络利用情况
-
-- `ss`：套接字数据
 
 - `sysctl`： 在内核运行时动态地查看和修改内核的运行参数
 

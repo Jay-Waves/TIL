@@ -32,7 +32,7 @@ define i32 @main() {
 
 ![|500](../../attach/Pasted%20image%2020240229161828.png)
 
-目标的数据布局。具体而言：
+目标的数据布局. 具体而言:
 
 - `e`: 小端序
 - `m:e`: 符号表中使用ELF格式的命名修饰
@@ -41,6 +41,9 @@ define i32 @main() {
 - `f80:128`: 将`long double`类型的变量采用128位的ABI对齐
 - `n8:16:32:64`: 目标CPU的原生整型包含8位、16位、32位和64位
 - `S128`: 栈以128位自然对齐
+
+`target triple`: 目标平台, 如 `aarc64-apple-darwin`, `x86_64-pc-windows-msvc`
+
 
 > 参考 [Data Layout](https://llvm.org/docs/LangRef.html#data-layout)
 

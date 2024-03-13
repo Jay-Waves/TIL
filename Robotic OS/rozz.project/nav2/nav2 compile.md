@@ -8,7 +8,7 @@ tags:
 
 不开 coverage, 不开 asan, 使用 clang 编译 navigation2
 
-clang 检查比较严格, 可能报 gcc 不报的错. 参考 [使用 clang 编译](nav2_compile.md#使用%20clang%20编译)
+clang 检查比较严格, 可能报 gcc 不报的错. 参考 [使用 clang 编译](nav2%20compile.md#使用%20clang%20编译)
 
 ```shell
 source /opt/ros/humble/setup.bash
@@ -238,7 +238,7 @@ using-clang:
 
 > https://github.com/google/sanitizers/issues/89
 
-==已解决==, 见 [nav2_bringup](nav2_bringup.md)
+==已解决==, 见 [nav2 bringup](nav2%20bringup.md)
 
 ### 使用 clang 编译
 

@@ -107,7 +107,7 @@ docker exec <my-container> ls
 
 ## Dockerfile
 
-dockfile 定义了 docker engine 如何构建一个 docker 镜像, 构建过程为root用户. 可以参考我为 Rozz 设计的 [rozz dockerfile](../Robotic%20OS/rozz.project/nav2/rozz%20dockerfile.md)
+dockfile 定义了 docker engine 如何构建一个 docker 镜像, 构建过程为root用户. 可以参考我为 Rozz 设计的 [rozz dockerfile](../Robotic%20OS/fuzz.project/nav2/rozz%20dockerfile.md)
 
 - `ENV`: 镜像构建和执行过程中都会存在参.
 - `ARG`: 仅镜像构建中存在的参数.

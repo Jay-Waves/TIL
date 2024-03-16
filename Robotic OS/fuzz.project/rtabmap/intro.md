@@ -16,7 +16,7 @@ ros2 launch rtabmap_launch rtabmap.launch.py \
    qos:=2 \
    args:="-d --RGBD/NeighborLinkRefining true --Reg/Strategy 1" \
    use_sim_time:=true \
-   rviz:=true
+   rviz:=false
 
 # 将 /rtabmap/map 转发到 /map, 让 rviz 接收到地图
 ros2 run topic_tools relay /rtabmap/map /map

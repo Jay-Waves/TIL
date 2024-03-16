@@ -22,47 +22,7 @@ MSan detects cases where uninitialized values affect program execution, which me
 - `-o2` optimize code performance.
 - `-g` get file names and line numbers in the warning msgs.
 
-### popular data-race cases
-
-#### 1 Simple race
-
-**Thread-hostile reference counting**, 引用计数时, 没有互斥访问.
-
-```cpp
-// Ref() and Unref() may be called from several threads.
-// Last Unref() destroys the object.
-class RefCountedObject {
- ...
- public:
-  void Ref() {
-    ref_++;  // Bug!
-  }
-  void Unref() {
-    if (--ref_ == 0)  // Bug! Need to use atomic decrement!
-      delete this;
-  }
- private:
-  int ref_;
-};
-```
-
-#### 2 Race on a complex object
-
-two threads access a non-thread-safe complex object (e.g. an STL container) without synchronization.
-
-```cpp
-std::map<int,int> m;
-
-void Thread1() {
-  m[123] = 1;
-}
-
-void Thread2() {
-  m[345] = 0;
-}
-```
-
-#### 3 Publishing objects without synchronization
+详见 [Thread Sanitizer](Thread%20Sanitizer.md)
 
 ## UBSan
 
@@ -193,5 +153,5 @@ void foo() {
 Sanitizer 自带的覆盖率统计工具, 见:
 - [Sanitizer Coverage](Sanitizer%20Coverage.md)
 - [AFL](AFL.md)
-- [Coverage](../Coverage.md)
+- [Coverage](Coverage.md)
 

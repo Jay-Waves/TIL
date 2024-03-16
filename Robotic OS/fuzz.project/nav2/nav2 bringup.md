@@ -40,6 +40,9 @@ export ASAN_OPTIONS="new_delete_type_mismatch=0 detect_leaks=0 halt_on_erro=0"
 
 #LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libasan.so.6 /usr/lib/x86_64-linux-gnu/libstdc++.so.6"
 ros2 launch nav2_bringup tb3_simulation_launch.py headless:=True use_composition:=False # log_level:=log
+
+# 待 gazebo:
+ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False use_composition:=False
 ```
 
 ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False

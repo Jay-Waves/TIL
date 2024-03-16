@@ -3,7 +3,7 @@ date: 2023-09-01
 tags:
   - Paper
 ---
-> 参考 [Fuzzing: A Survey](../Docs/Fuzzing%20a%20survey%201.pdf)
+> 参考 [Fuzzing: A Survey](../../../paper/Fuzzing%20a%20survey.pdf)
 
 # Fuzz 综述
 
@@ -81,8 +81,6 @@ while not (timeout or abort_signal):
 
 print(Tx)
 ```
-
-![](../attach/Pasted%20image%2020230727234845.png)
 
 ### Key Questions
 

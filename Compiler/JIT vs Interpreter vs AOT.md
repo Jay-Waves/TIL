@@ -1,6 +1,6 @@
 ## AOT
 
-Ahead-of-time 指程序在执行前就编译为可执行文件. (如 C, C++)
+Ahead-of-time 指程序在执行前就编译为可执行文件. (如 C, C++. 也叫静态编译)
 
 AOT 对编译时间不是很敏感, 可以进行复杂高级的优化算法, 得到效率或 codesize 更优的代码. 但 AOT 无法进行 PGO (profile-guided optimization) 优化
 

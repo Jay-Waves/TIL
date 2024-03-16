@@ -6,7 +6,7 @@
 - **Start Date**: December 2000.
 - **Design Principle**: Reusable libraries with clear interfaces, contrasting with the then-prevailing monolithic design of language implementations.
 - **Innovation1**: Facilitated the reuse of compiler components across launguages or further tasks (unlike static compilers like GCC which were hard to repurpose for tasks beyond compilation, or scripting languages which had to embed their monolithic runtime into larger applications).
-- **Innovation2**: Support both traditional static compiler (like GCC, Free Pascal) and runtime compiler in the form of interpreter (like Python) or Just-In-Time(JIT like .Net, JVM) compiler with more sharings of code.
+- **Innovation2**: Support both traditional [static compiler](../JIT%20vs%20Interpreter%20vs%20AOT.md) (like GCC, Free Pascal) and runtime compiler in the form of interpreter (like Python) or Just-In-Time ([JIT](../JIT%20vs%20Interpreter%20vs%20AOT.md) like .Net, JVM) compiler with more sharings of code.
 
 ![](../../attach/Pasted%20image%2020240307150000.png)
 
@@ -19,24 +19,27 @@ LLVM IR 中间代码表示有三种格式:
 
 The classical three-phase design of compilers comprised the front end, optimizer, and back end. This design allows for the support of multiple source languages and target architectures by using a common code representation, which enhances portability, broadens the developer base, and fosters community contributions. Open source compilers serving multiple communities tend to produce better optimized code compared to more specialized compilers.
 
-中间代码形式, 使 n 种高级语言和 m 种汇编语言间转换关系从 $n\times m$ 简化为 $n+m$, 让这让编译器更方便地实现跨平台支持.
-
 ![](../../attach/SimpleCompiler.png)
 
 实践中这种编译器结构很少被完全实现, 前端后端难分离, 没有标准的中间代码形式, 导致各个语言的代码和优化几乎不能互相复用. 有三种实现该结构的努力:
 1. Java and .Net 虚拟机. 提供 JIT 执行程序的 bytecode, [其他语言](http://en.wikipedia.org/wiki/List_of_JVM_languages) 编译为该格式即可被解释执行. 但这种方式必须使用: JIT runtime, garbage collection, particular object model. 这导致了和这种模型差异较大的语言(如C)仅有较低的执行效率.
-2. 将源码翻译为C, 然后交给C编译器. 
-3. GCC
+2. 将源码翻译为 C, 然后交给 C 编译器. 这种方法很灵活, 翻译为 C 的前端也比较好写, 但此法会降低错误处理的效率, 使代码很难 debug, 并且使整个编译时间更长. 此外, 要实现一些 C 不支持的特性需要更多工作.
+3. GCC. GCC 本身支持很多前后端目标, 社区也积极推荐其本身的优化迭代. 但 GCC 本身历史包袱比较重, 最初设计并不模块化, 导致对 gcc 的扩展很困难.
 
-A second success story is perhaps the most unfortunate, but also most popular way to reuse compiler technology: translate the input source to C code (or some other language) and send it through existing C compilers. This allows reuse of the optimizer and code generator, gives good flexibility, control over the runtime, and is really easy for front-end implementers to understand, implement, and maintain. Unfortunately, doing this prevents efficient implementation of exception handling, provides a poor debugging experience, slows down compilation, and can be problematic for languages that require guaranteed tail calls (or other features not supported by C).
+> There are multiple reasons why pieces of GCC cannot be reused
+>  as libraries, including rampant use of global variables, 
+>  weakly enforced invariants, poorly-designed data structures, 
+>  sprawling code base, and the use of macros that prevent the 
+>  codebase from being compiled to support more than one 
+>  front-end/target pair at a time. 
+>  The hardest problems to fix, though, are the inherent 
+>  architectural problems that stem from its early design and age. 
+>  Specifically, GCC suffers from layering problems and leaky 
+>  abstractions: the back end walks front-end ASTs to generate 
+>  debug info, the front ends generate back-end data structures, 
+>  and the entire compiler depends on global data structures 
+>  set up by the command line interface.
 
-A final successful implementation of this model is GCC[4](https://aosabook.org/en/v1/llvm.html#footnote-4). GCC supports many front ends and back ends, and has an active and broad community of contributors. GCC has a long history of being a C compiler that supports multiple targets with hacky support for a few other languages bolted onto it. As the years go by, the GCC community is slowly evolving a cleaner design. As of GCC 4.4, it has a new representation for the optimizer (known as "GIMPLE Tuples") which is closer to being separate from the front-end representation than before. Also, its Fortran and Ada front ends use a clean AST.
-
-While very successful, these three approaches have strong limitations to what they can be used for, because they are designed as monolithic applications. As one example, it is not realistically possible to embed GCC into other applications, to use GCC as a runtime/JIT compiler, or extract and reuse pieces of GCC without pulling in most of the compiler. People who have wanted to use GCC's C++ front end for documentation generation, code indexing, refactoring, and static analysis tools have had to use GCC as a monolithic application that emits interesting information as XML, or write plugins to inject foreign code into the GCC process.
-
-> There are multiple reasons why pieces of GCC cannot be reused as libraries, including rampant use of global variables, weakly enforced invariants, poorly-designed data structures, sprawling code base, and the use of macros that prevent the codebase from being compiled to support more than one front-end/target pair at a time. The hardest problems to fix, though, are the inherent architectural problems that stem from its early design and age. Specifically, GCC suffers from layering problems and leaky abstractions: the back end walks front-end ASTs to generate debug info, the front ends generate back-end data structures, and the entire compiler depends on global data structures set up by the command line interface.
-
-Pre-LLVM, language implementations rarely shared code, and those that were retargetable were still highly specific to their source language. LLVM's introduction of the Intermediate Representation (IR) changed this by providing a versatile platform for optimization and transformation.
 
 LLVM IR 是独立完备的, 相比之下, GCC 的 GIMPLE 中间表示并不是完备的, 编译器前后端仍需要参考其他信息来完成工作, 这导致基于 GCC 工具链的前后端实现难度较大. 各种代码优化/静态分析/代码重构, 可直接基于 LLVM IR.
 
@@ -94,5 +97,3 @@ llvm 仅链接入所需要的 Pass.o, 无关 Pass.o 不会产生开销. 这也�
 ![](../../attach/PassLinkage.png)
 
 ![](../../attach/LTO.png)
-
-> Modular vs Monolithic

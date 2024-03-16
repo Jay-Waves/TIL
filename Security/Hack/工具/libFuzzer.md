@@ -130,7 +130,7 @@ void Fuzzer::ExecuteCallback(const uint8_t *Data, size_t Size) {
 
 ## Coverage
 
-libFuzzer 使用 [Sanitizer Coverage](../Coverage.md) 统计覆盖率数据. 在 `FuzzerTracePC.cpp` 中, TracePC(TPC) 类专用于收集 SanCov 收集的插桩信息.
+libFuzzer 使用 [Sanitizer Coverage](Coverage.md) 统计覆盖率数据. 在 `FuzzerTracePC.cpp` 中, TracePC(TPC) 类专用于收集 SanCov 收集的插桩信息.
 
 ```cpp
 ATTRIBUTE_INTERFACE

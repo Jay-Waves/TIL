@@ -1,4 +1,4 @@
-## ros bag
+## bag
 
 `ros bag` 工具用于记录订阅的消息
 
@@ -16,7 +16,7 @@
 
 见 [topic_tools.git](https://github.com/ros-tooling/topic_tools)
 
-```shell
+```sh
 # 订阅转发 relay 
 ros2 run topic_tools relay /rtabmap/map /map
 

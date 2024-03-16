@@ -15,7 +15,7 @@ source /opt/ros/humble/setup.bash
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
-rosdep install -y --from-paths ./src --ignore-src
+	rosdep install -y --from-paths ./src --ignore-src
 
 # 设置 make 并行数
 export MAKEFLAGS="-j4"

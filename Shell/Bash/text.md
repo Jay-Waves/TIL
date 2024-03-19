@@ -96,14 +96,6 @@ Hello This is a Test d d d d
 
 ### `grep`
 
-Looks for text inside files. You can use grep to search for lines of text that match one or many regular expressions, and outputs only the matching lines.  
-
-```bash
-grep pattern filename
-```
-
-Example:
-
 ```bash
 $ grep admin /etc/passwd
 _kadmin_admin:*:218:-2:Kerberos Admin Service:/var/empty:/usr/bin/false
@@ -111,17 +103,18 @@ _kadmin_changepw:*:219:-2:Kerberos Change Password Service:/var/empty:/usr/bin/f
 _krb_kadmin:*:231:-2:Open Directory Kerberos Admin Service:/var/empty:/usr/bin/false
 ```
 
-You can also force grep to ignore word case by using `-i` option. `-r` can be used to search all files under the specified directory, for example:
+force grep to ignore word case by using `-i` option. `-r` can be used to search all files under the specified directory:
 
 ```bash
 $ grep -r admin /etc/
 ```
 
-And `-w` to search for words only. For more detail on `grep`, check following [link](https://www.cyberciti.biz/faq/grep-in-bash).
+`-F`, `-E` enable functional of regular expr.
 
-`grep -F`
-
-`grep -E`
+`-C [N]` context: print `N` lines after and before matching lines:
+```bash
+grep -C 5 "pattern"
+```
 
 ***
 
@@ -147,12 +140,18 @@ cut -d " " -f2,7,9 example.txt
 riding park play
 ```
 
-### `echo`
+### `echo` & `printf`
 
 ```sh
 $ echo -ne "Hello\nWorld\n"
 Hello
 World
+```
+
+`printf` 类似 `echo -n`:
+
+```sh
+printf '%s\n' 'hello world'
 ```
 
 ### `fmt`

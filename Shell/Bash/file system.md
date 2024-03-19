@@ -1,8 +1,10 @@
 `df`，`mount`，`fdisk`，`mkfs`，`lsblk`
 
-## Directory
+## Directory Management
 
 ### `cd`
+
+change working directory.
 
 ### `ls`, `tree`
 
@@ -85,4 +87,69 @@ Shows what your disk quota is.
 quota -v
 ```
 
-## Management
+## Index file
+
+### `find` !
+
+```bash
+$ find . -name README.md
+$ find . -iname REAME.md # case insensitive
+$ find /home/user1 -name '*.png'
+```
+
+### `locate`
+
+任意位置索引(需要先建立索引): `locate "pattern"`
+
+## File Management
+
+### `mv` !
+
+Moves a file from one location to other.  
+
+```bash
+mv filename1 filename2
+```
+
+Where `filename1` is the source path to the file and `filename2` is the destination path to the file.
+
+Also it can be used for rename a file.
+
+```bash
+mv old_name new_name
+```
+
+### `cp` !
+
+Copies a file from one location to other.  
+
+```bash
+cp filename1 filename2
+```
+
+Where `filename1` is the source path to the file and `filename2` is the destination path to the file.
+
+### `rm` !
+
+Removes a file. Using this command on a directory gives you an error.
+`rm: directory: is a directory`
+To remove a directory you have to pass `-r` which will remove the content of the directory recursively. Optionally you can use `-f` flag to force the deletion i.e. without any confirmations etc.
+
+```bash
+rm filename
+```
+
+### `touch` !
+
+Updates access and modification time stamps of your file. If it doesn't exists, it'll be created.
+
+```bash
+touch filename
+```
+
+Example:
+
+```bash
+$ touch trick.md
+```
+

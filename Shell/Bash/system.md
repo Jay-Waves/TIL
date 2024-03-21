@@ -2,18 +2,7 @@
 
 ### `/proc` Info
 
-`/proc` 是一种虚拟文件系统, 用于内核态和用户态的通信. 用户可以通过这些文件读取大量系统信息, 并通过修改参数改变系统行为.
-
-- `/proc/cpuinfo` CPU 详细信息
-- `/proc/meminfo` 内存使用情况
-- `/proc/sys/` 内核各种参数和状态, 用于修改内核行为 (如 IP转发)
-- `/proc/partitions` 系统所有分区
-- `/proc/mouts` 当前挂载的文件系统
-- `/proc/[pid]/cmdline` 启动进程时使用的命令行参数
-- `/proc/[pid]/status` 进程状态信息
-- `/proc/[pid]/cwd` 进程工作目录
-- `/proc/[pid]/exe` 指向该进程所用可执行文件的符号链接
-- `/proc/[pid]/fd/` 指向该进程打开的所有文件的符号链接
+详见: [proc](../../Linux/proc.md)
 
 ### `uptime`, `w`
 
@@ -98,6 +87,13 @@ $ time ./lab2
 
 引导及系统错误信息
 
+### `strace`, `ltrace`
+
+用于审查程序失败/挂起/崩溃的原因, 或者大致了解程序性能.  strace 用于跟踪系统调用, `ltrace` 用于跟踪程序对动态库函数的调用 (也包括标准库函数 `malloc`, `printf` 等)
+
+- `-c`: 开启 profile 性能分析, `strace -c ./my_program`
+- `-p`: 附加到一个运行中的进程, `strace -p 1234`
+
 ## Screen
 
 分屏软件: `screen`, `tmux`, `byobu`, `dtach`
@@ -126,3 +122,9 @@ $ time ./lab2
 3. 使用`ps -aux`查看后台进程状态
 1. 使用数据同步`sync`
 2. 关机
+
+## Time
+
+### `dateutils`
+
+[`dateutils`](http://www.fresse.org/dateutils/) 中 `dateadd`、`datediff`、`strptime` 系列工具

@@ -235,6 +235,10 @@ sort example.txt | uniq -c
     1 d
 ```
 
+### `nl`
+
+number lines, 打印行号, `nl file1`
+
 ## Encode
 
 ### `iconv`, `uconv`

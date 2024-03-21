@@ -29,5 +29,123 @@ func finishReq(timeout time.Duration) r ob {
 
 ![](../../../attach/Pasted%20image%2020240318090441.png)
 
+```go
+var group sync.WaitGroup
+group.Add(len(pm.plugins))
+for _, p := range pm.plugins {
+	go func(p *plugin) {
+		defer group.Done()
+	}
+	- group.Wait()
+}
++ group.Wait()
+```
+
+```go
+// goroutine1
+func goroutine1() {
+	m.Lock()
+-	ch <- request // blocks
++	select {
++		case ch <- request
++		default:
++	}
+	m.Unlock()
+}
+
+// goroutine2
+func goroutine2() {
+	for {
+		m.Lock() // blocks
+		m.Unlock()
+		request <- ch
+	}
+}
+```
+
 ### Unblocking Bugs
 
+Message Passing 比 shared memory 的方式产生非阻塞 bugs 的概率更小, 也确实是一种更安全的线程通信方式, 但是出现 bug 后更难查找修复.
+
+匿名函数造成的数据竞争:
+```go
+for i:= 17; i<=21; i++{ // write
+-	go func() { // create a new goroutine
++	go func(i int) {
+		apiVersion := fmt.Sprintf("v1.%d", i) //read
+		...
+-	}()
++	}(i)
+}
+```
+
+错误使用 WaitGroup:
+```go
+// func1
+func (p *peer) send() {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	switch p.status {
+		case idle:
++			p.wg.Add(1)
+			go func() {
+-				p.wg.Add(1)
+				...
+				p.wg.Done()
+			}()
+		case stopped:
+	}
+}
+
+// func2
+func (p* peer) stop() {
+	p.mu.Lock()
+	p.status = stoppedp.mu.Unlock()
+	p.mu.Unlock()
+	p.wg.Wait()
+}
+```
+
+错误传输消息占所有非阻塞错误的 20%, 这常常由错误使用 channel 导致的. 
+
+```go
+-select {
+-	case <- c.closed:
+-	default:
++		Once.Do(func() {
+			close(c.closed)
++		})
+-}
+```
+
+```go
+	ticker := time.NewTicker()
+	for {
++		select {
++		case <- stopCh:
++			return
++		default:
++		}
+		f()
+		select{
+		case <- stopCh:
+			return
+		case <- ticker:
+		}
+	}
+```
+
+```go
+-	timer := time.NewTimer(0)
++	var timeout <- chan time.Time
+	if dur > 0{
+-		timer = time.NewTimer(dur)
++		timeout = time.NewTimer(dur).C
+	}
+	select {
+-		case <- timer.C:
++		case <- timeout:
+		case <- ctx.Done():
+			return nil 
+	}
+```

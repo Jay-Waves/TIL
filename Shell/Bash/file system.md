@@ -153,3 +153,6 @@ Example:
 $ touch trick.md
 ```
 
+### security
+
+managerment of files access permissions, see [security](security.md)

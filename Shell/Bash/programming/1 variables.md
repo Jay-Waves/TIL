@@ -1,3 +1,5 @@
+bash 变量无类型.
+
 ## 获取变量
 
 - 变量引用 `${var}`
@@ -55,18 +57,12 @@
 
 ### 子程序
 
-子程序仅会继承父程序(bash)的环境变量, 而不会继承自定变量.
+子程序仅会继承父程序 (bash) 的环境变量, 而不会继承自定变量.
 除非使用: `export Variable`
 
 ### `export`
 
-Displays all environment variables. If you want to get details of a specific variable, use `echo $VARIABLE_NAME`.  
-
-```bash
-export
-```
-
-Example:
+展示或设置环境变量:
 
 ```bash
 $ export
@@ -77,8 +73,42 @@ LESS=-R
 
 $ echo $AWS_HOME
 /Users/adnanadnan/.aws
+
+# 将 TimeZone 设置斐济时间.
+$ export $TZ=Pacific/Fiji data 
 ```
 
-这个命令还可以在当前 bash 进程修改变量 `export $var=hello`
+## 数组
 
-直接指定命令环境: `TZ=Pacific/Fiji date`, 获取斐济时间.
+Like other languages bash has also arrays. An array is a variable containing multiple values. There's no maximum limit on the size of array. Arrays in bash are zero based. The first element is indexed with element 0. There are several ways for creating arrays in bash which are given below.
+
+Examples:
+
+```bash
+array[0]=val
+array[1]=val
+array[2]=val
+array=([2]=val [0]=val [1]=val)
+array=(val val val)
+```
+
+To display a value at specific index use following syntax:
+
+```bash
+${array[i]}     # where i is the index
+```
+
+If no index is supplied, array element 0 is assumed. To find out how many values there are in the array use the following syntax:
+
+```bash
+${#array[@]}
+```
+
+Bash has also support for the ternary conditions. Check some examples below.
+
+```bash
+${varname:-word}    # if varname exists and isn't null, return its value; otherwise return word
+${varname:=word}    # if varname exists and isn't null, return its value; otherwise set it word and then return its value
+${varname:+word}    # if varname exists and isn't null, return word; otherwise return null
+${varname:offset:length}    # performs substring expansion. It returns the substring of $varname starting at offset and up to length characters
+```

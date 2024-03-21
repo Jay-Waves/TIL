@@ -32,27 +32,19 @@
 
 ### `finger`
 
-Displays information about user.  
-
-```bash
-finger username
-```
+`finger username` 展示用户信息
 
 ### `whoami`
 
-Return current logged in username.
+展示当前登入用户的用户名.
 
 ### `last`
 
-Lists your last logins of specified user.  
-
-```bash
-last yourUsername
-```
+`list <username>` 展示该用户上次登入信息.
 
 ### `passwd`
 
-Allows the current logged user to change their password.
+修改密码
 
 ### `id`
 

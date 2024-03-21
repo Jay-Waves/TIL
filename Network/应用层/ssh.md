@@ -62,6 +62,24 @@ systemctl start sshd (enable 保持启动)
 systemctl stop sshd
 ```
 
+## 其他配置
+
+`-L`, `-D`
+
+配置 `~/.ssh/config`: 防止特定网络环境下连接断开, 压缩数据, 多通道等
+```
+      TCPKeepAlive=yes
+      ServerAliveInterval=15
+      ServerAliveCountMax=6
+      Compression=yes
+      ControlMaster auto
+      ControlPath /tmp/%r@%h:%p
+      ControlPersist yes
+```
+
+ssh 有一个替代品 [`mosh`](https://mosh.org), 使用 UDP 协议, 连接更稳定并且带宽需求更少. 但是服务端也需要配置, 因为通常不内置.
+
+
 ## 原理
 
 ssh 协议五阶段:

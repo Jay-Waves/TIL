@@ -1,3 +1,15 @@
+### SheBang
+
+Linux 脚本文件第一行 `shebang` 用于指定程序的执行器:
+
+```bash
+#!/usr/bin/env bash
+```
+
+```bash
+#!/usr/bin/python
+```
+
 ### 临时上下文
 
 使用 `(...)` 来创建临时上下文:
@@ -34,13 +46,17 @@ diff /etc/hosts <(ssh somehost cat /etc/hosts)
 
 `mkdir -p test-{a,b,c}/subtest-{1,2,3}`
 
-### 调试脚本
+### 多线程
 
-在脚本开头写上调试命令:
+You can easily multi-threading your jobs using `&`. All those jobs will then run in the background simultaneously and you can see the processes below are running using `jobs`.
 
 ```bash
-	set -euo pipefail
-	trap "echo 'error: Script failed: see failed command above'" ERR
+sleep 15 & sleep 5 &
 ```
 
-可以检测错误 (如管道错误, 变量未赋值), 并在错误发生时中断程序, 捕获 ERR/EXIT, 然后输出错误信息.
+The optional `wait` command will then wait for all the jobs to finish.
+
+```bash
+sleep 10 & sleep 5 &
+wait
+```

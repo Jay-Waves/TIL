@@ -74,7 +74,7 @@ service 是某**个** node 作为 server 提供的, 其他节点作为 client �
 
 ## action
 
-适合耗时任务, 提供稳定反馈. 使用 server-client 模式, 但可以中断. 由 *goal, feedback, result* 组成, 其中 goal 和 result 都是一个 service, 而 feedback 是一个 topic. 
+适合耗时任务, 提供稳定反馈. 使用 server-client 模式, 但可以中断. 由 *goal, feedback, result* 组成, 其中 goal 和 result 都是一个 service, 而 feedback/status 是 topic. 
 
 `ros2 action list`
 

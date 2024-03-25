@@ -46,7 +46,7 @@ grep "pattern" <<< "This is search term in string"
 
 ### here documents
 
-bash 中一种重定向输入方法, 可以在命令行直接提供多个行的输入.
+bash 中一种重定向标准输入方法, 可以在命令行直接提供多个行的输入.
 
 ```bash
 kubectl apply -f - <<EOF
@@ -66,6 +66,18 @@ EOF
 ```
 
 "here documents" 会展开 Shell 变量. 可以通过 `<<'EOF'` 禁用.
+
+```bash
+cat <<EOF > lab.cc
+#include <stdio.h>
+static long num_steps = 100000000;
+double step, pi;
+int main() {
+	...
+	return 0;
+}
+EOF
+```
 
 ## 管道
 

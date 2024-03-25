@@ -47,7 +47,7 @@ colcon build --mixin coverage
 
 包源码一般放在 workspace 的 src 文件夹的子文件夹中.
 
-### 1 使用 cmake 构建
+### 使用 cmake 构建
 
 包内容:
 - `CMakeLists.txt` file that describes how to build the code within the package
@@ -72,7 +72,7 @@ my_package/
 
 
 
-### 2 使用 python 构建
+### 使用 python 构建
 
 包内容:
 - `package.xml` 

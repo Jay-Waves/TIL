@@ -177,7 +177,7 @@ ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False \
 
 ```
 
-ASAN 在 **[WSL](../../../Linux/Distributions/Ubuntu.md)** 上总是无法正常运行, 找到 [issue121](https://github.com/microsoft/WSL/issues/121)中描述:
+ASAN 在 **[WSL](../../../Operating%20System/Linux%20Distributions/Ubuntu.md)** 上总是无法正常运行, 找到 [issue121](https://github.com/microsoft/WSL/issues/121)中描述:
 
 > Like I said few months ago, ASAN is affected by [#1671](https://github.com/microsoft/WSL/issues/1671) like many other tools that maps large amount of memory. Until that's fixed I doubt it will be usable.
 

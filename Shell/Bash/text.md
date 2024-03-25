@@ -1,28 +1,37 @@
 ## Special Formatter
 
-### HTML, YAML, JSON, CSV
+### `pandoc`
 
-- 将 HTML 转为文本：`lynx -dump -stdin`。
+[`pandoc`](http://pandoc.org/) 用于 Mardown, HTML 和其他任意格式的转化.
 
-- Markdown，HTML，以及所有文档格式之间的转换，试试 [`pandoc`](http://pandoc.org/)。
+### `jq`, `shyaml`, `xmlstarlet`
 
-- 当你要处理棘手的 XML 时候，`xmlstarlet` 算是上古时代流传下来的神器。
+[`jq`](http://stedolan.github.io/jq/) 处理 Json; [`shyaml`](https://github.com/0k/shyaml) 处理 YAML; `xmmlstarlet` 处理 XML, 算是上古神器.
 
-- 使用 [`jq`](http://stedolan.github.io/jq/) 处理 JSON。
+### `csvkit`
 
-- 使用 [`shyaml`](https://github.com/0k/shyaml) 处理 YAML。
+[`csvkit`](https://github.com/onyxfish/csvkit) 用于处理 Excel 或 CSV 文件, 提供了 `in2csv`，`csvcut`，`csvjoin`，`csvgrep` 等工具
 
-- 要处理 Excel 或 CSV 文件的话，[csvkit](https://github.com/onyxfish/csvkit) 提供了 `in2csv`，`csvcut`，`csvjoin`，`csvgrep` 等方便易用的工具。
+### `hd`, `hexdump`, `xxd`
 
-### Binary
+以十六进制显示二进制文件.
 
-- 对于二进制文件，使用 `hd`，`hexdump` 或者 `xxd` 使其以十六进制显示，使用 `bvi`，`hexedit` 或者 `biew` 来进行二进制编辑。
+### `bvi`, `hexedit`, `biew`
 
-- 同样对于二进制文件，`strings`（包括 `grep` 等工具）可以帮助在二进制文件中查找特定比特。
+编辑二进制文件.
 
-- 制作二进制差分文件（Delta 压缩），使用 `xdelta3`。
+### `split`, `csplit`
 
 - 拆分文件可以使用 `split`（按大小拆分）和 `csplit`（按模式拆分）。
+
+### `strings`
+
+从二进制中抽取文本或特定比特, 用于逆向和调试.
+
+```bash
+# 提取长度至少为6的字符串, 并输出其字节偏移量(以十六进制)
+strings -tx -n 6 --encoding={s,S,b,l,B,L} example.bin
+```
 
 ## Text Filter
 
@@ -153,6 +162,8 @@ World
 ```sh
 printf '%s\n' 'hello world'
 ```
+
+**注意, `echo` 不接受文件输入或标准输入, 如 `echo < hello.txt` 是无效的. 它仅重复输入的参数, 其他情况应使用 `cat`**
 
 ### `fmt`
 

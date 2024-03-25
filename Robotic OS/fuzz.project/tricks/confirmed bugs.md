@@ -79,3 +79,60 @@ Controller::on_cleanup(const rclcpp_lifecycle::State &){
 }
 ```
 
+## [Issue#4175](https://github.com/ros-planning/navigation2/issues/4175), [PR#4180](https://github.com/ros-planning/navigation2/pull/4180), 
+
+## [Issue#4166](https://github.com/ros-planning/navigation2/issues/4166), [Pull#4176](https://github.com/ros-planning/navigation2/pull/4176), [RclCpp Issue#2447](https://github.com/ros2/rclcpp/issues/2447)
+
+我们和 ros2 底层设计人员讨论了 ros2 节点退出机制时可能出现的并发问题.
+
+```cpp
+nav2_util::CallbackReturn
+AmclNode::on_cleanup(const rclcpp_lifecycle::State & /*state*/)
+{
+  executor_thread_.reset();
+
+  // Get rid of the inputs first (services and message filter input), so we
+  // don't continue to process incoming messages
+  global_loc_srv_.reset();
+  nomotion_update_srv_.reset();
+  initial_pose_sub_.reset();
+  laser_scan_connection_.disconnect();
+  tf_listener_.reset();  //  listener may access lase_scan_filter_, so it should be reset earlier
+  laser_scan_filter_.reset();
+  laser_scan_sub_.reset();
+
+  // Map
+  map_sub_.reset();  //  map_sub_ may access map_, so it should be reset earlier
+  if (map_ != NULL) {
+    map_free(map_);
+    map_ = nullptr;
+  }
+  first_map_received_ = false;
+  free_space_indices.resize(0);
+
+  // Transforms
+  tf_broadcaster_.reset();
+  tf_buffer_.reset();
+```
+
+```cpp
+void
+AmclNode::initTransforms()
+{
+  RCLCPP_INFO(get_logger(), "initTransforms");
+
+  // Initialize transform listener and broadcaster
+  tf_buffer_ = std::make_shared<tf2_ros::Buffer>(get_clock());
+  auto timer_interface = std::make_shared<tf2_ros::CreateTimerROS>(
+    get_node_base_interface(),
+    get_node_timers_interface(),
+    callback_group_);
+  tf_buffer_->setCreateTimerInterface(timer_interface);
+  tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+  tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(shared_from_this());
+
+  sent_first_transform_ = false;
+  latest_tf_valid_ = false;
+  latest_tf_ = tf2::Transform::getIdentity();
+}
+```

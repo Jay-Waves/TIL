@@ -34,3 +34,14 @@ coding workflow:
 issue status:
 
 #WontFix #MisConfig #UserError ( #PEBKAC ) #Blocked #FAQ #Open #Closed
+
+### 中英文标点切换
+
+- `:%s/,\s/，/g`
+- `:%s/\.\s/。/g`
+- `:%s/;\s/；/g`
+- `:%s/:\s/：/g`
+- `:%s/\?\s/？/g`
+- `:%s/!\s/！/g`
+- `:%s/\s(/（/g`
+- `:%s/)\s/）/g`

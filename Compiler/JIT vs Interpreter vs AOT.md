@@ -4,19 +4,30 @@ Ahead-of-time 指程序在执行前就编译为可执行文件. (如 C, C++. 也
 
 AOT 对编译时间不是很敏感, 可以进行复杂高级的优化算法, 得到效率或 codesize 更优的代码. 但 AOT 无法进行 PGO (profile-guided optimization) 优化
 
+## Interpreter
+
+Interpretation 用函数栈维护线程上下文信息, 将代码一条条转义然后执行. (如 Python, Perl, JS). 占用内存少 (因为一条一条执行代码), 但执行效率低下.
+
+### Python
+
+标准实现 CPython 没有 JIT, 首先将 `.py` 编译为字节码 `.pyc`, 然后由 python 虚拟机执行这些字节码. PyPy 解释器引入了 JIT, 执行速度更快.
+
+Python 没有 Java 那样复杂的性能优化 (比如py并不进行类型检查), 执行更轻量, 当然也更慢.
+
 ## JIT
 
-Just-in-time(JIT) 在程序运行时编译为可执行文件, 然后运行. JIT 可以接触到运行时信息. (如 C# .Net, Java JVM)
+Just-in-time(JIT) 在程序运行时编译为可执行文件, 然后运行. JIT 可以接触到运行时信息. (如 C# .Net, Java JVM). JIT 在运行时需要先将部分字节码编译为二进制码, 程序存在较长冷启动时间. 并且运行时编译占用资源大. 
 
 JIT 会调用一个解释器 (Interpreter) 执行字节码, 并收集运行时信息 (如程序热点, 目标平台), JIT 会根据运行时信息进行优化. 比如将字节码中热点代码, 结合目标平台 ABI 或特点, 编译为机器码加速执行.
 
-JIT 在运行时需要先将部分字节码编译为二进制码, 程序存在较长冷启动时间. 并且运行使编译占用资源大 (臭 JVM)
+现代不同类型编译器有驱动趋势, 如: JVM虚拟机, C#.Net 运行时, Python 解释器, 都有 JIT , GC和各种优化技术.
 
-## Interpreter
+### Java JVM 
 
-Interpretation 用函数栈维护线程上下文信息, 将代码一条条转义执行. (如 Python, Perl, JS)
+Java 最初是为"跨平台"目的设计的 ("Write Once, Run Everywhere"111), 其"字节码"实际就是一种精简指令集. 将源代码编译为字节码后, 由Java虚拟机负责将字节码执行和编译为目标平台机器码, 最初 JVM 不具有JIT 功能, 需要全部编译为字节码后再解释执行字节码. 
 
-占用内存少 (因为一条一条执行代码), 但执行效率低下.
+后来 Java 也支持 JIT 技术.
 
+### C# .Net
 
-
+微软为了凸显自身比虚拟机型语言更**轻量**, 将 C#.Net 环境称为"运行时".

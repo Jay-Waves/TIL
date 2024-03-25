@@ -20,7 +20,6 @@ Run `nano ~/.bash_profile` and add the following line:
 alias dockerlogin='ssh www-data@adnan.local -p2222'  # add your alias in .bash_profile
 ```
 
-
 `$ alias new_expr=old_instru_expr`
 
 ```bash
@@ -61,23 +60,6 @@ source ~/.bashrc
 cd $hotellogs
 ```
 
-### 重新执行上条指令
-
-This goes back to the days before you could rely on keyboards to have an "up" arrow key, but can still be useful. 
-To run the last command in your history
-
-```bash
-!!
-```
-
-A common error is to forget to use `sudo` to prefix a command requiring privileged execution. Instead of typing the whole command again, you can:
-
-```bash
-sudo !!
-```
-
-This would change a `mkdir somedir` into `sudo mkdir somedir`.
-
 ### Exit traps
 
 Make your bash scripts more robust by reliably performing cleanup.
@@ -88,14 +70,6 @@ function finish {
   jobs -p | xargs kill
 }
 trap finish EXIT
-```
-
-### Saving your environment variables
-
-When you do `export FOO = BAR`, your variable is only exported in this current shell and all its children, to persist in the future you can simply append in your `~/.bash_profile` file the command to export your variable
-
-```bash
-echo export FOO=BAR >> ~/.bash_profile
 ```
 
 ### Accessing your scripts
@@ -119,25 +93,4 @@ function finish {
   jobs -p | xargs kill
 }
 trap finish EXIT
-```
-
-### Saving your environment variables
-
-When you do `export FOO = BAR`, your variable is only exported in this current shell and all its children, to persist in the future you can simply append in your `~/.bash_profile` file the command to export your variable
-
-```bash
-echo export FOO=BAR >> ~/.bash_profile
-```
-
-### Accessing your scripts
-
-You can easily access your scripts by creating a bin folder in your home with `mkdir ~/bin`, now all the scripts you put in this folder you can access in any directory.
-
-If you can not access, try append the code below in your `~/.bash_profile` file and after do `source ~/.bash_profile`.
-
-```bash
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
 ```

@@ -87,6 +87,10 @@ Shows what your disk quota is.
 quota -v
 ```
 
+### `ldparm`
+
+SATA/ATA 磁盘更改以及性能分析.
+
 ## Index file
 
 ### `find` !
@@ -129,11 +133,22 @@ cp filename1 filename2
 
 Where `filename1` is the source path to the file and `filename2` is the destination path to the file.
 
+### `repren`
+
+[`repren`](https://github.com/jlevy/repren) 用于批量重命名文件, 或在多个文件中搜索替换内容.
+
+```sh
+      # 将文件、目录和内容全部重命名 foo -> bar:
+      repren --full --preserve-case --from foo --to bar .
+      # 还原所有备份文件 whatever.bak -> whatever:
+      repren --renames --from '(.*)\.bak' --to '\1' *.bak
+      # 用 rename 实现上述功能（若可用）:
+      rename 's/\.bak$//' *.bak
+```
+
 ### `rm` !
 
-Removes a file. Using this command on a directory gives you an error.
-`rm: directory: is a directory`
-To remove a directory you have to pass `-r` which will remove the content of the directory recursively. Optionally you can use `-f` flag to force the deletion i.e. without any confirmations etc.
+删除文件. 常用 `-r` 递归删除文件夹, `-f` 强制删除(无确认)
 
 ```bash
 rm filename
@@ -152,6 +167,10 @@ Example:
 ```bash
 $ touch trick.md
 ```
+
+### `truncate`
+
+`truncate` 用于创建[稀疏文件](https://zh.wikipedia.org/wiki/稀疏文件), 即高效创建空文件. `fallocate` (用于 ext4, xfs, btrf, ocfs2), `xfs_mkfile`, `mkfile` (solaris, mac os)
 
 ### security
 

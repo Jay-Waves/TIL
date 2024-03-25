@@ -1,8 +1,11 @@
 ## System Info
 
+- 系统网络相关工具见 [bash/network](network.md)
+- 系统存储相关工具见 [file system](file%20system.md)
+
 ### `/proc` Info
 
-详见: [proc](../../Linux/proc.md)
+详见: [proc](../../Operating%20System/proc.md)
 
 ### `uptime`, `w`
 
@@ -54,45 +57,15 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 
 `free` 检查主存空间
 
-## Debug
+### `lsxxx` series
 
-### network debug
-
-see [Bash/network](network.md)
-
-### `ldd`
-
-列出程序所依赖的共享库文件 (.so)
-
-<pre>
-$ ldd /usr/bin/clang
- linux-vdso.so.1 (0x00007fffc04c3000)
- libclang-cpp.so.14 => /lib/x86_64-linux-gnu/libclang-cpp.so.14 (0x00007f8e58795000)
- libLLVM-14.so.1 => /lib/x86_64-linux-gnu/libLLVM-14.so.1 (0x00007f8e51ec3000)
- libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f8e51c97000)
- libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f8e51bb0000)
- #  [库名] => [地址] (加载到的内存地址)
- </pre>
-
-ldd 存在[严重安全漏洞](https://catonmat.net/ldd-arbitrary-code-execution), 确保目标程序是受信任文件.
-
-### `time`
-
-```
-$ time ./lab2
-./lab2  0.59s user 0.01s system 19% cpu 3.008 total
-```
-
-### `dmesg`
-
-引导及系统错误信息
-
-### `strace`, `ltrace`
-
-用于审查程序失败/挂起/崩溃的原因, 或者大致了解程序性能.  strace 用于跟踪系统调用, `ltrace` 用于跟踪程序对动态库函数的调用 (也包括标准库函数 `malloc`, `printf` 等)
-
-- `-c`: 开启 profile 性能分析, `strace -c ./my_program`
-- `-p`: 附加到一个运行中的进程, `strace -p 1234`
+查看硬件信息的一系列工具:
+- `lsblk` list block devices, 如硬盘驱动器, 固态驱动器和usb等的信息.
+- `lshw` list headware, 展示详细系统硬件信息.
+- `lscpu` list cpu, 展示 CPU 架构信息
+- `lspci` list PCI, 展示PCI总线上设备, 如显卡/网卡/声卡
+- `lsusb` 展示 USB 设备的信息.
+- `dmidecode` 解析系统 DMI (桌面管理接口), 提供主板/BIOS/处理器/内存信息.
 
 ## Screen
 

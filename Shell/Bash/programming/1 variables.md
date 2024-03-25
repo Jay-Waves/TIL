@@ -43,8 +43,7 @@ bash 变量无类型.
 
 ## 环境变量
 
- `env`
- `set`
+`env`, `set`
  
 常见环境变量(大写变量):
 
@@ -76,6 +75,20 @@ $ echo $AWS_HOME
 
 # 将 TimeZone 设置斐济时间.
 $ export $TZ=Pacific/Fiji data 
+```
+
+### `env`
+
+提供对临时环境变量更高级的支持.
+
+```bash
+# 以 VAR1, VAR2 环境变量临时执行某命令
+env VAR1=value1 VAR2=value2 command
+# 当然这样也可以
+VAR1=value1 VAR2=value2 command
+
+# 清除所有环境变量, 包括 export 设置的变量
+env -i command 
 ```
 
 ## 数组

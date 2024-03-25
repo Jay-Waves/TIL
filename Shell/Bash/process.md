@@ -58,7 +58,16 @@ killall processname
 
 ### `lsof`
 
-list open files.
+list open files. 因为 Unix 系统 "万物(硬件, 套接字, 管道)皆文件" 的思想, 该命令常用于调试系统问题.
+
+```bash
+# 列出某个用户打开的文件
+lsof -u username
+# 列出某个端口的进程
+lsof -i :port 
+# 列出某个进程打开的文件
+lsof -p  pid
+```
 
 ### &
 

@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"023dcffb0c310089","x":-537,"y":-75,"width":245,"height":170,"type":"text","text":"### Mono\n- Monospace\n- Proportional\n- Auasi-Proportional\n"},
+		{"id":"d94e7fa44de3171f","x":-539,"y":135,"width":250,"height":150,"type":"text","text":"### Serif\n- slab serif\n- serif\n- sans serif\n"},
+		{"id":"0b25f842150a9a9d","x":-542,"y":330,"width":250,"height":60,"type":"text","text":"### ligatures"},
+		{"id":"c7b6fbf760fe24c5","type":"text","text":"### Style\n- Curly\n- Andale\n- Anonymous Pro\n- Consolas\n- Menlo\n- Fira Code\n- Liberation\n- Monaco\n- Pragmata Pro\n- Source Code Pro\n- Envy Code R\n- X Windows fixed\n- Ubuntu\n- Lucida\n- JetBrains\n- IBM Plex\n- PT\n","x":-165,"y":-100,"width":250,"height":510},
+		{"id":"02197939b9acaf72","type":"text","text":"### Weights\n- Heavy\n- Bold\n- Medium\n- Thin\n- Light\n","x":220,"y":-55,"width":250,"height":210},
+		{"id":"e2dcf9952138088d","x":220,"y":204,"width":250,"height":156,"type":"text","text":"### Italic\n- Italic\n- Oblique\n- Regular"},
+		{"id":"bf832064d0578311","type":"text","text":"### Extended","x":-542,"y":440,"width":250,"height":60}
+	],
+	"edges":[
+		{"id":"d7afc69a76592f03","fromNode":"023dcffb0c310089","fromSide":"right","toNode":"c7b6fbf760fe24c5","toSide":"left"},
+		{"id":"5f36d35b2d687716","fromNode":"d94e7fa44de3171f","fromSide":"right","toNode":"c7b6fbf760fe24c5","toSide":"left"},
+		{"id":"d8da591d8582bd8a","fromNode":"0b25f842150a9a9d","fromSide":"right","toNode":"c7b6fbf760fe24c5","toSide":"left"},
+		{"id":"6f2d19868e4ce4aa","fromNode":"c7b6fbf760fe24c5","fromSide":"right","toNode":"02197939b9acaf72","toSide":"left"},
+		{"id":"00de8ca7a1625691","fromNode":"c7b6fbf760fe24c5","fromSide":"right","toNode":"e2dcf9952138088d","toSide":"left"},
+		{"id":"da86670a8570f1b9","fromNode":"bf832064d0578311","fromSide":"right","toNode":"c7b6fbf760fe24c5","toSide":"left"}
+	]
+}

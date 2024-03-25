@@ -1,14 +1,20 @@
 ## Network Info
 
-windows 上原生网络工具请见 
+windows 上原生网络工具请见 [cmd/网络](../Cmd/网络.md)
 
 ### `ip`
 
 `ip addr show`
 
+### `ping`
+
+```bash
+ping host
+```
+
 ### `mtr`
 
-[`mtr`](http://www.bitwizard.nl/mtr/), my traceroute, = traceroute+ping . mtr 用于跟踪路由, 提供了交互式界面, 可以灵活调整参数.
+[`mtr`](http://www.bitwizard.nl/mtr/), my traceroute, = traceroute+ping. mtr 用于跟踪路由, 提供了交互式界面, 可以灵活调整参数.
 
 ### `netcat`, `socat`
 
@@ -30,9 +36,9 @@ socat TCP-LISTEN:port1,fork TCP:target.address:port2
 
 根据域名查看 ip.
 
-### `dig`
+### `dig` & `host`
 
-Gets DNS information for domain.  domain info get.
+查询 domain 的 DNS 信息.
 
 ```bash
 dig domain
@@ -47,14 +53,6 @@ whois domain
 ```
 
 ## Network Debug
-
-### `ping`
-
-Pings host and outputs results.  
-
-```bash
-ping host
-```
 
 ### `netstat`, `ss`
 
@@ -78,42 +76,49 @@ lsof -iTCP -sTCP:LISTEN -P -n
 
 `ss` (socket statistics) 比 `netstat` 更加现代, 处理速度更快.
 
+### `iftop`, `nethogs`,`slurm`
+
+[`iftop`](http://www.ex-parrot.com/~pdw/iftop/) 或 [`nethogs`](https://github.com/raboof/nethogs) 用于查找正在使用带宽的套接字连接或进程. 其中 nethogs 可以将流量分解到进程, 诊断带宽使用时更有效. slurm 则用于对总体流量变化进行可视化, 更简洁.
+
+iftop 侧重于持续监控网络连接, netstat 则用于一次性检查网络配置和状态.
+
 ### `wireshark`, `tshark`
 
-[`wireshark`](https://wireshark.org/)，[`tshark`](https://www.wireshark.org/docs/wsug_html_chunked/AppToolstshark.html) 和 [`ngrep`](http://ngrep.sourceforge.net/) 可用于复杂的网络调试
+[`wireshark`](https://wireshark.org/), [`tshark`](https://www.wireshark.org/docs/wsug_html_chunked/AppToolstshark.html) 和 [`ngrep`](http://ngrep.sourceforge.net/) 都是用于截获过滤报文的工具. 其中 tshark 和 ngrep 是命令行工具.
+
+该系列工具用于分析**报文具体协议和内容**, 而 `iftop` 则仅用于监控流量.
 
 ## Network Connection Tool
 
 ### `scp`
 
-Transfer files between a local host and a remote host or between two remote hosts.
-
-*copy from local host to remote host*
+和远程主机间传输文件.
 
 ```bash
+# 从本地拷贝到远程
 scp source_file user@host:directory/target_file
-```
 
-*copy from remote host to local host*
-
-```bash
+# 从远程拷贝到本地:
 scp user@host:directory/source_file target_file
 scp -r user@host:directory/source_folder target_folder
-```
 
-This command also accepts an option `-P` that can be used to connect to specific port.  
-
-```bash
+# 链接指定端口
 scp -P port user@host:directory/source_file target_file
 ```
 
 ### `rsync`
 
-Does the same job as `scp` command, but transfers only changed files. Useful when transferring the same folder to/from server multiple times.
+和 `scp` 一样用于跨设备传输文件, 但可以**增量传输**, 常用于大量文件的同步. `rsync` 还可以实现文件续传, 而不用从头开始.
 
 ```bash
 rsync source_folder user@host:target_folder
 rsync user@host:target_folder target_folder
+```
+
+本地 `rsync` 有个神奇用法, 就是[删除大量文件时速度很快](https://web.archive.org/web/20130929001850/http://linuxnote.net/jianingy/en/linux/a-fast-way-to-remove-huge-number-of-files.html)
+
+```sh
+mkdir empty && rsync -r --delete empty/ some-dir && rmdir some-dir
 ```
 
 ### `ssh`

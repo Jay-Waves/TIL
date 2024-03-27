@@ -18,7 +18,7 @@ export MAKEFLAGS="-j1" # 指定编译线程数为1
 colcon build --packages-select <pkg1> <pkg2> # 选特定包编译
 ```
 
-在WSL2平台下, 普通编译ROS2无法通过. 参加[WSL配置](../Operating%20System/Linux%20Distributions/WSL/WSL.md), 经尝试, 无论是否开启虚拟内存, 内存上限开多大 (本电脑最高16GB), 都无法通过编译. 现象为, 内存爆满卡死, 虚拟内存开启于事无补. 
+在WSL2平台下, 普通编译ROS2无法通过. 参加[WSL配置](../Operating%20System/Linux%20Distributions/WSL/配置%20-%20从此开始.md), 经尝试, 无论是否开启虚拟内存, 内存上限开多大 (本电脑最高16GB), 都无法通过编译. 现象为, 内存爆满卡死, 虚拟内存开启于事无补. 
 
 > 越发认同: 虚拟内存是伪需求, 当内存爆满需要虚拟内存挽救时, 系统颠簸就已很大了.
 

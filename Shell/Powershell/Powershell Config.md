@@ -8,7 +8,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 # zoxide:
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
 # github env
-$env:GITHUB_TOKEN = "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"
+$env:GITHUB_TOKEN = "..."
 $env:GH_LOG_LEVEL = "info"
 # github completion
 Invoke-Expression -Command $(gh completion -s powershell | Out-String)

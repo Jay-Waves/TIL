@@ -34,7 +34,7 @@ sudo apt install kmod linux-headers-5.4.0-80-generic # just an example
 sudo pacman -S linux-headers
 ```
 
-Header files are in `/lib/modules/<kernel_version>/build/include`. On WSL2, header files are in `<wsl-kernel-location>/include`, see [here](https://unix.stackexchange.com/questions/594470/wsl-2-does-not-have-lib-modules#:~:text=For%20those%20that%20need%20to%20load%20modules%20on,5%20Restart%20WSL.%20Your%20module%20should%20be%20loaded.). **For WSL2, default kernel image doesn't allow `insmod`, but you can [compiler your own WSL kernel](../Linux%20Distributions/WSL/更新%20Linux%20内核.md) for that.** It's suggested to compile our module in an environment which was identical to the one in which our precompiled kernel was built, for every linux distribution.
+Header files are in `/lib/modules/<kernel_version>/build/include`. On WSL2, header files are in `<wsl-kernel-location>/include`, see [here](https://unix.stackexchange.com/questions/594470/wsl-2-does-not-have-lib-modules#:~:text=For%20those%20that%20need%20to%20load%20modules%20on,5%20Restart%20WSL.%20Your%20module%20should%20be%20loaded.). **For WSL2, default kernel image doesn't allow `insmod`, but you can [compiler your own WSL kernel](../Linux%20Distributions/WSL/更新%20WSL%20Linux%20内核.md) for that.** It's suggested to compile our module in an environment which was identical to the one in which our precompiled kernel was built, for every linux distribution.
 
 ## Hello World
 

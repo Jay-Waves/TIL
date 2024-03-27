@@ -25,7 +25,8 @@ powershell 为 bash 和 cmd 用户准备了对应命令的别名.
 | `clear`                  | `cls`                                                   |                             | `cls`                   |
 | `cd .. && pwd`           | `cd; pwd`                                               |                             | `cd .. & cd`            |
 | `ln -s`                  | `new-item -ItemType SymbolicLink -Path ... -Target ...` |                             | `mklink` or `mklink /D` |
-|                          | `get-clipboard`                                         | `gcb`                       | `clip.exe` (not same)               | 
+|                          | `get-clipboard`                                         | `gcb`                       | `clip.exe` (not same)   |
+| `ip`                     | `get-netipaddress`                                      |  None                           | `ipconfig`                        |
 
 
 ## Variable

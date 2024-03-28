@@ -15,7 +15,7 @@ source /opt/ros/humble/setup.bash
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
-	rosdep install -y --from-paths ./src --ignore-src
+rosdep install -y --from-paths ./src --ignore-src
 
 # 设置 make 并行数
 export MAKEFLAGS="-j4"
@@ -28,9 +28,32 @@ colcon build \
 		-DCMAKE_CXX_STANDARD=17 \
 		-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
 		-DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} \
-			-w -Wno-error -Wno-format-securtiy" \
+			-w -Wno-error -Wno-format-security" \
 		-DCMAKE_C_FLAGS="${CMAKE_C_FLAGS}  \
 			-w -Wno-error -Wno-format-security"
+```
+
+链接 SanCov 编译:
+```shell
+colcon build \
+	--symlink-install \
+	--parallel-workers 2 \
+	--cmake-clean-cache \
+	--packages-select nav2_amcl \
+	--cmake-args \
+		-DBUILD_TESTING=OFF \
+		-DCMAKE_CXX_STANDARD=17 \
+		-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
+		-DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} \
+			-w -Wno-error -Wno-format-security \
+			/home/JayWaves/src/nav2_240315/sleep-rt.o \
+			-fsanitize=address \
+			-fsanitize-coverage=func,trace-pc-guard,indirect-calls" \
+		-DCMAKE_C_FLAGS="${CMAKE_C_FLAGS}  \
+			-w -Wno-error -Wno-format-security \
+			/home/JayWaves/src/nav2_240315/sleep-rt.o \
+			-fsanitize=address \
+			-fsanitize-coverage=func,trace-pc-guard,indirect-calls"
 ```
 
 由于 colcon 是增量编译, 所以我们只给特定包开启 asan 和 coverage 即可:

@@ -17,15 +17,7 @@
 
 ### super user
 
-使用`su`命令进入管理员模式(`#`)
-
-如果无法使用su, 那么需要初始化root密码: `sudo passwd`
-
-使用`exit`退出管理员模式使用`su`命令进入管理员模式(`#`)
-
-如果无法使用su, 那么需要初始化root密码: `sudo passwd`
-
-使用`exit`退出管理员模式
+用户管理员权限详见 [usr](usr.md)
 
 ### `chmod` !
 

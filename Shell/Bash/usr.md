@@ -28,6 +28,35 @@
 
 为新用户添加sudo权限: `sudo usermod -G sudo <usr>`
 
+### 使用 root 用户
+
+使用`su`命令进入管理员模式(`#`)
+
+如果无法使用su (即无法使用 root), 那么需要初始化root密码: `sudo passwd`
+
+使用`exit`退出管理员模式使用`su`命令进入管理员模式(`#`)
+
+如果无法使用su, 那么需要初始化root密码: `sudo passwd`
+
+使用`exit`退出管理员模式
+
+### 将用户添加到 wheel 组
+
+sudo 是一个提权的程序, 不同系统用不同用户组来标识用户的调用 sudo 权限.
+
+在 Debian 系统版本中, 通过 sudo 用户组来控制用户 sudo 权限, 这些系统预设了 `etc/sudoers` 的用户组权限设置.
+
+```
+%sudo ALL=(ALL:ALL) ALL
+```
+
+基于 Arch 和 Fedora 的发行版, 则更为传统地使用 wheel 用户组而不是 sudo. 但这些系统一般不默认开启 `etc/sudoers` 中的设置.
+
+```
+$ visduo
+# %wheel ALL=(ALL) ALL
+```
+
 ## usr info
 
 ### `finger`

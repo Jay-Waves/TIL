@@ -10,7 +10,7 @@ WSL 占用空间后, 如果空间在 WSL 中被释放, 被释放的空间并不�
 
 通过 `.wslconfig`:
 
-```
+```toml
 [experimental]
 sparseVhd=true 
 ```

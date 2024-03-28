@@ -69,6 +69,39 @@ void __sanitizer_cov_trace_pc_guard(uint32_t *guard) {
 }
 ```
 
+## API
+
+插桩粒度, 需要和 trace-pc 插桩功能搭配使用:
+- `func`, 函数调用插桩. 如 `-fsan...=func,trace-pc`
+- `edge`, IR基本块分支插桩
+- `bb`, IR基本块插桩
+- `indirect-calls` -> `__sanitizer_cov_trace_pc_indirect(void *callee)` 对非直接函数调用进行插桩, 即函数指针. 如 `-fsan...=trace-pc,indirect-calls`. 似乎部分情况下, 实际插入的是 `__sanitizer_cov_trace_pc_indir()?`, 文档没说过
+
+trace-pc 插桩功能: 
+- `trace-pc` -> `__sanitizer_cov_trace_pc()` 仅对每个插桩点执行此callback, 无信息.
+- `trace-pc-guard` -> `__sanitizer_cov_trace_pc_guard(*guard)` 对每个插桩点插入此 callback, 同时可用 guard 记录信息; `__sanitizer_cov_trace_pc_guard_init(*start, *stop)` 初始化每个DSO的guards. 
+- `inline-8bit-counters` -> `__sanitizer_cov_8bit_counters_init(*start, *end)` 在每个插桩点插入一字节计数器, 用此 callback 初始化, 每次覆盖插桩点时计数器加一.
+- `inline-bool-flag` -> `__sanitizer_cov_bool_flag_init(*start, *end)` 每个插桩点插入一个 bool, 覆盖时置为 true. 用此回调获取 flags 指针位置.
+- `pc-table` 记录 PC 表, 需要搭配上面功能使用.
+
+`no-prune` 不允许SanCov修剪掉一些无价值代码路径. (禁用后资源占用膨胀)
+
+trace-dataflow 插桩功能, 需要和 trace-pc 插桩搭配使用:
+- `...=trace-cmp`
+- `trace-div`
+- `trace-gep`: IR 数组/结构体访址指令, `getelementptr`
+- `trace-stores`: 插桩 IR load/store 指令
+
+trace-controlflow 插桩功能: ...
+
+> clang/gcc 也支持最简单的插桩 `-finstrument-functions`
+
+## 编译
+
+假设定义插桩函数文件为 `inst_rt.o.cc`
+1. 编译为链接文件: `clang++ -c inst_rt.o.cc -o inst_rt.o -fsanitize=address`
+2. 编译被插桩文件, 记得将 hook 目标文件传入: `clang++ test.cc -g -o test -fsanitize=address -fsanitize-coverage=trace-pc-guard inst_rt.o`
+
 ## 禁用插桩
 
 对于插桩函数 `__sanitizer_cov_trace_pc_guard()` 等函数可能调用的函数, 如果也开启 `coverage` 插桩选项, 可能导致无限递归. 此时可以使用编译器指令来禁用插桩: `__attribute__((no_sanitize("coverage")))`, 并搭配 `__has_feature(coverage_sanitizer)` (如果不使用 clang, 就没有 sancov 功能).

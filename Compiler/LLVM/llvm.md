@@ -1,7 +1,4 @@
-> [!cite] 
-> [LLVM IR 入门](https://evian-zhang.github.io/llvm-ir-tutorial/01-LLVM%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B.html)  
-> [LLVM Language Reference](https://llvm.org/docs/LangRef.html)  
-> [The Architecture of Open Source Applications (Volume 1)LLVM](https://aosabook.org/en/v1/llvm.html)
+
 
 - **Start Date**: December 2000.
 - **Design Principle**: Reusable libraries with clear interfaces, contrasting with the then-prevailing monolithic design of language implementations.
@@ -97,3 +94,8 @@ llvm 仅链接入所需要的 Pass.o, 无关 Pass.o 不会产生开销. 这也�
 ![](../../attach/PassLinkage.png)
 
 ![](../../attach/LTO.png)
+
+> [!cite] 
+> [LLVM IR 入门](https://evian-zhang.github.io/llvm-ir-tutorial/01-LLVM%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B.html)  
+> [LLVM Language Reference](https://llvm.org/docs/LangRef.html)  
+> [The Architecture of Open Source Applications (Volume 1)LLVM](https://aosabook.org/en/v1/llvm.html)

@@ -15,6 +15,8 @@ Clang: 基于 LLVM 的 C/C++/Objective-C 编译器前端. 见 [Comiler/LLVM/clan
 CI/CD: continuous integration/continuous deployment, 用于自动化测试/集成/部署, 来加快
 软件交互速度.
 
+Completeness: 完备性. 逻辑系统是完备的, 如果它能证明该逻辑下的**所有**真命题.
+
 # D
 
 DOM: 文档对象模型, 指网页文档的编程接口, 允许脚本语言 (JS) 修改网页内容结构
@@ -83,6 +85,8 @@ ROS: Robot Operating System, 开源机器人操作系统
 # S
 
 SQL: 数据库结构化查询语言, 见 [Data Storage/SQL](Data%20Storage/SQL/理论/SQL.md)
+
+Soundness: 健全性, 一个逻辑系统是健全的, 当它所有推导都仅产生真实结论; 即不会错误地证明假命题为真.
 
 # T
 

@@ -137,7 +137,5 @@ AmclNode::initTransforms()
 }
 ```
 
-1. `map_.reset()`
-2. `map_server_.reset()`, due to shared_ptr's attribute, actually not reset.
-3. still have `executor -> map_server_`
-4. `map_server->map_` UAF!!
+1. initial_pose_sub_.reset()
+2. executor_->initial_pose_handler

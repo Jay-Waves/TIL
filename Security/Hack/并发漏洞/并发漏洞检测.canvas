@@ -1,0 +1,28 @@
+{
+	"nodes":[
+		{"id":"e49ef8ed7f4db60b","type":"text","text":"## 发生序关系\n\n发生序关系 (Happens-Before Relation) 关注程序中多个事件的偏序关系\n\n- Vector Clocks, [M 88](Security/Hack/相关研究/Virtual%20time%20and%20global%20states%20of%20distributed%20systems.md)\n- Happens Before, [Lamport 78](Security/Hack/相关研究/Time,%20Clocks,%20and%20the%20Ordering%20of%20Events%20in%20a%20Distributed%20System.md)\n- Eraser (Lockset), [SBN+ 97](Security/Hack/相关研究/Eraser,%20A%20Dynamic%20Data%20Race%20Detector%20for%20Multithreaded%20Programs.md)","x":-79,"y":760,"width":459,"height":240},
+		{"id":"6564127c8d5ebb1a","type":"text","text":"## 并发保护工具\n\n- 同步锁 Mutex Lock\n- 自旋锁 Spin Lock\n- 读写锁 \n- 条件变量\n- 原子操作 Atomic\n- 信号量 Semaphore\n- 内存屏障 Memory Barrier\n- 读复制更新 RCU\n\n|            | 同步锁         | 自旋锁           |\n| ---------- | -------------- | ---------------- |\n| 获取方式   | 获取失败则休眠 | 获取失败则忙等待 |\n| 获取速度   | 较慢           | 较快             |\n| 临界区大小 | 无特殊限制     | 普遍较小         |\n| 使用场景   | 无特殊限制     | 主要用于内核     |\n| 休眠操作   | 可使用         | 不可使用                 |\n\n非内核的锁其实都是伪锁, 因为操作系统时间片用完都会强行切走.\n","x":-1520,"y":920,"width":540,"height":590},
+		{"id":"964825e03c5a7cb0","type":"text","text":"# 动态数据竞争检测","x":-560,"y":1469,"width":353,"height":83},
+		{"id":"95cea9637295cdf7","type":"file","file":"Security/Hack/相关研究/Time, Clocks, and the Ordering of Events in a Distributed System.md","x":609,"y":440,"width":614,"height":400},
+		{"id":"8474dca78856694d","type":"file","file":"Security/Hack/相关研究/FastTrack, Efficient and Precise Dynamic Race Detection.md","x":609,"y":-80,"width":597,"height":400},
+		{"id":"1dddb58d2f322139","type":"file","file":"Security/Hack/相关研究/CONVUL, An Effective Tool for Detecting Concurrency Vulnerabilities.md","x":1400,"y":280,"width":685,"height":240},
+		{"id":"5c1d5e91bf195812","type":"text","text":"## 锁集分析\n\n锁集分析 (Lockset Analysis) 追踪每个变量的锁集合, 如果一个变量在不同线程中被访问, 其锁集交集为空, 那么就可能存在竞争条件.","x":20,"y":1110,"width":360,"height":210},
+		{"id":"f234b4f13130efda","type":"file","file":"Security/Hack/相关研究/Eraser, A Dynamic Data Race Detector for Multithreaded Programs.md","x":609,"y":1075,"width":630,"height":280},
+		{"id":"36d691ff997e9a58","type":"text","text":"## 观察点检测\n\n观察点检测 (watchpoint detection) 设置程序中观察点或断点来观察对内存位置的访问和修改 (通过调用 gdb, lldb)","x":80,"y":1560,"width":360,"height":160},
+		{"id":"e22b477777288c9d","type":"text","text":"## 内存一致性模型\n\nMemory Consistency Models","x":-160,"y":1895,"width":360,"height":120},
+		{"id":"2493de800877959b","type":"file","file":"Data Storage/SQL/理论/并发控制.md","x":520,"y":2015,"width":553,"height":300},
+		{"id":"5c910097989bfedd","type":"text","text":"## 并发漏洞分类\n\n- [数据竞争, Data Race](Data%20Race.md)\n- 原子性违反\n- 顺序性违反, Order Violation\n- 死锁, Deadlock","x":-1100,"y":1640,"width":364,"height":235},
+		{"id":"9a449fe1b1e098c5","type":"file","file":"Security/Hack/并发漏洞/Data Race.md","x":-1760,"y":1895,"width":400,"height":400}
+	],
+	"edges":[
+		{"id":"cb2de10a9e4e188d","fromNode":"e49ef8ed7f4db60b","fromSide":"right","toNode":"95cea9637295cdf7","toSide":"left"},
+		{"id":"4cfeac55e46899e3","fromNode":"e49ef8ed7f4db60b","fromSide":"right","toNode":"1dddb58d2f322139","toSide":"left"},
+		{"id":"277f0ff122f9a383","fromNode":"5c1d5e91bf195812","fromSide":"right","toNode":"f234b4f13130efda","toSide":"left"},
+		{"id":"4b9276a489448715","fromNode":"e49ef8ed7f4db60b","fromSide":"right","toNode":"8474dca78856694d","toSide":"left"},
+		{"id":"6feb9fde23a57774","fromNode":"e22b477777288c9d","fromSide":"right","toNode":"2493de800877959b","toSide":"left"},
+		{"id":"5c7ab33f2e32176b","fromNode":"5c910097989bfedd","fromSide":"left","toNode":"9a449fe1b1e098c5","toSide":"right"},
+		{"id":"77bd2e35be54a9ee","fromNode":"964825e03c5a7cb0","fromSide":"right","toNode":"e49ef8ed7f4db60b","toSide":"left"},
+		{"id":"3c53d17575d6ee00","fromNode":"964825e03c5a7cb0","fromSide":"right","toNode":"5c1d5e91bf195812","toSide":"left"},
+		{"id":"0da70b3dfdcac03a","fromNode":"964825e03c5a7cb0","fromSide":"right","toNode":"36d691ff997e9a58","toSide":"left"}
+	]
+}

@@ -5,7 +5,7 @@
 
 ### `/proc` Info
 
-详见: [proc](../../Operating%20System/proc.md)
+详见: [proc](../../Operating%20System/File%20System/proc.md)
 
 ### `uptime`, `w`
 

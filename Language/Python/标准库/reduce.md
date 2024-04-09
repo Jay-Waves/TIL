@@ -1,6 +1,12 @@
-`from functools import reduce`
-`reduce(funct, seq)`, 对seq序列中元素使用funct进行累积操作, 比如将seq序列中的元素累乘.
+对序列中元素使用辅助函数进行累积操作.
 
-例子:
-- 累乘: `reduce((lambda x, y: x*y), list)`
-- 累加: `reduce((lambda x, y: x+y), list)`
+
+```python
+from functools import reduce
+
+# reduce of sum
+reduce((lambda x, y: x+y), list)
+
+# reduct of multiply
+reduce((lambda x, y: x*y), list)
+```

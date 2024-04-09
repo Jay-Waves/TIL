@@ -1,6 +1,13 @@
-自己规定新类型, 多用于复杂类型的构造.  
-比如声明类型 `Tuple[int, ...]`  
+加强 Python 类型检查
 
+```python
+from Typing import Tuple, NewType
 
-*类型*和函数类似, 都能直接赋值给变量. 赋值给变量相当于给该类型起别名, 如`Int32 = int`.  
-自定义名称 `NewType('Int32', int)`, 这和上述方式的区别是, 解释器会将NewType声明的类型当作新类型进行类型检查. 比如还有定义 `NewType('Int64', int)`, 如果混用Int32和Int64, 解释器会报错.
+# 声明复杂类型:
+def foo() -> Tuple[int, ...]:
+	...
+
+# 新类型, (辅助静态分析器类型检查)
+NewType('Int32', int) # 混用时, 解释器会报错
+Int32 = int           # 这样解释器会视为同一类型
+```

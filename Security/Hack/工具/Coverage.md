@@ -118,6 +118,6 @@ gcovr --exclude-throw-branches
 
 clang 还有 Google 系列开发的 [sanitizer coverage](https://clang.llvm.org/docs/SanitizerCoverage.html), 和各种 Sanitizer 搭配用于 Fuzzing, 优点是可以统计*边缘覆盖率*. SanCovr 允许向各个程序块插入自定义函数 `__sanitizer_cov_trace_pc_guard()`, 插桩很方便.
 
-![AFL](工具/AFL.md#bitmap)
+![AFL](AFL.md#bitmap)
 
-源码分析见 ![Sanitizer Coverage](工具/Sanitizer%20Coverage.md)
+源码分析见 ![Sanitizer Coverage](Sanitizer%20Coverage.md)

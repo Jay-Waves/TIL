@@ -1,3 +1,0 @@
-Redis 不是一种关系型数据库, 不适合海量数据存储. Redis 更像是一种数据结构服务器: `strings, map, list, sets, sorted sets`, 实现语言是 C. 实际场景中, Redis 常作为数据库缓存使用.
-
-...

@@ -7,6 +7,7 @@ print(rootpath)
 
 ret = abspath.replace(rootpath, '.', 1)
 ```
+
 ### python中路径使用`/`而不是windows中的`\`
 
 #Trouble

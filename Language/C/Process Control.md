@@ -40,4 +40,4 @@ int wait( int *status_loc);
 void exit(int status);
 ```
 
-例子见 [appendix/fork.c](../../appendix/fork.c), 代码为 K&R 风格.
+例子见 [appendix/fork.c](../../appendix/程序/fork.c), 代码为 K&R 风格.

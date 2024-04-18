@@ -1,3 +1,5 @@
+stdout, stderr 是 bash 命令的输出, 默认输出到屏幕. 但是可以重定向, 与其他命令相组合.
+
 ## 重定向
 
 **stdout 重定向**:
@@ -68,7 +70,7 @@ EOF
 "here documents" 会展开 Shell 变量. 可以通过 `<<'EOF'` 禁用.
 
 ```bash
-cat <<EOF > lab.cc
+cat << my-end-flag > lab.cc
 #include <stdio.h>
 static long num_steps = 100000000;
 double step, pi;
@@ -76,7 +78,16 @@ int main() {
 	...
 	return 0;
 }
-EOF
+my-end-flag
+```
+
+"here string" 类似, 将字符串重定向到 stdin.
+
+```bash
+grep "example" <<< "here is an example"
+
+# 常用于解析变量:
+read -r var1 var2 <<< "1 2"
 ```
 
 ## 管道
@@ -88,6 +99,15 @@ EOF
 find . -type f -name "*.txt" | wc -l
 # 排序并去重
 cat file.txt | sort | uniq
+```
+
+每个管道都是在**局部环境**中执行, 变量也都是局部变量(即子shell), 仅有 stdout 被父进程捕获.
+
+```bash
+mkfifo /tmp/myfifo
+while read line < /tmp/myfifo; do
+	echo "阻塞读取 fifo"
+done
 ```
 
 ### `tee`

@@ -4,6 +4,7 @@
 - streaming engine
 - message broker
 
+Redis 的很多类型虽然类似 Python, 但是并不支持复杂的多层嵌套, 每种类型存储的都是 String. 可以借助键顺序 `a:b:c` 来实现类似嵌套字典的功能.
 
 ### Redis DataStructure
 
@@ -22,4 +23,13 @@
 connect to redis server :
 ```bash
 redis-cli -h 127.0.0.1 -p 6379
+
+redis-cli flushdb
+
+redis-cli Keys '*'
+
+# 获取所有键值
+redis-cli KEYS '*' | xargs -n 1 redis-cli GET
+
+redis-cli Info keyspace
 ```

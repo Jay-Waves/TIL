@@ -8,7 +8,7 @@ powershell 为 bash 和 cmd 用户准备了对应命令的别名.
 
 补全 `cmd` 一栏对应的命令如下：
 
-| zsh                      | pwsl                                                    | pwsl alias                  | cmd                     |
+| bash                     | pwsl                                                    | pwsl alias                  | cmd                     |
 | ------------------------ | ------------------------------------------------------- | --------------------------- | ----------------------- |
 | `grep`                   | `find-string -Pattern`                                  |                             | `findstr`               |
 | `ls, dir`                | `get-childitem`                                         | `gci`                       | `dir`                   |
@@ -26,7 +26,8 @@ powershell 为 bash 和 cmd 用户准备了对应命令的别名.
 | `cd .. && pwd`           | `cd; pwd`                                               |                             | `cd .. & cd`            |
 | `ln -s`                  | `new-item -ItemType SymbolicLink -Path ... -Target ...` |                             | `mklink` or `mklink /D` |
 |                          | `get-clipboard`                                         | `gcb`                       | `clip.exe` (not same)   |
-| `ip`                     | `get-netipaddress`                                      |  None                           | `ipconfig`                        |
+| `ip`                     | `get-netipaddress`                                      | None                        | `ipconfig`              |
+| `time`                   | `Measure-Command {Start-Process <program> -Wait}`                                                        |                             |                         |
 
 
 ## Variable

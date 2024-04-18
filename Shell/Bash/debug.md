@@ -2,7 +2,7 @@
 
 ### network debug
 
-see [Bash/network](网络.md)
+see [Bash/network](网络调试.md)
 
 ### `ldd`
 

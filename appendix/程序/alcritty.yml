@@ -1,6 +1,4 @@
-alacritty 配置文件 `./config/alacritty/alcritty.yml`
-
-```yaml
+# configuration of alcritty, place at ~/config/alacritty/alcritty.yml
 # Dracula colors for Alacritty
 
 colors:
@@ -79,4 +77,3 @@ scrolling:
 	faux_multiplier: 100 
 	# 自动滚动至最新行 
 	auto_scroll: true
-```

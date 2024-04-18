@@ -38,6 +38,10 @@ set clipboard=unnamedplus
 " 设置文件编码
 set encoding=utf-8
 set fileencoding=utf-8
+
+" 启用自动折行时, 应替换对应上下行移动命令
+nmap j gj
+nmap k gk
 ```
 
 ## 安装插件管理器

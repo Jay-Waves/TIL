@@ -1,31 +1,56 @@
 ## Functions
 
-bash 中使用函数就像使用其他命令一样.
+bash 中使用函数就像使用其他命令一样. 参数默认是值传递.
 
 ```bash
-function name() {
-    shell commands
+function greet() {
+    echo "hello, world"
+    return 0
 }
+
+greet | cat
+
+# function 输出共有: sdtout, stderr, exit codes.
 ```
 
-Example:
+参数传递 != 标准输入
 
 ```bash
-#!/bin/bash
-function hello {
-   echo world!
-}
-hello
-
+# 不要搞混 `标准输入` 和 `参数`, 两回事.
 function say {
     echo $1
 }
 say "hello world!"
+echo "hello, world!" | say # 这样是错误的, 
+
+function say {
+	read input # 用 read 接收标准输入, 或者使用 xargs 将标准输入或字符串转化为参数.
+}
+```
+
+通过变量名传递间接引用:
+
+```bash
+foo() {
+	local var=$1
+	eval "$var='new value'"
+}
+
+var="hello"
+foo "var"
+echo $var 
+>> nwe value
+
+# bash 还呢个通过 ${!var} 来间接引用.
+arr["key"]="value"
+keyname="key"
+echo "${!keyname}
 ```
 
 ## Conditionals
 
 ```bash
+# 注意 `[` 是参数, 两边必须是空格
 if [ expression ]; then
     ...
 else
@@ -110,9 +135,12 @@ while 类型
 while condition; do
   statements
 done
+
+while command; # while 检查命令返回状态, 为 0 (正确退出)时, 执行; 否则退出.
+while [ ]; # [ ] 是一个bash命令, 用于判断条件是否成立
 ```
 
-Until 类型
+Until 类型: 相当于 `while !`
 
 ```bash
 until condition; do

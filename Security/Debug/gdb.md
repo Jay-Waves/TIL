@@ -11,12 +11,14 @@ gdb 中的启动信息 (设置的断点, 输入的参数, 监视的变量等), �
 `-tui` : terminal user interface, 基于终端的 GUI 界面.
 
 执行代码:
-- `r`: run, 等于 F5
-- `c`: continue, 再按一次 F5 
+- `run, r`: 等于 F5
+- `continue, c`: 执行到下一个断点, F5
 - `until  行号`: 指定位置跳转
-- `n`: next, 相当于 F10, 单步跳出
-- `s`: step, 相当于 F11, 单步执行
-- `finish`: 执行完当前函数
+- `next, n`: 相当于 F10, 单步跳出
+- `step, s`: 相当于 F11, 单步执行
+- `skip` 执行 step 时跳过某个函数
+- `stepi, si`: 单步执行汇编
+- `finish, step out`: 执行完当前函数
 
 断点
 - `b  [源文件:] 函数名/行号`: break, \[指定文件\]打断点
@@ -27,34 +29,16 @@ gdb 中的启动信息 (设置的断点, 输入的参数, 监视的变量等), �
 - `break 编号 if 条件`: 创建条件断点. `condition 编号 条件`: 使断点成为条件断点.
 
 显示:
-- `l  行号/函数名`: list, 显示 10 行代码. 
-- `bt`: 查看函数压栈, 即 backtrace
+- `list, l`: 显示源代码. 
+- `backtrace, bt`: 查看函数压栈, 搭配 `frame <id>` 切换栈帧.
 - `set var`: 修改变量值
-- `p  变量名`: print, 打印变量值
-- `display`: 跟踪一个变量; `undisplay 变量编号`. 或者 `watch`
+- `display [var]`: 跟踪一个变量, 自动显示信息.
+- `watch [var|expr]` 跟踪一个变量, 有变化时中断. 或跟踪表达式, 满足时中断.
+- `print [fmt] <expr>` 打印表达式值, 详见 [gdb 查看表达式值](gdb%20查看表达式值.md)
+- `info` 查看信息, 见 [gdb 查看调试信息](gdb%20查看调试信息.md)
 
 可按 Enter 继续查看, gdb 会自动执行上次命令.
-
-### 字段信息
-
-- Num: 编号
-- Type: 类型, 如 breakpoint
-- Disp: 状态
-- Enb: 是否可用, 例如当前断点不可用则为 n
-- Address: 地址
-- What: 在此文件的哪几个函数的第几行
-
-### 表达式
-
-`(gdb) watch (z > 28)` 设置条件表达式
-
-`(gdb) frame 1` 回溯到之前编号为 1 的栈帧. 当前帧为编号 0, 父帧为编号 1, 依次.
-
-### 定义宏
-
 
 ## 参考
 
 [软件调试艺术](file:///D:/yjw/book/Calibre/Norman%20Matloff/Ruan%20Jian%20Diao%20Shi%20De%20Yi%20Zhu%20(109)/Ruan%20Jian%20Diao%20Shi%20De%20Yi%20Zhu%20-%20Norman%20Matloff.pdf), 教科书. 比较繁琐细节, 没事可以翻出来看一看.
-
-#c

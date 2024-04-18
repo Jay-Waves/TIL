@@ -41,10 +41,26 @@ trap cleanup SIGINT
 
 ### 临时上下文
 
-使用 `(...)` 来创建临时上下文:
+使用 `(...)` 来创建临时上下文, 命令在新进程中执行, 但是会集成父进程的大部分环境.
 
 ```bash
 	# do something in current dir
 	(cd /some/other/dir && other-command)
 	# continue in original dir
+```
+
+### 命令字符串
+
+直接执行变量, 变量会被当作**一个**整体命令.
+```bash
+cmd="echo Hello; echo Hello"
+$cmd
+>> "Hello; echo Hello"
+```
+
+`eval` 首先解析 `cmd` 的内容, 然后拆解为不同命令. eval 容易引入安全问题.
+```bash
+eval "$cmd"
+>> Hello
+>> World
 ```

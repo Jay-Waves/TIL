@@ -51,6 +51,9 @@
 - z, 跳转工具
 - bat, 现代 cat 替代品
 - fd, find 替代品
+- hyperfine, 
+- tokei
+- httpie
 
 
 ### Browser Plugins

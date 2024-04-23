@@ -1,3 +1,5 @@
+注意, WSL 和 Docker 类似, 多个 Linux 实例**实际上共用了一个底层虚拟机**. 例如不同虚拟机的 IP 地址是相同的 (仅用端口区分). 
+
 ```shell
 wsl --export Ubuntu-22.04 D:\VM\backup.tar.gz
 wsl --import Ubuntu-22.04-2 <path\to\install> D:\VM\backup.tar.gz

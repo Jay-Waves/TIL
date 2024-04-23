@@ -1,6 +1,6 @@
-内存管理见[进程与线程](../../Linux/Preliminaries/进程与线程.md)
+内存管理见[进程与线程](../../../Operating%20System/Preliminaries/进程与线程.md)
 
-常见CPU寄存器:
+栈使用的CPU寄存器:
 - `EBP` Extended Base Pointer, 堆栈帧指针. 初始指向上一个函数堆栈帧基址.
 - `ESP` Extended Stack Pointer, 堆栈顶指针. 初始指向函数堆栈帧底部.
 - `EIP` Extended Instruction Pointer, 指向下次执行的指令
@@ -19,7 +19,7 @@ call function
 3. 初始化栈 (此时已进入被调用函数的汇编)
 ```
 push ebp
-mov ebp, esp
+mov ebp esp
 ```
 4. 初始化局部变量空间, 编译时其所用局部变量空间就已被固定. (静态空间)
 ```assembly

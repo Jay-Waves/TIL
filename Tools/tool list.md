@@ -2,7 +2,7 @@
 
 - Obsidia
 - AFFiNE
-- vscode
+- VSCode
 - NeatConverter 电子书格式转换
 - FileConverter
 - DrawIO
@@ -13,7 +13,7 @@
 - VirtualBox, WSL, WMare Player, Docker Desktop
 - Datagrip, DBeaver
 - Terminal, Alacritty, Clink
-- **PoerToys**
+- **PowerToys**
 - **Luna**, 切换 Windows 亮暗主题
 - StartKiller
 - **ExplorerPatcher**
@@ -26,17 +26,20 @@
 - [Files](https://github.com/files-community/Files)
 - rufus
 - V2ray, V2rayN, Clash
-- Wireshark (tShark)
+- Wireshark (call tShark)
 - UsbEAm Hosts Editor
 - **HandBrake** 音视频编码转换
 - **PotPlayer**
 - LosslessCut 快速裁切视频, 无转码导出
 - Microsoft ClipChamp
 - **Mail Master** 网易邮箱大师
-- **Zotero7**
+- **Zotero7**, 文献管理
 - Captura, 便携录屏软件, 依赖 ffmpg
 - SumatraPDF, Adobe Acrobat DC
-- CryptoMator, 加密硬盘工具
+- CryptoMator, 硬盘加密工具
+- **CyberChefs, 加密/编码/压缩/数据分析工具**.
+- TrafficMonitor, windows 任务栏系统监控器
+- GoldenDict, 本地词典
 
 ### Cli-Tools
 

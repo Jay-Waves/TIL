@@ -1,4 +1,4 @@
-GNU MP 支持任意精度的C语言大整数运算库. 
+GNU MP 支持任意精度的C语言大整数运算库. 详见手册 https://gmplib.org/manual/
 
 编译:
 ```bash

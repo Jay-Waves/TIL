@@ -17,6 +17,8 @@ CI/CD: continuous integration/continuous deployment, 用于自动化测试/集�
 
 Completeness: 完备性. 逻辑系统是完备的, 如果它能证明该逻辑下的**所有**真命题.
 
+Casting/Coercion: 显式类型转换/隐式类型转换
+
 # D
 
 DOM: 文档对象模型, 指网页文档的编程接口, 允许脚本语言 (JS) 修改网页内容结构
@@ -35,8 +37,9 @@ Fuzz: 高效软件模糊测试框架, 见 [Fuzzing Survey](Security/Hack/相关�
 
 GUI: 计算机的用户图形界面
 
-Git: 分布式版本控制系统, 用于跟踪文件更改和人员间协作. 和常见远程托管平台进行交互, 如: 
-Github, GitLab
+Git: 分布式版本控制系统, 用于跟踪文件更改和人员间协作. 和常见远程托管平台进行交互, 如: Github, GitLab
+
+Generics: 泛型, 即允许接口同时复用于多种数据类型, 使用类型参数化实现, 在编译时确定具体数据类型(即编译器为不同数据类型的调用生成不同代码, 而不是真的动态类型). 如 CPP 模板. 
 
 # H
 
@@ -68,11 +71,13 @@ MIPS: Million Instructions Per Second, 用于衡量 CPU 每秒执行指令的速
 
 # O
 
-ORM: Object-Relational Mapping, 软件开发概念, 建立关系型数据库和面向对象语言间的关系.
+ORM: Object-Relational Mapping, 软件开发概念, 将面向对象的类资源/方法和一个关系型数据库绑定起来, 对类操作即等价于对数据表操作.
 
 OO: object-orientation, 面向对象编程.
 
 # P
+
+Poll: 轮询结构. 并发程序模型中, 某个线程阻塞等待其他资源, 线程将不时主动查询资源是否可用来结束轮询状态.
 
 # Q
 
@@ -82,13 +87,17 @@ OSI: 一种安全框架, 定义了安全攻击/安全机制/安全服务, 见 [�
 
 ROS: Robot Operating System, 开源机器人操作系统
 
+Reflection: 反射, 在**运行时**操作和配置对象及其属性, 在编写代码时这些类和方法可能不是已知的, 常用于实现框架和库. 如 python 的[元类](Language/Python/特性/面向对象/使用元类.md)
+
 # S
 
-SQL: 数据库结构化查询语言, 见 [Data Storage/SQL](Data%20Storage/SQL/理论/SQL.md)
+SQL: 数据库结构化查询语言, 见 [Data Storage/SQL](Data%20Structure/SQL/理论/SQL.md)
 
 Soundness: 健全性, 一个逻辑系统是健全的, 当它所有推导都仅产生真实结论; 即不会错误地证明假命题为真.
 
 # T
+
+TagDispatch: 一种函数反射方法, 见 [运行时调用选择](Language/C++/语法与特性/运行时调用选择.md#函数体)
 
 # U
 
@@ -100,7 +109,7 @@ Ubuntu: 基于 Debian 的开源 Linux 流行发行版.
 
 # W
 
-WSL: Windows Subsystem for Linux, 见 [OS/Linux Distribution/WSL](Operating%20System/Linux%20Distributions/WSL/配置%20-%20从此开始.md)
+WSL: Windows Subsystem for Linux, 见 [OS/Linux Distribution/WSL](System/Distributions/WSL/配置%20-%20从此开始.md)
 
 # X
 

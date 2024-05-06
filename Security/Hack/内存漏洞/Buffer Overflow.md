@@ -1,4 +1,4 @@
-内存管理见[进程与线程](../../../Operating%20System/Preliminaries/进程与线程.md)
+内存管理见[进程与线程](../../../System/Linux%20Basic/进程与线程.md)
 
 栈使用的CPU寄存器:
 - `EBP` Extended Base Pointer, 堆栈帧指针. 初始指向上一个函数堆栈帧基址.

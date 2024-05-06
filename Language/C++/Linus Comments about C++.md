@@ -1,7 +1,8 @@
-On Wed, 5 Sep 2007, Dmitry Kakurin wrote: 
+
+> When I first looked at Git source code two things struck me as odd:   
+> Pure C as opposed to C++. No idea why. Please don't talk about portability, it's BS (bullshit) ...
 > 
-> When I first looked at Git source code two things struck me as odd: 
-> 1. Pure C as opposed to C++. No idea why. Please don't talk about portability, it's BS. 
+> -- Dmitry Kakurin, on Wed, 5 Sep 2007
 
 **YOU** are full of bullshit.
 
@@ -50,12 +51,8 @@ Linus
 
 总结:
 - Linus 认为 C++ 新增了很多特性, 这会增加如何选择合适实现方法的**心智包袱**.
-- Linus 认为系统软件 (如 git core) 倾向于不抽象掉数据结构和算法, 因为这是其性能的核心. 但是 C++ 擅长的恰好是复杂抽象能力, 其对象模型容易被过度抽象, 导致最最终效率低下.
+- Linus 认为系统软件 (如 git core) 倾向于不抽象掉数据结构和算法, 因为核心瓶颈是性能. 但是 C++ 擅长的恰好是复杂抽象能力, 其对象模型容易被过度抽象, 导致最最终效率低下.
 - C++ 的异常处理性能低下, 且复杂不可预测?
 - 模板库 (如 stl, boost) 并不稳定, 难以 debug.
 
----
-
-Over my dead body.
-
-Linus.
+> Over my dead body  -- Linus Torvalds

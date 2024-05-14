@@ -39,7 +39,7 @@ docker 默认网桥模式: 虚拟一个网桥(docker0), 为每一个容器分配
 | none      | --network none                 | 容器有独立的 Network namespace，但并没有对其进行任何网络设置，如分配 veth pair 和网桥连接，配置 IP 等 |
 | bridge    | --network                      | bridge 默认模式, 网络隔离, 但分配一个内部IP. 构建时也使用该网络模式.                                                                                       |
 
-直接将宿主机设置为proxy即可, 如用[clash](../../Network/防火墙/代理.md), 设置 `all_proxy=http://host_ip:7890`
+直接将宿主机设置为proxy即可, 如用[clash](../../Network/防火墙/vpn.md), 设置 `all_proxy=http://host_ip:7890`
 
 ps: git 不走系统代理, 构建时也要设置 proxy.
 
@@ -77,13 +77,19 @@ docker 指令结构: `docker <func> <params>`
 - docker volume ...
 - docker network ...
 
-### 管理容器和镜像
+### 管理镜像
 
-拉取 DockerHub 镜像: docker pull
+拉取 DockerHub 镜像: docker pull ...
 
-删除镜像: delete mounted containers -> delete image
+image 的名称通常为 `name:tag`. 
+
+删除镜像:
+1. 先删除基于该 image 的所有正被挂载容器
+2. 再删除镜像
 
 ### 运行
+
+运行时, 需要基于 image 创建一个 container, 在 container 上运行虚拟机. 不指定 `container_name` 时, 会随机创建一个奇葩名字的容器, 并不是创建了一个一次性容器.
 
 `docker run --name <container_name> <image_name>`
 

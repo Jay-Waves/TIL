@@ -1,6 +1,7 @@
+
 ## 循环队列
 
-循环队列, 比较笨
+数组实现
 
 ```c
 #define ElementType int

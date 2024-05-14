@@ -44,6 +44,6 @@ gcc使用格式: `gcc [选项] 要编译的文件 [选项] [目标文件]`
 
 ### 链接
 
-- 符号表的合并与重定位. 详见 [内存管理](../../System/Linux%20Basic/内存管理.md)
+- 符号表的合并与重定位. 详见 [内存管理](../../System/Memory%20Management/内存管理.md)
 
 `gcc file1.o file2.o file.o -o file.exe`

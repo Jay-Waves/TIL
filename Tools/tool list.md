@@ -43,6 +43,7 @@
 - GoldenDict, 本地词典
 - Jupyter Lab (kernel: ipython, ihaskell, wolfram14)
 - 7zip, winRaR 压缩软件.
+- Jane Reader, windows 下 EUPB 阅读器.
 
 ### Cli-Tools
 

@@ -1,28 +1,4 @@
-**Subsections**
-
--   [What Is RPC](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003310000000000000000)
--   [How RPC Works](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003320000000000000000)
--   [RPC Application Development](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003330000000000000000)
-    -   [Defining the Protocol](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003331000000000000000)
-    -   [Defining Client and Server Application Code](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003332000000000000000)
-    -   [Compliling and running the application](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003333000000000000000)
--   [Overview of Interface Routines](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003340000000000000000)
-    -   [Simplified Level Routine Function](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003341000000000000000)
-    -   [Top Level Routines](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003342000000000000000)
--   [Intermediate Level Routines](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003350000000000000000)
-    -   [Expert Level Routines](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003351000000000000000)
-    -   [Bottom Level Routines](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003352000000000000000)
--   [The Programmer's Interface to RPC](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003360000000000000000)
-    -   [Simplified Interface](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003361000000000000000)
-    -   [Passing Arbitrary Data Types](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003362000000000000000)
-    -   [Developing High Level RPC Applications](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003363000000000000000)
-        -   [Defining the protocol](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003363100000000000000)
-    -   [Sharing the data](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003364000000000000000)
-        -   [The Server Side](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003364100000000000000)
-        -   [The Client Side](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003364200000000000000)
--   [Exercise](https://users.cs.cf.ac.uk/Dave.Marshall/C/node33.html#SECTION003370000000000000000)
-
-___
+RPC, remote procedure call, 远程过程调用. 是一种进程间通信方式
 
 This chapter provides an overview of Remote Procedure Calls (RPC) RPC.
 

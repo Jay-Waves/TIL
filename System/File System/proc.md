@@ -10,6 +10,8 @@
 - `/proc/[pid]/cwd` 进程工作目录
 - `/proc/[pid]/exe` 指向该进程所用可执行文件的符号链接
 - `/proc/[pid]/fd/` 指向该进程打开的所有文件的符号链接
+- `/proc/iomem` 物理内存布局
+- `/proc/[pid]/maps` 查看虚拟内存布局
 
 ### `sysctl` 
 

@@ -1,4 +1,3 @@
-> [尾调用优化 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2015/04/tail-call.html)
 
 **尾调用**指函数 `f()` 最后调用 `g()`, 此时 `f()` 不必等待 `g()` 返回才释放资源.
 
@@ -77,3 +76,7 @@ def factorial(n, total=1):
 	return factorial(n-1, n*total)
 factorial(5)
 ```
+
+## 参考
+
+[尾调用优化 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2015/04/tail-call.html)

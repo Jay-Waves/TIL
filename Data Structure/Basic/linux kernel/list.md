@@ -17,8 +17,8 @@ struct data {
 
 ```c
 /*
- * The trick here is that `(st *)0` is equivalent to `(st *)NULL`, indicating that
- * the new ptr of `st` points at the zero address.
+ * The trick here is that `(st *)0` is equivalent to `(st *)NULL`, 
+ * indicating that the new ptr of `st` points at the zero address.
  * for example: offsetof(struct data, a) = &data.a - &data
  */
 #define offsetof(st, m) ( (size_t) &(((st *)0)->m) )
@@ -130,7 +130,6 @@ void test( void )
 	}
 }
 ```
-
 
 ***
 

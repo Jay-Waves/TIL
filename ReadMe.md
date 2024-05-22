@@ -1,11 +1,3 @@
-
-### Vaults:
-
-- [开发文档](obsidian://open?vault=Docs)
-- [计算机](obsidian://open?vault=Code)
-- [数学](obsidian://open?vault=Math)
-- [文学](obsidian://open?vault=Reference)
-
 ### TOC 🚀
 
 - Algorithm, 算法
@@ -39,6 +31,8 @@
 	- 网络调试工具
 - Operating System, 计算机系统
 	- File System, 文件系统
+	- Process Control, 进程管理
+	- Memory Management, 内存管理
 	- IPC, 进程间通信, 见 C
 	- Kernel Module, 内核模块开发
 	- Linux Distributions, Linux 分发版
@@ -79,7 +73,7 @@ issue status:
 
 #WontFix #MisConfig #UserError ( #PEBKAC ) #Blocked #FAQ #Open #Closed
 
-### 中英文标点切换
+### Vim Scripts
 
 - `:%s/,\s/，/g`
 - `:%s/\.\s/。/g`
@@ -89,3 +83,11 @@ issue status:
 - `:%s/!\s/！/g`
 - `:%s/\s(/（/g`
 - `:%s/)\s/）/g`
+
+
+### Vaults:
+
+- [开发文档](obsidian://open?vault=Docs)
+- [计算机](obsidian://open?vault=Code)
+- [数学](obsidian://open?vault=Math)
+- [文学](obsidian://open?vault=Reference)

@@ -15,18 +15,6 @@ struct page {
   struct list_head lru;
   void *virtual; // pages's virtual address, NULL for high memory
 };
-
-// virtual memory of a task
-struct mm_struct {
-	int count;
-	pgd_t *pgd;
-	unsigned long context;
-	unsigned long start_code, end_code, start_data, end_data;
-	unsigned long start_brk, brk...
-
-	struct vm_area_struct *mmap;
-	struct vm_area_struct *mmap_avl;
-	struct semaphore mmap_sem;
 ```
 
 区域指一组有类似硬件特征的页, 如:
@@ -125,9 +113,3 @@ GFP (get free page) mask flags, `gfp_t`, 用于
 ```c
 ptr = kmalloc(size, __GFP_WAIT | __GFP_IO | __GFP_FS);
 ```
-
-***
-
-### vm_area_struct
-
-Each vm_area_struct data structure describes an area of virtual memory for a process.

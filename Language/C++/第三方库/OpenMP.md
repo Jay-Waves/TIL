@@ -208,7 +208,7 @@ for(i = 0; i < N; i++)
 omp_set_num_threads(2);
 int k=10
 #pragma omp parallel for firstprivate(k) lastprivate(k)
-for(int i=0;i<4;i++){
+for(int i = 0; i < 4; i++){
 	k=k+i;
 	printf("ID=%d, k=%d\n", omp_get_thread_num(), k);
 }
@@ -312,6 +312,8 @@ double omp_get_wtime(void);
 double omp_get_wtick(void);
 ```
 
-> 参考:  
-> [OpenMP教程  wjin](https://w-jin.github.io/tech/openmp/)  
-> [官方白皮书: *OpenMP Application Programming Interface*](https://www.openmp.org/wp-content/uploads/OpenMP-API-Specification-5.0.pdf)
+## 参考:  
+
+[OpenMP教程  wjin](https://w-jin.github.io/tech/openmp/)  
+
+[官方白皮书: *OpenMP Application Programming Interface*](https://www.openmp.org/wp-content/uploads/OpenMP-API-Specification-5.0.pdf)

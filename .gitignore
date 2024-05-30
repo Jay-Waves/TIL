@@ -1,6 +1,7 @@
 /.obsidian/**
 /.trash/**
 /.stash/**
+build/
 .obsidian.vimrc
 desktop.ini
 NSFW/

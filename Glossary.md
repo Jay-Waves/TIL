@@ -95,7 +95,7 @@ HTTPs: HTTP+SSL/TLS, 对 HTTP 协议提供安全加密.
 
 Handle: 句柄
 
-Heap: 堆, 数据结构. 见 [heap](Data%20Structure/Basic/heap.md)
+Heap: 堆, 数据结构. 见 [heap](Data%20Structure/Preliminaries/heap.md)
 
 Hook: 钩子.
 
@@ -107,7 +107,7 @@ IDE: 集成开发环境
 
 I/O Bound: I/O 密集型.
 
-Interrupt: 操作系统中断, 见 [操作系统概述](System/Process%20Scheduling/操作系统概述.md)
+Interrupt: 操作系统中断, 见 [操作系统概述](System/Process/操作系统概述.md)
 
 ISR: interrupt service routine, 中断处理程序.
 
@@ -143,7 +143,7 @@ MSB: most significant big/byte, 最大影响位.
 
 Multiprogramming: 多道程序技术.
 
-Mutex: 多线程互斥量. 见 [进程与线程](System/Process%20Scheduling/进程与线程.md)
+Mutex: 多线程互斥量. 见 [进程与线程](System/Process/进程与线程.md)
 
 # N
 
@@ -169,7 +169,7 @@ PAE: physical address extension. 物理地址扩展.
 
 Page Fault: 内存缺页段错误.
 
-Paging: 分页技术, 见 [内存分配](System/Memory%20Management/内存分配.md)
+Paging: 分页技术, 见 [分页技术](System/Memory/分页技术.md)
 
 P-Code: P码, 一种编译器中间码.
 
@@ -183,17 +183,17 @@ PIE: position-independent executable, 地址无关可执行文件.
 
 PLT: procedure linkage table. 过程链接表.
 
-Preemption: 抢占式调度. 见 [进程调度](System/Process%20Scheduling/进程调度.md)
+Preemption: 抢占式调度. 见 [进程调度](System/Process/进程调度.md)
 
 Poll: 轮询结构. 并发程序模型中, 某个线程阻塞等待其他资源, 线程将不时主动查询资源是否可用来结束轮询状态.
 
-Process: 计算机进程. 见 [进程与线程](System/Process%20Scheduling/进程与线程.md)
+Process: 计算机进程. 见 [进程与线程](System/Process/进程与线程.md)
 
-Priority Schedule: 进程优先级调度. 见 [进程调度](System/Process%20Scheduling/进程调度.md)
+Priority Schedule: 进程优先级调度. 见 [进程调度](System/Process/进程调度.md)
 
-Round Robin: 时间片轮转法调度. 见 [进程调度](System/Process%20Scheduling/进程调度.md)
+Round Robin: 时间片轮转法调度. 见 [进程调度](System/Process/进程调度.md)
 
-Read-Write Lock: 读写锁. 见 [进程同步与互斥](System/Process%20Scheduling/进程同步与互斥.md)
+Read-Write Lock: 读写锁. 见 [进程同步与互斥](System/Process/进程同步与互斥.md)
 
 Reentrant: 可重入.
 
@@ -209,7 +209,7 @@ OSI: 一种安全框架, 定义了安全攻击/安全机制/安全服务, 见 [�
 
 ROS: Robot Operating System, 开源机器人操作系统
 
-Reflection: 反射, 在**运行时**操作和配置对象及其属性, 在编写代码时这些类和方法可能不是已知的, 常用于实现框架和库. 如 python 的[元类](Language/Python/特性/面向对象/使用元类.md)
+Reflection: 反射, 在**运行时**操作和配置对象及其属性, 在编写代码时这些类和方法可能不是已知的, 常用于实现框架和库. 如 python 的[元类](Language/Python/特性/元编程.md)
 
 # S
 
@@ -219,7 +219,7 @@ Soundness: 健全性, 一个逻辑系统是健全的, 当它所有推导都仅�
 
 Semantic Analyzer: 语义分析器. 见 [Compiler](Compiler/Compiler.md)
 
-Semaphore: 信号量. 见 [进程同步与互斥](System/Process%20Scheduling/进程同步与互斥.md)
+Semaphore: 信号量. 见 [进程同步与互斥](System/Process/进程同步与互斥.md)
 
 Shared Library: 共享库
 
@@ -227,7 +227,7 @@ SDK: software development kit, 软件开发工具集.
 
 Southbridge: 南桥. 见 [计算机架构](HardWare/计算机架构.md)
 
-Stack: 先入后出的栈数据结构, 见 [kernel/list](Data%20Structure/Basic/linux%20kernel/list.md). 也指进程内存空间的一种结构, 见 [linux 内存空间分布](System/Memory%20Management/linux%20内存空间分布.md)
+Stack: 先入后出的栈数据结构, 见 [kernel/list](Data%20Structure/Preliminaries/linux%20kernel/list.md). 也指进程内存空间的一种结构, 见 [linux 内存空间分布](System/Memory/linux%20内存空间分布.md)
 
 Static Shared Library: 静态共享库.
 
@@ -235,11 +235,11 @@ Symbol Link: 软链接.
 
 Symbol Resolution: 符号决议.
 
-Synchronization: 进程间同步, 见 [进程同步与互斥](System/Process%20Scheduling/进程同步与互斥.md)
+Synchronization: 进程间同步, 见 [进程同步与互斥](System/Process/进程同步与互斥.md)
 
 Syntax Tree: 语法树, 编译前端的中间产物, 见 [Compiler](Compiler/Compiler.md)
 
-System Call: 系统调用. 见 [操作系统概述](System/Process%20Scheduling/操作系统概述.md)
+System Call: 系统调用. 见 [操作系统概述](System/Process/操作系统概述.md)
 
 # T
 
@@ -249,7 +249,7 @@ Time-Sharing System: 分时系统.
 
 Time Slice: 时间片.
 
-Thread: 线程, 一种更轻量进程, 见 [System/进程与线程](System/Process%20Scheduling/进程与线程.md)
+Thread: 线程, 一种更轻量进程, 见 [System/进程与线程](System/Process/进程与线程.md)
 
 Token: 词元.
 
@@ -265,7 +265,7 @@ User Mode: 操作系统用户空间.
 
 Virtual Address Space: 虚拟地址空间. 一种管理内存的方式.
 
-VMA: virtual memory area, 代指进程拥有的某片连续虚拟内存区域. 见 [linux 进程与内存管理数据结构](System/Process%20Scheduling/linux%20进程内存管理结构.canvas) 的 `vm_area_struct` 结构.
+VMA: virtual memory area, 代指进程拥有的某片连续虚拟内存区域. 见 [linux 进程与内存管理数据结构](System/Process/linux%20进程内存管理结构.canvas) 的 `vm_area_struct` 结构.
 
 # W
 

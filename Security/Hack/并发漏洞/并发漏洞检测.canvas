@@ -13,7 +13,7 @@
 		{"id":"2493de800877959b","type":"file","file":"Data Structure/SQL/理论/并发控制.md","x":520,"y":2015,"width":553,"height":300},
 		{"id":"5c910097989bfedd","type":"text","text":"## 并发漏洞分类\n\n- [数据竞争, Data Race](数据竞争.md)\n- 原子性违反\n- 顺序性违反, Order Violation\n- 死锁, Deadlock","x":-1100,"y":1640,"width":364,"height":235},
 		{"id":"9a449fe1b1e098c5","type":"file","file":"Security/Hack/并发漏洞/数据竞争.md","x":-1760,"y":1895,"width":400,"height":400},
-		{"id":"e8b25b48dc029280","x":-1136,"y":2200,"width":400,"height":400,"type":"file","file":"System/Process Scheduling/进程同步与互斥.md"}
+		{"id":"e8b25b48dc029280","x":-1136,"y":2200,"width":400,"height":400,"type":"file","file":"System/Process/进程同步与互斥.md"}
 	],
 	"edges":[
 		{"id":"cb2de10a9e4e188d","fromNode":"e49ef8ed7f4db60b","fromSide":"right","toNode":"95cea9637295cdf7","toSide":"left"},

@@ -12,9 +12,45 @@
 | `intmax_t, uintmax_t`  |                                               |
 | `int8_t, uint8_t, ...` | in `stdlib.h`, platform-independent with fixed width                                 |
 
+### bool
+
+C89 标准中没有对 `bool` 的原生支持, C99 才引入了 `stdbool.h` 头文件. 因为 `bool` 极容易和现有 C 程序的宏或定义冲突, 所以委员会使用了保留名称 `_Bool`, 将选择权交给程序员.
+
+```c
+#include <stdbool.h>
+
+typdef bool _Bool // 实际上 _Bool 才是 c99 引入的原生布尔类型.
+#define true 1
+#define false 0
+```
+
+在 C99 之前, 开发者已习惯用整数, 宏或枚举模拟布尔值, 所以 `stdbool` 没有被广泛采用.
+
 ### Static Variables
 
 静态变量对函数而言是**本地的**, 只会被初始化一次 (函数第一被调用时), 每次函数调用皆访问同一对象, 直到程序结束销毁. 常用于递归.
+
+### Struct 
+
+```c
+struct node {
+	int key;
+	struct node *forward[]; // zero size
+}
+// using like:
+struct node *n = malloc(sizeof(node) + 10*sizeof(struct node*));
+```
+
+结构体按顺序从低地址到高地址排列, 但这并不是标准要求而是惯例. 结构体按其内部体积最大成员进行对齐, 结构体内部按各个成员需求进行对齐.
+
+```c
+struct data { // total size: 24, 8-byte alignment
+	char   a; // offset 0,  1-byte alignment
+	int    b; // offset 4,  4-byte alignment
+	char   c; // offset 8,  1-byte alignment
+	double d; // offset 16, 8-byte alignment
+}
+```
 
 ### Unions
 
@@ -36,6 +72,7 @@ typedef union {
 	hellicopter heli;
 	cargoplane cargo;
 } aircraft;
+
 typedef struct {
 	type kind; // type flag
 	int speed;

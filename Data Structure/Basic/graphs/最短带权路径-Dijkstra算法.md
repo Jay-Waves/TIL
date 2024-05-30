@@ -1,2 +1,0 @@
-- 在一定空间开销内， 该算法无法正确处理权值含负值的情况（会死循环）
-- 算法演示：[11-3: Dijkstra ,Finding Shortest Path in Weighted Graphs - YouTube](https://www.youtube.com/watch?v=uyNJxsH16nc&list=PLvOO0btloRnsbnIIbX6ywvD8OZUTT0_ID&index=5)

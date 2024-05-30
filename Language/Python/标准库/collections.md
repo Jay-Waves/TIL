@@ -53,7 +53,7 @@ new_dict = dict(new_dfltdict)
 
 ### deque
 
-双端队列, double-ended queue, 用于高效实现 FIFO 队列.
+[双端队列](../../../Data%20Structure/Preliminaries/deque.md)
 
 ```python
 from collections import deque
@@ -63,7 +63,7 @@ fifo.apend(1)      # Producer
 x = fifo.popleft() # Consumer
 ```
 
-普通 `list` 类型也是有序队列, 但是从列表头部删除/插入数据却是 $O(N)$ 复杂度的.
+普通 `list` 类型也是有序队列, 但是操作列表头部数据却是 $O(N)$ 复杂度的, `deque` 操作两头数据都是 $O(1)$ 的
 
 ## sortedcontainers
 

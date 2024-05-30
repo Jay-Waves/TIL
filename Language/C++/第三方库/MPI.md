@@ -247,3 +247,7 @@ int MPI_Alltoall(void *send_buf, int send_cnt, MPI_Datatype send_type,
 								void *recv_buf, int recv_cnt, MPI_Datatype recv_type,
 								MPI_Comm comm);
 ```
+
+## 例子
+
+[fourier series mpi](../../../appendix/程序/fourier_series_mpi.c)

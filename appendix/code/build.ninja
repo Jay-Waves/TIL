@@ -1,0 +1,17 @@
+cflags = -std=c99 -Wall -Wextra
+includes = errno.h
+
+rule cc
+  command = gcc $cflags -o $out $in
+  description = Compiling $in to $out
+
+build build/queue: cc queue.c
+build build/deque: cc deque.c list.h $includes
+default build/queue build/deque
+
+rule clean
+  command = rm -r build
+  description = Cleaning up all build files
+
+build clean: clean
+builddir = build

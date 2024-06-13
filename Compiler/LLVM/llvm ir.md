@@ -42,7 +42,7 @@ define i32 @main() {
 - `n8:16:32:64`: 目标CPU的原生整型包含8位、16位、32位和64位
 - `S128`: 栈以128位自然对齐
 
-`target triple`: 目标平台, 如 `aarc64-apple-darwin`, `x86_64-pc-windows-msvc`
+`target triple`: [目标平台](../../Language/C/ReadMe.md), 如 `aarc64-apple-darwin`, `x86_64-pc-windows-msvc`
 
 
 > 参考 [Data Layout](https://llvm.org/docs/LangRef.html#data-layout)

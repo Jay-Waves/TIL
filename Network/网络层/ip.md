@@ -4,15 +4,14 @@
 
 开头为哈夫曼编码, 对IP进行唯一区分
 
-- A类地址, 默认`Net ID`占8bits, `Host ID`占24bits, 开头固定为 `0`
+|     | 网络地址位宽    | 主机地址位宽 | 固定前缀格式     |
+| --- | --------------- | ------------ | -------- |
+| A   | `8b`            | `24b`        | `0...`   |
+| B   | `16b`           | `16b`        | `10...`  |
+| C   | `24b`           | `8b`         | `110...` |
+| D   | `32b`, 用于多播 |              | `1110...`   |
+| E   | `32b`, 保留后用 |              | `1111...`         |
 
-- B类地址, 默认`Net ID`占16bits, `Host ID`占16bits, 开头固定为 `10`
-
-- C类地址, 默认`Net ID`占24bits, `Host ID`占8bits, 开头固定为 `110`
-
-- D类地址, 开头固定为 `1110`, 用于多播地址
-
-- E类地址, 开头固定为 `1111`, 保留今后使用
 
 #### 特殊IP:
 
@@ -50,6 +49,7 @@
  |                             Data                              |
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ```
+
 - Version: 版本号 (IPv4: 4, IPv6: 6)
 - IHL (Internet Header Length):  IP头长度, 单位 4 bytes.
 - Type of Service: usually unused
@@ -65,14 +65,7 @@
 
 ipv6 和 ipv4 是不兼容的, 这导致了从 ipv4 向 ipv6 过渡困难.
 
-## 应用
+## DHCP
 
-### 开启 IPv4 转发
-
-临时开启: `sudo sysctl -w net.ipv4.ip_forward=1`
-
-永久开启: 
-
-- 修改 `/etc/sysctl.conf`, 添加 `net.ipv4.ip_forward = 1`
-- 重启服务 `sudo sysctl -p`
+动态主机配置协议 (Dynamic Host Configuration Protocol, DHCP) 用于自动分配和配置网段中的主机的 IP 地址.
 

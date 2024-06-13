@@ -20,7 +20,7 @@ Bus: 总线
 
 Bootstrap: 自举
 
-BSS: block started by symbol, ELF 文件中存储未初始化全局变量和局部静态变量的段. 见 [ELF目标文件](Compiler/linking/ELF目标文件.md)
+BSS: block started by symbol, ELF 文件中存储未初始化全局变量和局部静态变量的段. 见 [目标文件](Compiler/linking/目标文件.md)
 
 # C
 
@@ -33,7 +33,7 @@ Completeness: 完备性. 逻辑系统是完备的, 如果它能证明该逻辑�
 
 Casting/Coercion: 显式类型转换/隐式类型转换
 
-COFF, common object file format, ELF 格式前身. 见 [ELF目标文件](Compiler/linking/ELF目标文件.md)
+COFF, common object file format, ELF 格式前身. 见 [目标文件](Compiler/linking/目标文件.md)
 
 COM, component object model, 组件对象模型.
 
@@ -55,7 +55,7 @@ DSO: dynamic shared object, 动态共享对象.
 
 # E
 
-ELF: executable linkable format, 可执行可连接格式. 见 [ELF目标文件](Compiler/linking/ELF目标文件.md)
+ELF: executable linkable format, 可执行可连接格式. 见 [目标文件](Compiler/linking/目标文件.md)
 
 Environment Variables: 环境变量, 指 SHELL 运行的关键共享变量.
 
@@ -95,7 +95,7 @@ HTTPs: HTTP+SSL/TLS, 对 HTTP 协议提供安全加密.
 
 Handle: 句柄
 
-Heap: 堆, 数据结构. 见 [heap](Data%20Structure/Preliminaries/heap.md)
+Heap: 堆, 数据结构. 见 [binary heap](Data%20Structure/Preliminaries/tree/binary%20heap.md)
 
 Hook: 钩子.
 
@@ -127,7 +127,7 @@ LLVM: low level virtaul machine, 编译器框架.
 
 Lazy Binding: 延迟绑定.
 
-Linking: 链接, 程序编译的步骤. 见 [链接](Compiler/linking/链接.md)
+Linking: 链接, 程序编译的步骤. 见 [静态链接](Compiler/linking/静态链接.md)
 
 LSB: linux standard base.
 
@@ -155,7 +155,7 @@ Northbright: 北桥, 计算机硬件架构组成部分. 见 [计算机架构](Ha
 
 # O
 
-Object File: 目标文件, 编译过程中中间文件. 见 [ELF目标文件](Compiler/linking/ELF目标文件.md)
+Object File: 目标文件, 编译过程中中间文件. 见 [目标文件](Compiler/linking/目标文件.md)
 
 ORM: Object-Relational Mapping, 软件开发概念, 将面向对象的类资源/方法和一个关系型数据库绑定起来, 对类操作即等价于对数据表操作. 类的元类等价于数据库表, 一个类实例等价于表中的一行.
 
@@ -209,7 +209,9 @@ OSI: 一种安全框架, 定义了安全攻击/安全机制/安全服务, 见 [�
 
 ROS: Robot Operating System, 开源机器人操作系统
 
-Reflection: 反射, 在**运行时**操作和配置对象及其属性, 在编写代码时这些类和方法可能不是已知的, 常用于实现框架和库. 如 python 的[元类](Language/Python/特性/元编程.md)
+Reflection: 反射, 在**运行时**操作和配置对象及其属性, 在编写代码时这些类和方法可能不是已知的, 常用于实现框架和库. 如 python 的[元类](Language/Python/运行时服务/元类.md)
+
+RTT: 网络报文往返时间
 
 # S
 
@@ -243,7 +245,7 @@ System Call: 系统调用. 见 [操作系统概述](System/Process/操作系统�
 
 # T
 
-TagDispatch: 一种函数反射方法, 见 [运行时调用选择](Language/C++/语法与特性/运行时调用选择.md#函数体)
+TagDispatch: 一种函数反射方法, 见 [运行时调用选择](Language/C++/语法/运行时调用选择.md#函数体)
 
 Time-Sharing System: 分时系统.
 
@@ -265,7 +267,7 @@ User Mode: 操作系统用户空间.
 
 Virtual Address Space: 虚拟地址空间. 一种管理内存的方式.
 
-VMA: virtual memory area, 代指进程拥有的某片连续虚拟内存区域. 见 [linux 进程与内存管理数据结构](System/Process/linux%20进程内存管理结构.canvas) 的 `vm_area_struct` 结构.
+VMA: virtual Memory Area, 代指进程拥有的某片连续虚拟内存区域. 见 [linux 进程与内存管理数据结构](System/Process/linux%20进程内存管理结构.canvas) 的 `vm_area_struct` 结构.
 
 # W
 

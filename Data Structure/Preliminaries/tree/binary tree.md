@@ -14,6 +14,9 @@
 - [red-black tree](red-black%20tree.md)
 - [avl tree](avl%20tree.md)
 - [b tree](b%20tree.md)
+
+**完全二叉树**: 所有叶节点的深度相同, 内部节点的出度 (子节点数) 相同.
+
 ## 声明
 ```c
 #define ELEMENTTYPE int
@@ -472,3 +475,7 @@ deleteElement( ELEMENTTYPE X, SEARCHTREE_ T ){
 
 ![|500](../../../attach/Pasted%20image%2020240527120240.png)
 
+## 树的数组实现
+
+
+其中，**数组A下标从1到N**，N为堆的大小，A\[1\]是根节点，A\[2\]是根节点的左子孩节点，A\[3\]是根节点的右子孩节点。实际上，对于任何一个节点，若其在数组中的位置是i，则它的左子孩节点位置$left\_child(i)=2i$，右子孩节点位置$right\_child=2i+1$，它的父节点（假如有）的位置$parent(i)=\lfloor i/2 \rfloor$，$\lfloor \rfloor$表示向下取整。图3中的箭头从父节点分别指向左右子孩节点。???

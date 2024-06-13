@@ -1,12 +1,12 @@
-MPI, Message Passing Interface, 是一种基于消息传递的并发工具库 (的标准).
+MPI, Message Passing Interface, 是一种**基于消息传递**的**进程**并发工具库 (的标准).
 
 ```c
 #include "mpi.h"
 #include <stdio.h>
 
-int main( argc, argv)
-int argc;
-char *argv [];
+#define N 1000 // size of problem
+
+int main(int argc, char **argv)
 {
 	int myid, numprocs;
 	int namelen;
@@ -14,9 +14,16 @@ char *argv [];
 	MPI_Init(&argc, &argv);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myid);
 	MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
-	MPI_Get_processor_name(proc_name, &namelen);
+	
+	int local_N = N / numprocs;
+	int start = myid * local_N;
+	int end = start + local_N;
 	...
+	if (world_rank == 0) {
+		// root process
+	}
 	MPI_Finalize();
+	return 0;
 }
 ```
 
@@ -137,7 +144,7 @@ int MPI_Ssend(...)
 int MPI_Rsend(...)
 ```
 
-默认标准模式下, MPI自动决定是否使用缓存. 通常系统会预留一些缓冲区, 缓冲区足够或未满时会拷贝后理解返回; 否则会和接收方联系.
+默认标准模式下, MPI自动决定是否使用缓存. 通常系统会预留一些缓冲区, 缓冲区足够或未满时会拷贝后立即返回; 否则会和接收方联系.
 
 ### 阻塞与非阻塞
 
@@ -202,12 +209,13 @@ MPI_Startall(int cnt, MPI_Request* array)
 collective communication 指多进程通信, 如一对多/多对多/多对一, 其中 `one in (one-to-many)` 一般称为 `root` . 核心功能为**同步, 通信, 计算.**
 
 ```c
-// only synchronization machanism MPI provided, return until every process in
-// Comm blocking at this function. then all processes will start meanwhile.
+// only synchronization machanism MPI provided, return until every process 
+// in Comm blocking at this function. 
+// Then, all processes will start meanwhile.
 int MPI_Barrier(MPI_Comm comm);
 
-// used in one-to-many communication, `root` broadcasts `buf` to all processes 
-// in the same MPI_Comm.
+// used in one-to-many communication, `root` broadcasts `buf` to 
+// all processes in the same MPI_Comm.
 int MPI_Bcast(void *buf, int cnt, MPI_Datatype, int root, MPI_Comm);
 
 // many-to-one.
@@ -250,4 +258,4 @@ int MPI_Alltoall(void *send_buf, int send_cnt, MPI_Datatype send_type,
 
 ## 例子
 
-[fourier series mpi](../../../appendix/程序/fourier_series_mpi.c)
+[fourier_series_map.c](../../../src/fourier_series_mpi.c)

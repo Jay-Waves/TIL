@@ -19,7 +19,7 @@ node -> node -> ...  -> node
 -> list_head <-> head(first) <-> head <-> ... <-> head(last) <-
 ```
 
-这里的示例将使用入侵式设计, 即数据结构的管理信息(如前驱后驱指针)被嵌入到数据结构本身之中, 常用于无 GC 的语言. 同时, 将**内存管理**和链表结构管理分离, 即不假设数据是在栈分配还是在堆分配, 交由用户自行管理内存.
+这里的示例将使用入侵式设计, 即数据结构的管理信息 (如前驱后驱指针) 被嵌入到数据结构本身之中, 常用于无 GC 的语言. 同时, 将**内存管理**和链表结构管理分离, 不假设数据是在栈分配还是在堆分配, 交由用户自行管理内存.
 
 ```c
 #ifndef _CDLL_H
@@ -35,7 +35,7 @@ struct item {
 }
 
 /*
- * init list header. memory management should be apart from list management.
+ * initlize list header.
  */
 void cdll_init_head(cdll_head *list);
 
@@ -57,17 +57,12 @@ void cdll_append(cdll_head *new, cdll_head *head);
  */
 void cdll_delete(cdll_head *entry);
 
-bool cdll_empty(const cdll_head *head);
-bool cdll_singular(const cdll_head *head);
+#define cdll_empry(head) (head->next == head)
+#define cdll_singular(head) (head->next == head->prev)
 
 #define offsetof(st, m) ( (size_t) &(((st *)0)->m) )
 #define cdll_for_each(pos, head) \
 	for(pos=head; pos!=NULL; pos=pos->next)
-
-/*
- * example of traversing on this *intrusive circular linked list*
- */
-void cdll_print(cdll_head *head);
 
 #endif /* _CDLL_H */
 ```
@@ -108,17 +103,7 @@ void cdll_delete(cdll_head *entry)
     prev->next = next;
 }
 
-bool cdll_empty(const cdll_head *head)
-{
-    return head->next == head;
-}
-
-bool cdll_singular(const cdll_head *head)
-{
-	return head->next == head->prev;
-}
-
-void cdll_print(cdll_head *head) {
+static void cdll_print(cdll_head *head) {
     list_head *i;
     printf("List: ");
     for (i = head->next; i != head; i = i->next) {
@@ -129,26 +114,7 @@ void cdll_print(cdll_head *head) {
     }
     printf("\n");
 }
-
-/*
- * test
- */
-int main() {
-    list_head head;
-    cdll_init_head(&head);
-
-    item item1 = { .data = 1 };
-    item item2 = { .data = 2 };
-    item item3 = { .data = 3 };
-
-    list_append(&item1.list, &head); 
-    list_prepend(&item2.list, &head); 
-    list_append(&item3.list, &head); // header, 2, 1, 3
-
-    list_print(&head);
-    return 0;
-}
 ```
 
-内核中的 `traverse()` 例程, 以及由 `list_head` 获取数据 `item` 的例程, 都是由宏实现的, 详见 [kernel/list](../linux%20kernel/list.md)
+linux 内核的链表就是循环双向链表, 详见 [kernel/list](../linux%20kernel/list.md).
 

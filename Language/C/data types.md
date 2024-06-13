@@ -12,6 +12,8 @@
 | `intmax_t, uintmax_t`  |                                               |
 | `int8_t, uint8_t, ...` | in `stdlib.h`, platform-independent with fixed width                                 |
 
+https://en.wikipedia.org/wiki/C_data_types#float.h
+
 ### bool
 
 C89 标准中没有对 `bool` 的原生支持, C99 才引入了 `stdbool.h` 头文件. 因为 `bool` 极容易和现有 C 程序的宏或定义冲突, 所以委员会使用了保留名称 `_Bool`, 将选择权交给程序员.

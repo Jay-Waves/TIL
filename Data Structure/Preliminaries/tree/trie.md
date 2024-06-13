@@ -1,6 +1,8 @@
 ## 分析:
 核心是一位一位进行查找, 以路径为前缀, 以前缀为基础向下查询
 
+https://en.wikipedia.org/wiki/Ctrie
+
 ***
 
 ## 字典树:

@@ -190,3 +190,233 @@ void InitQueue( ) {
 
 #endif  //_QUEUE_H_
 ```
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+struct graph_node {
+    int data;
+    struct graph_node **neighbors;
+    int num_neighbors;
+    int capacity;
+};
+
+struct graph {
+    struct graph_node **nodes;
+    int num_nodes;
+    int capacity;
+};
+
+/* 创建图节点 */
+struct graph_node *graph_node_create(int data)
+{
+    struct graph_node *node = (struct graph_node *)malloc(sizeof(*node));
+    if (!node)
+        return NULL;
+
+    node->data = data;
+    node->num_neighbors = 0;
+    node->capacity = 4;
+    node->neighbors = (struct graph_node **)malloc(node->capacity * sizeof(struct graph_node *));
+    if (!node->neighbors) {
+        free(node);
+        return NULL;
+    }
+
+    return node;
+}
+
+/* 添加邻接节点 */
+void graph_node_add_neighbor(struct graph_node *node, struct graph_node *neighbor)
+{
+    if (node->num_neighbors == node->capacity) {
+        node->capacity *= 2;
+        node->neighbors = (struct graph_node **)realloc(node->neighbors, node->capacity * sizeof(struct graph_node *));
+    }
+    node->neighbors[node->num_neighbors++] = neighbor;
+}
+
+/* 销毁图节点 */
+void graph_node_destroy(struct graph_node *node)
+{
+    if (node) {
+        free(node->neighbors);
+        free(node);
+    }
+}
+
+/* 创建图 */
+struct graph *graph_create()
+{
+    struct graph *g = (struct graph *)malloc(sizeof(*g));
+    if (!g)
+        return NULL;
+
+    g->num_nodes = 0;
+    g->capacity = 4;
+    g->nodes = (struct graph_node **)malloc(g->capacity * sizeof(struct graph_node *));
+    if (!g->nodes) {
+        free(g);
+        return NULL;
+    }
+
+    return g;
+}
+
+/* 添加节点到图 */
+struct graph_node *graph_add_node(struct graph *g, int data)
+{
+    if (g->num_nodes == g->capacity) {
+        g->capacity *= 2;
+        g->nodes = (struct graph_node **)realloc(g->nodes, g->capacity * sizeof(struct graph_node *));
+    }
+
+    struct graph_node *node = graph_node_create(data);
+    if (!node)
+        return NULL;
+
+    g->nodes[g->num_nodes++] = node;
+    return node;
+}
+
+/* 销毁图 */
+void graph_destroy(struct graph *g)
+{
+    if (g) {
+        for (int i = 0; i < g->num_nodes; ++i) {
+            graph_node_destroy(g->nodes[i]);
+        }
+        free(g->nodes);
+        free(g);
+    }
+}
+```
+
+### BFS
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+struct queue_node {
+    struct graph_node *graph_node;
+    struct queue_node *next;
+};
+
+struct queue {
+    struct queue_node *front;
+    struct queue_node *rear;
+};
+
+struct queue *create_queue()
+{
+    struct queue *q = (struct queue *)malloc(sizeof(struct queue));
+    q->front = q->rear = NULL;
+    return q;
+}
+
+void enqueue(struct queue *q, struct graph_node *graph_node)
+{
+    struct queue_node *new_node = (struct queue_node *)malloc(sizeof(struct queue_node));
+    new_node->graph_node = graph_node;
+    new_node->next = NULL;
+    if (q->rear) {
+        q->rear->next = new_node;
+        q->rear = new_node;
+    } else {
+        q->front = q->rear = new_node;
+    }
+}
+
+struct graph_node *dequeue(struct queue *q)
+{
+    if (!q->front)
+        return NULL;
+    struct queue_node *temp = q->front;
+    struct graph_node *graph_node = temp->graph_node;
+    q->front = q->front->next;
+    if (!q->front)
+        q->rear = NULL;
+    free(temp);
+    return graph_node;
+}
+
+bool is_queue_empty(struct queue *q)
+{
+    return q->front == NULL;
+}
+
+void free_queue(struct queue *q)
+{
+    while (!is_queue_empty(q)) {
+        dequeue(q);
+    }
+    free(q);
+}
+
+void graph_bfs(struct graph *g, int start)
+{
+    bool *visited = (bool *)calloc(256, sizeof(bool)); // 假设节点数据最大值为255
+    struct queue *q = create_queue();
+
+    for (int i = 0; i < g->num_nodes; ++i) {
+        if (g->nodes[i]->data == start) {
+            enqueue(q, g->nodes[i]);
+            visited[g->nodes[i]->data] = true;
+            break;
+        }
+    }
+
+    while (!is_queue_empty(q)) {
+        struct graph_node *node = dequeue(q);
+        printf("Visited node %d\n", node->data);
+
+        for (int i = 0; i < node->num_neighbors; ++i) {
+            struct graph_node *neighbor = node->neighbors[i];
+            if (!visited[neighbor->data]) {
+                visited[neighbor->data] = true;
+                enqueue(q, neighbor);
+            }
+        }
+    }
+
+    free(visited);
+    free_queue(q);
+}
+
+```
+
+### DFS
+
+```c
+void dfs_util(struct graph_node *node, bool *visited)
+{
+    printf("Visited node %d\n", node->data);
+    visited[node->data] = true;
+
+    for (int i = 0; i < node->num_neighbors; ++i) {
+        struct graph_node *neighbor = node->neighbors[i];
+        if (!visited[neighbor->data]) {
+            dfs_util(neighbor, visited);
+        }
+    }
+}
+
+void graph_dfs(struct graph *g, int start)
+{
+    bool *visited = (bool *)calloc(256, sizeof(bool)); // 假设节点数据最大值为255
+
+    for (int i = 0; i < g->num_nodes; ++i) {
+        if (g->nodes[i]->data == start) {
+            dfs_util(g->nodes[i], visited);
+            break;
+        }
+    }
+
+    free(visited);
+}
+
+```

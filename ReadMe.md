@@ -7,22 +7,19 @@
 	- LLVM
 - Container, 容器与虚拟化技术
 - Data Storage, 存储技术
-	- Redis, 非关系型数据库
+	- NoSQL, 非关系型数据库
+		- Redis
+		- 格式化文本 json, toml, yaml
+		- 标记语言 html, xml
 	- SQL, 关系型数据库
-	- Json, Toml, Yaml, Xml 等格式化文本
 - Data Structure, 数据结构
 - HardWare, 计算机硬件
 - Language, 计算机语言
 	- C
-		- IPC, 进程通信技术
 	- C++
-		- 并发
-		- STL
 	- Go
 	- Haskell
 	- Python
-		- 标准库
-		- 特性
 	- Regular Expression, 正则表达式
 	- Rust
 - Network, 计算机网络
@@ -83,11 +80,3 @@ issue status:
 - `:%s/!\s/！/g`
 - `:%s/\s(/（/g`
 - `:%s/)\s/）/g`
-
-
-### Vaults:
-
-- [开发文档](obsidian://open?vault=Docs)
-- [计算机](obsidian://open?vault=Code)
-- [数学](obsidian://open?vault=Math)
-- [文学](obsidian://open?vault=Reference)

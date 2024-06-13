@@ -1,4 +1,4 @@
-## Deque
+## 双端队列
 
 双端队列, Double-ended Queue, 允许从两端插入和删除的队列, 操作两侧数据时复杂度为 $O(1)$.
 
@@ -68,4 +68,4 @@ void print_deque(struct list_head *deque) {
 }
 ```
 
-总体实现详见: [deque.c](../../appendix/code/deque.c)
+总体实现详见: [deque.c](../../src/deque.c)

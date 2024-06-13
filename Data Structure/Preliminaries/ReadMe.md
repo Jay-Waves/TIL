@@ -1,6 +1,6 @@
 ## 指南
 
-使用 kernel 风格 [kernel code style](../../Language/C/kernel%20code%20style.md)
+使用 kernel 风格 [kernel code style](../../Language/Coding%20Style/kernel%20code%20style.md)
 
 大部分数据结构有三个核心接口:
 - `search()`, 最基础的遍历, 用于一窥核心结构.
@@ -19,25 +19,29 @@
 - peek, 指从当前数据结构中挑选出首个元素, 但不移除.
 - pop, 指从当前数据结构中挑选出首个元素, 同时移除.
 - push, 指向当前数据结构压入一个元素.
-- 
-- `stack` 栈
-- `queue` 队列, `circular queue` [循环队列](queue.md), `deque` [双端队列](deque.md)
-- `linked list` 链表, 由指针相连的离散内存序列.
-- `list` [列表](linked%20list/list.md), 变长有序集合. 在 linux kernel 语境下仍指链表.
-- `circular linked list` [循环链表](linked%20list/circular%20linked%20list.md), `doubly linked list` [双向链表](linked%20list/doubly%20linked%20list.md) 
-- 
 
 [^1]: 详见 [STL](../../Language/C++/标准库/STL/STL.md)
 
+### 数据结构列表
+
+- `stack` 栈
+- `queue` 队列, `circular queue` [循环队列](queue.md), `deque` [双端队列](deque.md), [优先队列](tree/binary%20heap.md)
+- `linked list` 链表. `circular linked list` [循环链表](linked%20list/circular%20linked%20list.md), `doubly linked list` [双向链表](linked%20list/doubly%20linked%20list.md) 
+- `list` [列表](linked%20list/list.md), 变长有序集合. 在 linux kernel 语境下仍指链表.
+- `Hash Table` [哈希表](hash/hash%20table.md), 也被称为 `Map`, `Dictionary`, `Symbol Table`.
+
+
 ### 错误码
 
-使用 `linux/errno.h` 中定义的部分错误状态码. 详见 [appendix/errno.h](../../appendix/code/errno.h)
+使用 C POSIC LIB `errno.h` 中定义的部分错误状态码. 详见 [appendix/errno.h](../../src/errno.h)
 - `-ENOMEM` 内存不足, 无法分配内存. 即 `malloc` 失败时返回.
 - `-EINVAL` 无效参数.
 - `-ENOENT` 资源不存在, 如查找操作未找到指定键, 或数据结构已空.
 - `-ENOSPC` 空间不足, 数据结构已满.
 - `-EBUSY` 资源忙, 数据结构已被其他操作锁定.
 - `-EEXIST` 资源已存在, 如插入操作中发现已有相同键.
+
+这些错误码都是宏定义的负数整型, 但我们并不能保证某操作的正常返回值一定不是负数. 具体情境请具体分析, 如使用指针传参而不是返回值的形式.
 
 ## 参考
 

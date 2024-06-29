@@ -2,6 +2,23 @@
 
 https://en.wikipedia.org/wiki/Radix_tree
 
+在 radix tree 中，基数 \( r \) 表示每个节点的分支数目上限，即每个内部节点最多可以有多少个子节点。这里的基数 \( r \) 是一个整数，满足 \( r = 2^x \)，其中 \( x \geq 1 \)。因此，基数 \( r \) 实际上是一个节点能够包含的最大子节点数。
+
+具体来说：
+
+- 当 \( r = 2 \) 时，radix tree 是二叉的，每个节点在比较关键字时只比较其中的一位，这种结构可以减少空间使用，但会增加树的深度。
+  
+- 当 \( r \geq 4 \) 且是2的幂次方时，radix tree 是 r-ary 的，即每个节点最多有 \( r \) 个子节点。这种情况下，radix tree 可以减少树的深度，但可能会增加节点之间的空间占用。
+
+基数 \( r \) 的选择影响了 radix tree 的性能特征，包括树的深度、空间利用效率以及在搜索和插入操作中的效率。因此，在设计和实现 radix tree 时，选择合适的基数 \( r \) 是非常重要的。
+
+In [computer science](https://en.wikipedia.org/wiki/Computer_science "Computer science"), a **radix tree** (also **radix trie** or **compact prefix tree** or **compressed trie**) is a [data structure](https://en.wikipedia.org/wiki/Data_structure "Data structure") that represents a [space-optimized](https://en.wikipedia.org/wiki/Memory_Optimization "Memory Optimization") [trie](https://en.wikipedia.org/wiki/Trie "Trie") (prefix tree) in which each node that is the only child is merged with its parent. The result is that the number of children of every internal node is at most the [radix](https://en.wikipedia.org/wiki/Radix "Radix") r of the radix tree, where r = 2x for some integer x ≥ 1. Unlike regular trees, edges can be labeled with sequences of elements as well as single elements. This makes radix trees much more efficient for small sets (especially if the strings are long) and for sets of strings that share long prefixes.
+
+Unlike regular trees (where whole keys are compared _en masse_ from their beginning up to the point of inequality), the key at each node is compared chunk-of-bits by chunk-of-bits, where the quantity of bits in that chunk at that node is the radix r of the radix trie. When r is 2, the radix trie is binary (i.e., compare that node's 1-bit portion of the key), which minimizes sparseness at the expense of maximizing trie depth—i.e., maximizing up to conflation of nondiverging bit-strings in the key. When r ≥ 4 is a power of 2, then the radix trie is an r-ary trie, which lessens the depth of the radix trie at the expense of potential sparseness.
+
+As an optimization, edge labels can be stored in constant size by using two pointers to a string (for the first and last elements).[[1]](https://en.wikipedia.org/wiki/Radix_tree#cite_note-1)
+
+Note that although the examples in this article show strings as sequences of characters, the type of the string elements can be chosen arbitrarily; for example, as a bit or byte of the string representation when using [multibyte character](https://en.wikipedia.org/wiki/Multibyte_character "Multibyte character") encodings or [Unicode](https://en.wikipedia.org/wiki/Unicode "Unicode").
 
 
 ```c

@@ -95,16 +95,7 @@ Find(char * str, TREE_ root){
 ```
 
 ### 静态:
-- 又称"二维数组实现"
-#### 分析:
-- 优点: 
-	1. 比链表字典树访问更快, 因为避免了不断申请和释放空间的时间
-	2. 在数据量极大的情况下, 所占空间更小利用率更大, 因为不断动态申请细小空间时,malloc的前缀信息变得臃肿
-		- 当然, 这一点可以用同子代(26个)一起申请空间来解决
-	3. 方便利用qsort()函数
-- 缺点: 
-	需要提前开辟较大(通常是非常大)空间, 容易出现数组越界(overflow), 并且无法更改
-	不够直观, 理解困难, **调试困难**
+
 #### 原理:
 - 将字母转化为数字int(映射到0-26)处理, 一是方便直接作为角标, 二是同时存储编号需要较大空间
 1. 用二维数组tree[i]\[j]来标识一颗字典树，其中i为父节点，j为子节点.
@@ -115,6 +106,11 @@ Find(char * str, TREE_ root){
 
 ![[../../../attach/1922008-20200113195157015-783649434.jpg|400]]
 #### 源码:
+
+```c
+double  = // bitmap
+```
+
 ```c
 #define MAX_SIZE 10000000//最大10e7, 
 int tree[MAX_SIZE][30];//tree[i][j]表示节点i的第j个儿子的节点编号
@@ -122,6 +118,7 @@ int tree[MAX_SIZE][30];//tree[i][j]表示节点i的第j个儿子的节点编号
 enum BOOL{false, true};
 enum BOOL flag[MAX_SIZE];//表示该节点结尾是一个单词
 int total; //总节点数, 同时也用于给树节点编号
+
 
 /*input word, and init or insert tree*/
 void Insert(char *str)
@@ -169,7 +166,7 @@ void init(){
     }
     total = 0;
 }
-这里提供一个造树范例: 很简单
+
 /*
 void CreateStopTrie( ) {
     FILE *fp_in_stop;

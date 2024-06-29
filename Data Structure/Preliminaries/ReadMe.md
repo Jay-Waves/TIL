@@ -25,7 +25,7 @@
 ### 数据结构列表
 
 - `stack` 栈
-- `queue` 队列, `circular queue` [循环队列](queue.md), `deque` [双端队列](deque.md), [优先队列](tree/binary%20heap.md)
+- `queue` 队列, `circular queue` [循环队列](linked%20list/queue.md), `deque` [双端队列](linked%20list/deque.md), [优先队列](tree/binary%20heap.md)
 - `linked list` 链表. `circular linked list` [循环链表](linked%20list/circular%20linked%20list.md), `doubly linked list` [双向链表](linked%20list/doubly%20linked%20list.md) 
 - `list` [列表](linked%20list/list.md), 变长有序集合. 在 linux kernel 语境下仍指链表.
 - `Hash Table` [哈希表](hash/hash%20table.md), 也被称为 `Map`, `Dictionary`, `Symbol Table`.

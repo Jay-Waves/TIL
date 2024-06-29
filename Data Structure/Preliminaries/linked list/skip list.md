@@ -15,7 +15,7 @@
 
 ![|500](../../../attach/Pasted%20image%2020240527115938.png)
 
-跳表类似 [B树](../tree/b%20tree.md) + [链表](linked%20list%20vs%20array.md).
+跳表类似 [B树](../tree/b%20tree.md) + [链表](linked%20list%20or%20array.md).
 
 ```c
 /*

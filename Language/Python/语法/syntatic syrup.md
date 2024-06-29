@@ -1,3 +1,7 @@
+---
+date: 24-06-14
+---
+
 ## 链式比较
 
 Python 的逻辑操作不是二元的, 可以多元:
@@ -47,4 +51,34 @@ print('%d %s' %(i, content))
 也可以:
 ```python
 f'{a}, {b}'
+```
+
+## Ellipsis
+
+省略号是一种特殊语法, 用于作为占位符省略具体实现.
+
+```python
+def myfunc():
+	...
+
+# 等价于
+def myfunc():
+	pass
+```
+
+类型提示时, 表示数组元素数量未知
+
+```python
+def func(arr: List[..., int]):
+	...
+```
+
+定义抽象基类:
+
+```python
+from abc import ABC, abstractmethod
+class MyABC(ABC):
+	@abstractmethod
+	def myfunc(slf):
+		...
 ```

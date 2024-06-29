@@ -99,7 +99,7 @@ struct some_data {
 
 ```
 
-用法可以见 [双端队列](../deque.md). 调侃一下, 这些宏颇有种把 c 当 python 写的味:
+用法可以见 [双端队列](../linked%20list/deque.md). 调侃一下, 这些宏颇有种把 c 当 python 写的味:
 
 ```c
                              int 

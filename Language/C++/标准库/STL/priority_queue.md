@@ -3,7 +3,7 @@ path: <queue>
 date: 2024-05-30
 ---
 
-`std::priority_queue` 是 STL 中的一种[容器适配器](Container%20Adapters.md). 默认情况下是最[堆](../../../../Data%20Structure/Preliminaries/tree/binary%20heap.md), 但是可自定义比较函数 `Compare()` 来改变行为. 
+`std::priority_queue` 是 STL 中的一种[容器适配器](Container%20Adapters.md). 默认情况下是最[堆](../../../../Data%20Structure/tree/binary%20heap.md), 但是可自定义比较函数 `Compare()` 来改变行为. 
 
 ```cpp
 template<

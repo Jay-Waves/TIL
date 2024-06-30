@@ -2,7 +2,7 @@
 path: include/linux/list.h
 ---
 
-内核中使用的[双向循环列表](../linked%20list/circular%20linked%20list.md). 内核链表使用入侵式设计, 即将链表头嵌入其他数据结构的末尾来使用, 链表接口不负责相关内存管理 (即, 不假设数据是在栈还是在堆实现的).
+内核中使用的[双向循环列表](../../linked%20list/circular%20linked%20list.md). 内核链表使用入侵式设计, 即将链表头嵌入其他数据结构的末尾来使用, 链表接口不负责相关内存管理 (即, 不假设数据是在栈还是在堆实现的).
 
 ```c
 typedef struct list_head {
@@ -99,7 +99,7 @@ struct some_data {
 
 ```
 
-用法可以见 [双端队列](../linked%20list/deque.md). 调侃一下, 这些宏颇有种把 c 当 python 写的味:
+用法可以见 [双端队列](../../linked%20list/deque.md). 调侃一下, 这些宏颇有种把 c 当 python 写的味:
 
 ```c
                              int 

@@ -19,12 +19,12 @@ libc 指 C 语言标准库, libc++ 指 C++ 标准库. 语言委员会提供一�
 
 [^2]: llvm-libc 正在开发中, 不稳定. 所以现在在 windows 上用不了.
 
-[^3]: MSVCrt 指 `msvcrt.dll`, 是 Windwos 系统对 libc 的实现. 在 Windows10 之后, 引入了 UCRT 的现代版本 libc 实现, 提供了对现代 C 标准更好的支持. 都不开源...
+[^3]: MSVCrt (microsoft visual c runtime) 指 `msvcrt.dll`, 是 Windwos 系统对 libc 的实现. 在 Windows10 之后, 引入了 UCRT 的现代版本 libc 实现, 提供了对现代 C 标准更好的支持. 都不开源...
 
 
 | 系统调用标准                                    | 维护组织           | 解释                                       | 平台支持      |
 | ------------------------------------------- | ------------------ | ------------------------------------------ | ------------- |
-| POSIX (POSIXOperating System API)                                     | IEEE               |                                            | Unix-like     |
+| POSIX (POSIX Operating System API)                                     | IEEE               |                                            | Unix-like     |
 | Windows API                                 | Microsoft          |                                            | Windows       |
 | LSB (Linux Standard Base)                   | Linux 基金会       | 提高 Linux 不同发行版之间的兼容性          | Linux         |
 | SVID (System V Interface Definition)        | AT&T, Unix SystemV | 不常见, 仅兼容[^5]            | Unix SystemV |

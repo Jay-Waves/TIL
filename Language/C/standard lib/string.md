@@ -80,7 +80,7 @@ int isxdigit(int c)  // hexcadecimal digit
 
 // conversion
 int toascii(int c)
-void tolower(int c)
+int tolower(int c)
 int toupper(int c)
 ```
 

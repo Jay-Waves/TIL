@@ -2,7 +2,7 @@
 path: include/linux/kfifo.h, lib/kfifo.c
 ---
 
-`kfifo` 是内核对[循环队列](../linked%20list/queue.md)的实现, 队列含义是: first data in is the first data out, fifo. `kfifo` 内部数据是一段缓冲 `buffer`, 输入输出数据也是指定长度的缓冲.
+`kfifo` 是内核对[循环队列](../../linked%20list/queue.md)的实现, 队列含义是: first data in is the first data out, fifo. `kfifo` 内部数据是一段缓冲 `buffer`, 输入输出数据也是指定长度的缓冲.
 
 ```c
 // size of kfifo is often set 2^n, in order to use bitwise 

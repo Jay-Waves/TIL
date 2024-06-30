@@ -81,3 +81,12 @@
 | `export` | `env`   |     |     |     |
 | -------- | ------- | --- | --- | --- |
 | `tee`    | `xargs` | `history`    |     |     |
+
+## 参考
+
+- [awesome-shell](https://github.com/alebcay/awesome-shell) 一份工具列表.
+- [awesome-osx-command-line](https://github.com/herrbischoff/awesome-osx-command-line): 一份针对 osX 的工具列表
+- [Strict mode](http://redsymbol.net/articles/unofficial-bash-strict-mode/): bash 编程指导
+- [shellcheck](https://github.com/koalaman/shellcheck): 静态 Shell 脚本分析工具, 本质是 bash/sh/zsh 的 lint
+- [Filenames and Pathnames in Shell](http://www.dwheeler.com/essays/filenames-in-shell.html): 如何在脚本中正确处理文件名.
+- [Data Science at the Command Line](http://datascienceatthecommandline.com/#tools)

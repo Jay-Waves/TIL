@@ -6,7 +6,7 @@
 out <- node <- node <- node <- node <- in
 ```
 
-linux 的队列实现称为 kfifo, 详见 [kernel/kfifo](linux%20kernel/kfifo.md)
+linux 的队列实现称为 kfifo, 详见 [kernel/kfifo](../linux%20kernel/kfifo.md)
 
 ### 循环队列
 

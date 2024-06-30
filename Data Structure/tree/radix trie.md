@@ -1,4 +1,4 @@
-基数树
+基数树是[字典树](trie.md)的变形, 数据更加紧凑.
 
 https://en.wikipedia.org/wiki/Radix_tree
 

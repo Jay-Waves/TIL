@@ -1,50 +1,54 @@
 本篇旨在**快速配置一个舒适的ubuntu环境**.
+- 虚拟机代理软件: VMWare 或 VirtualBox
+- 主机: Windows10
+- 虚拟机: Ubuntu
 
-省流:
+### Install Ubuntu
+
+**minimal install** ubuntu-desktop
+
+VirtualBox Network: NAT + Host-Only
+
+### Install Basic Software
+
 ```shell
-# don't put duplicate lines or lines starting with space in the history.
-setopt histignorespace
-setopt histignoredups
+# shell
+sudo apt install zsh tree
 
-# append to the history file, don't overwrite it
-setopt append_history
+# build essentials
+sudo apt install git make llvm build-essential gcc cmake sudo 
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# luanguage
+sudo apt install go, rust, python
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# network
+sudo apt install net-tools, curl, traceroute, wireshark, wget, nfs-utils
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
+# server
+sudo apt install openssl-devel, opennssh-server
+# qt
+...
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+# tool
+sudo apt install vim
+```
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+In Ubuntu Software Store:
+- install vscode
+- install alacritty
+- install marktext
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+### Terminal
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+Zsh, change shell:
 
+```shell
+chsh -s /bin/zsh
+```
 
+修改 `.zshrc`, 详见 [gist: .bashrc](https://gist.github.com/jay-waves/f20f48813bf9cd257e09e24e3a71d354)
+
+```shell
 # ------------- command and prompt --------------------------
 # color support
 # export COLORTERM=truecolor
@@ -99,51 +103,6 @@ git config --global credential.helper 'cache --timeout=3600'
 git config --global user.name "Jay-Waves"
 git config --global user.email "yujiawei@buaa.edu.cn"
 ```
-
-### Install Ubuntu
-
-**minimal install** ubuntu-desktop
-
-VirtualBox Network: NAT + Host-Only
-
-### Install Basic Software
-
-```shell
-# shell
-sudo apt install zsh, tree
-
-# build essentials
-sudo apt install git, make, llvm, build-essential, gcc, cmake, sudo, 
-
-# luanguage
-sudo apt install go, rust, python
-
-# network
-sudo apt install net-tools, curl, traceroute, wireshark, wget, nfs-utils
-
-# server
-sudo apt install openssl-devel, opennssh-erver
-# qt
-...
-
-# tool
-sudo apt vim
-```
-
-In Ubuntu Software Store:
-- install vscode
-- install alacritty
-- install marktext
-
-### Terminal
-
-Zsh, change shell:
-
-```shell
-chsh -s /bin/zsh
-```
-
-default `.zshrc`:
 
 StarShip:
 ```shell

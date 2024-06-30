@@ -1,4 +1,4 @@
-**maps, aka associative array, [hash table](../hash/hash%20table.md)**, 是存储键值对的结构, 主要有三个操作:
+**maps, aka associative array, [hash table](../../hash/hash%20table.md)**, 是存储键值对的结构, 主要有三个操作:
 - `insert(key, value)`
 - `remove(key)`
 - `lookup(key)`

@@ -52,6 +52,7 @@
 - nivm, neovide
 - Graphviz + Doxygen
 - sl, genact 摸鱼用
+- neofetch, Figlet 装逼用
 - **mpv**, 播放视频和音频
 - Starship, prompt 加强工具
 - httpie

@@ -157,4 +157,4 @@ void delete(struct skip_list *list, int key)
 
 > 代码实现及样例见 [skip_list.c](../../../appendix/程序/skip_list.c)
 >
-> Redis [Sorted Set](../../NoSQL/Redis/data%20structure/Sorted%20sets.md) 就是使用跳表实现的.
+> Redis [Sorted Set](../../../Database/NoSQL/Redis/data%20structure/Sorted%20sets.md) 就是使用跳表实现的.

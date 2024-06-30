@@ -33,13 +33,13 @@ ls not_exisiting_file &>> output.log
 cat not_existed_file >logfile 2>&1
 ```
 
-**stdin 重定向**: 默认 stdin 是输入设备.
+**stdin 重定向**: 默认 stdin 是输入设备. ==注意, 请不要将标准输入和命令参数搞混, 比如 `echo` 命令默认只接收字符串参数而不是标准输入, 因此 `echo < temp.txt` 是不对的, 需要 `cat temp.txt`==
 
 ```bash 
 sort < unsorted.txt
 
 # 关闭标准输入, 立即返回 EOF, 用于确保后台命令不再期望读入输入, 
-# 而立即收到ROF关闭句柄
+# 而立即收到 EOF 关闭句柄
 cmd < /dev/null
 
 # <<< 将字符串直接作为命令的标准输入
